@@ -17,12 +17,14 @@ SRC	=	../src/op.c									\
 		$(SRCPATH)/get_file.c						\
 		$(SRCPATH)/multiple_split.c					\
 		$(SRCPATH)/my_strncpy.c						\
-		$(SRCPATH)/free_utils.c
+		$(SRCPATH)/free_utils.c		\
+		$(SRCPATH)/instruction_is_valid.c	\
+		$(SRCPATH)/argument_type.c	\
 
 OBJ	=	$(SRC:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-		-Iinclude -g			\
+		-Iinclude			\
 		-Iinclude -I../include -g			\
 
 LIB	=	my

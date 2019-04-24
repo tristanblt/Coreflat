@@ -28,10 +28,28 @@ bool is_a_label(char *str)
     return (false);
 }
 
-int instruction_is_valid(char **line)
+bool arguments_are_valid(args_type_t *types, char **line)
+{
+    for (int i = 0; i < 4; i++)
+        if (!argument_is_valid(line[i], types[i]))
+            return (false);
+    return (true);
+}
+
+char instruction_get_code(char **line)
 {
     bool label = is_a_label(line[0]);
+    int i = 0;
 
     if (label && !line[1])
         return (0);
+    while (op_tab[i].mnemonique) {
+        if (my_strcmp(op_tab[i].mnemonique, line[label]))
+            break;
+        i++;
+    }
+    if (!op_tab[i].mnemonique ||
+        !arguments_are_valid(op_tab[i].type, line + 1 + label))
+        return (-1);
+    return (op_tab[i].code);
 }

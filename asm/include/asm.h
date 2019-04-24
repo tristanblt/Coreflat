@@ -81,6 +81,10 @@ int my_arrlen(char **arr);
 void free_double_arr(char **arr);
 void free_instructions(instruction_t **arr);
 
+bool argument_is_valid(char *argument, char type);
+bool char_is_in_string(char c, char *str);
+char instruction_get_code(char **line);
+
 //END PROTOTYPES
 
 #endif /* !ASM_H_ */

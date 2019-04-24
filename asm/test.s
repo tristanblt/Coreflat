@@ -1,4 +1,4 @@
-live 1
+live %1
 # a super comment
 ld 34, r3
 st r4, 34
