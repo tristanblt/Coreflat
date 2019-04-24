@@ -32,9 +32,15 @@ char **get_file(FILE *fd)
     char *line = NULL;
     size_t size = 0;
 
+    if (to_ret == NULL)
+        return (NULL);
     to_ret[0] = NULL;
     while (getline(&line, &size, fd) != -1) {
+        if (line == NULL)
+            return (NULL);
         to_ret = push(to_ret, line);
+        if (to_ret == NULL)
+            return (NULL);
         line = NULL;
     }
     if (line)

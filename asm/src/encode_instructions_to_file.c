@@ -26,11 +26,23 @@ char *change_s_to_cor(char *file_name)
 
 int create_file(char *file_name)
 {
-    return (open(file_name, O_CREAT | O_WRONLY | O_TRUNC));
+    return (open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0664));
 }
 
 bool encode_and_write_instructions(int fd, instruction_t **instructions)
 {
+    my_printf("TEST : \n");
+    for (int i = 0; instructions[i]; i++) {
+        my_printf("Code : %i, Sumarry : ", instructions[i]->code);
+        for (int j = 0; instructions[i]->description[j]; j++) {
+            my_printf("%i, ", instructions[i]->description[j]);
+        }
+        my_printf("Arguments : ");
+        for (int j = 0; instructions[i]->args[j]; j++) {
+            my_printf("%i, ", instructions[i]->args[j]);
+        }
+        my_printf("\n");
+    }
     return (true);
 }
 
@@ -41,10 +53,12 @@ bool encode_instructions_to_file(char *file_name, instruction_t **instructions)
     file_name = change_s_to_cor(file_name);
     if (file_name == NULL)
         return (false);
-    if ((fd = create_file(file_name)) == -1)
+    if ((fd = create_file(file_name)) == -1) {
+        free(file_name);
         return (false);
+    }
+    free(file_name);
     if (encode_and_write_instructions(fd, instructions) == false)
         return (false);
-    free(file_name);
     return (true);
 }

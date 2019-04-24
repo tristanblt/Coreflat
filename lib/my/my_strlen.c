@@ -17,3 +17,11 @@ int my_strlen(char const *str)
         i++;
     return (i);
 }
+
+int my_arrlen(char **arr)
+{
+    int i = 0;
+
+    for (i = 0; arr[i]; i++);
+    return (i);
+}

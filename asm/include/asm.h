@@ -73,6 +73,12 @@ bool encode_instructions_to_file(char *file_name, instruction_t **instructions);
 bool arguments_handling(int ac, char **av);
 instruction_t **error_handling_and_parsing(char *file_path);
 char **get_file(FILE *fd);
+void *my_memset(void *alloced, char c, int count);
+char *my_strncpy(char *dest, char const *src, int n);
+char **multiple_split(char *str, char *split);
+int my_arrlen(char **arr);
+void free_double_arr(char **arr);
+void free_instructions(instruction_t **arr);
 
 //END PROTOTYPES
 #endif /* !ASM_H_ */

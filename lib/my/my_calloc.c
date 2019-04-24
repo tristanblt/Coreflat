@@ -21,7 +21,7 @@ void *my_memset(void *alloced, char c, int count)
 	return (alloced);
 }
 
-void * __cdecl my_calloc(int count, int size)
+void *my_calloc(int count, int size)
 {
     void *alloced = malloc(count * size);
 

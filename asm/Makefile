@@ -13,12 +13,15 @@ SRC	=	$(SRCPATH)/main.c							\
 		$(SRCPATH)/encode_instructions_to_file.c	\
 		$(SRCPATH)/arguments_handling.c				\
 		$(SRCPATH)/error_handling_and_parsing.c		\
-		$(SRCPATH)/get_file.c
+		$(SRCPATH)/get_file.c						\
+		$(SRCPATH)/multiple_split.c					\
+		$(SRCPATH)/my_strncpy.c						\
+		$(SRCPATH)/free_utils.c
 
 OBJ	=	$(SRC:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-		-Iinclude			\
+		-Iinclude -g			\
 
 LIB	=	my
 
