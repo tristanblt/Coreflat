@@ -22,6 +22,7 @@ OBJ	=	$(SRC:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
 		-Iinclude -g			\
+		-I..
 
 LIB	=	my
 

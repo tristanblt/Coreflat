@@ -7,14 +7,17 @@
 
 #include "my.h"
 #include "asm.h"
+#include "op.h"
 
 bool is_an_instruction(char *line)
 {
-    if (line[0] == 10)
-        return (false);
-    if (line[0] == '#')
-        return (false);
-    return (true);
+    for (int i = 0; line[i]; i++) {
+        if (line[i] == COMMENT_CHAR)
+            return (false);
+        if (line[i] != '\n' && line[i] != ' ' && line[i] != SEPARATOR_CHAR)
+            return (true);
+    }
+    return (false);
 }
 
 instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
@@ -40,7 +43,6 @@ instruction_t *check_and_parse_instruction(char **line)
     instruction_t *instruction = my_calloc(1, sizeof(instruction_t));
 
     instruction->code = IC_add;
-
     // JUST TO PAS SEGFAULT
     instruction->description = my_calloc(1, sizeof(char));
     instruction->description[0] = NULL;
@@ -60,7 +62,7 @@ instruction_t **get_instructions_array(char **file)
     for (int i = 0; file[i] != NULL; i++) {
         if (!is_an_instruction(file[i]))
             continue;
-        if ((line = multiple_split(file[i], " ,")) == NULL)
+        if ((line = multiple_split(file[i], (char [3]){' ', SEPARATOR_CHAR, 0})) == NULL)
             return (NULL);
         tmp_instr = check_and_parse_instruction(line);
         free_double_arr(line);
