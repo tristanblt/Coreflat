@@ -7,7 +7,6 @@
 
 #include "my.h"
 #include "asm.h"
-#include "op.h"
 
 bool is_an_instruction(char *line)
 {
