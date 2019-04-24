@@ -11,6 +11,7 @@
 // INCLUDES
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -70,6 +71,8 @@ struct instruction {
 
 bool encode_instructions_to_file(char *file_name, instruction_t **instructions);
 bool arguments_handling(int ac, char **av);
+instruction_t **error_handling_and_parsing(char *file_path);
+char **get_file(FILE *fd);
 
 //END PROTOTYPES
 #endif /* !ASM_H_ */
