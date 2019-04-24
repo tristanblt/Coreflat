@@ -5,9 +5,13 @@
 ## Makefile for
 ##
 
+SRCPATH = src
+
 NAME	=	asm
 
-SRC	=	src/main.c		\
+SRC	=	$(SRCPATH)/main.c							\
+		$(SRCPATH)/encode_instructions_to_file.c	\
+		$(SRCPATH)/arguments_handling.c
 
 OBJ	=	$(SRC:%.c=%.o)
 

@@ -1,15 +1,20 @@
 /*
 ** EPITECH PROJECT, 2019
-** corewar
+** CPE_corewar_2018
 ** File description:
-** wow
+** main
 */
 
 #include "my.h"
-#include <stdlib.h>
+#include "asm.h"
 
-int main(void)
+int main(int ac, char **av)
 {
-    my_printf("bonsoir %f\n", 1.300011);
-    return (0);
+    instruction_t **instructions = NULL;
+
+    if (!arguments_handling(ac, av))
+        return (EXIT_FAIL);
+    if (!encode_instructions_to_file())
+        return (EXIT_FAIL);
+    return (EXIT_SUCCESS);
 }

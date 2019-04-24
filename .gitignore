@@ -2,3 +2,5 @@
 \#*\#
 *.o
 *.a
+.vscode/
+asm/asm.exe
