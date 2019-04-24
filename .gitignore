@@ -4,3 +4,4 @@
 *.a
 .vscode/
 asm/asm.exe
+*.cor

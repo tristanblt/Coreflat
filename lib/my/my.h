@@ -10,6 +10,7 @@
 
 #include <stdarg.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #ifndef READ_SIZE
 #define READ_SIZE (100)
@@ -43,5 +44,6 @@ int my_get_nbr(char const *str);
 bool is_num(char const *str);
 char *get_next_line(int fd);
 char **my_str_to_array_opt(char *str, char c);
+void * __cdecl my_calloc(int count, int size);
 
 #endif

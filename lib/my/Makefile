@@ -8,17 +8,18 @@
 NAME	=	libmy.a
 
 SRCS	=	get_next_line.c		\
-		my_get_nbr.c		\
-		is_num.c		\
-		my_printf.c		\
-		my_putchar.c		\
-		my_put_nbr.c		\
-		my_putstr.c		\
-		my_strcmp.c		\
-		my_strdup.c		\
-		my_strlen.c		\
-		my_str_to_array.c	\
+		my_get_nbr.c			\
+		is_num.c				\
+		my_printf.c				\
+		my_putchar.c			\
+		my_put_nbr.c			\
+		my_putstr.c				\
+		my_strcmp.c				\
+		my_strdup.c				\
+		my_strlen.c				\
+		my_str_to_array.c		\
 		my_str_to_array_opt.c	\
+		my_calloc.c
 
 OBJS	=	$(SRCS:%.c=%.o)
 

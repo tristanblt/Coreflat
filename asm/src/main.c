@@ -14,7 +14,7 @@ int main(int ac, char **av)
 
     if (!arguments_handling(ac, av))
         return (EXIT_FAIL);
-    if (!encode_instructions_to_file())
+    if (!encode_instructions_to_file(my_strdup(av[1]), instructions))
         return (EXIT_FAIL);
     return (EXIT_SUCCESS);
 }

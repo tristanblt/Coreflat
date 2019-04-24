@@ -68,7 +68,7 @@ struct instruction {
 
 //PROTOTYPES
 
-bool encode_instructions_to_file();
+bool encode_instructions_to_file(char *file_name, instruction_t **instructions);
 bool arguments_handling(int ac, char **av);
 
 //END PROTOTYPES
