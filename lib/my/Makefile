@@ -36,6 +36,7 @@ all	:
 
 $(NAME)	:	$(OBJS)
 		$(AR) $(NAME) $(OBJS)
+		cp my.h ../../include
 
 clean	:
 		$(RM) $(OBJS)

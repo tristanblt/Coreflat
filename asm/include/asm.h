@@ -17,6 +17,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "op.h"
 
 // END INCLUDES
 
@@ -81,4 +82,5 @@ void free_double_arr(char **arr);
 void free_instructions(instruction_t **arr);
 
 //END PROTOTYPES
+
 #endif /* !ASM_H_ */
