@@ -9,7 +9,8 @@ SRCPATH = src
 
 NAME	=	asm
 
-SRC	=	$(SRCPATH)/main.c							\
+SRC	=	../src/op.c									\
+		$(SRCPATH)/main.c							\
 		$(SRCPATH)/encode_instructions_to_file.c	\
 		$(SRCPATH)/arguments_handling.c				\
 		$(SRCPATH)/error_handling_and_parsing.c		\
@@ -22,7 +23,7 @@ OBJ	=	$(SRC:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
 		-Iinclude -g			\
-		-I..
+		-Iinclude -I../include -g			\
 
 LIB	=	my
 

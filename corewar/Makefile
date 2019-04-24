@@ -12,7 +12,7 @@ SRC	=	src/main.c		\
 OBJ	=	$(SRC:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-		-Iinclude			\
+		-Iinclude -I../include			\
 
 LIB	=	my
 
