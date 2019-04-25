@@ -21,6 +21,7 @@ SRC	=	../src/op.c									\
 		$(SRCPATH)/instruction_is_valid.c			\
 		$(SRCPATH)/argument_type.c					\
 		$(SRCPATH)/parse_instruction.c				\
+		$(SRCPATH)/get_header.c	\
 
 OBJ	=	$(SRC:%.c=%.o)
 
