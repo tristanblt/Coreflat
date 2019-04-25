@@ -87,7 +87,6 @@ void free_instructions(instruction_t **arr);
 bool argument_is_valid(char *argument, char type);
 bool char_is_in_string(char c, char *str);
 char instruction_get_code(char **line);
-int instruction_is_valid(char **line);
 
 // parsing
 int get_instruction_id(char *start_line);

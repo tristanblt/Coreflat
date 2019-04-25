@@ -40,7 +40,7 @@ instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
 instruction_t *check_and_parse_instruction(char **line)
 {
     instruction_t *instruction = my_calloc(1, sizeof(instruction_t));
-    int id = instruction_is_valid(line);
+    int id = instruction_get_code(line);
 
     if (id == -1)
         return (false);
