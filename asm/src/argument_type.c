@@ -7,7 +7,6 @@
 
 #include "asm.h"
 #include "my.h"
-#include "op.h"
 
 bool argument_is_label(char *argument)
 {

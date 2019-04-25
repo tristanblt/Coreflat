@@ -7,7 +7,6 @@
 
 #include "asm.h"
 #include "my.h"
-#include "op.h"
 
 bool char_is_in_string(char c, char *str)
 {
@@ -28,28 +27,15 @@ bool is_a_label(char *str)
     return (false);
 }
 
-bool arguments_are_valid(args_type_t *types, char **line)
-{
-    for (int i = 0; i < 4; i++)
-        if (!argument_is_valid(line[i], types[i]))
-            return (false);
-    return (true);
-}
-
-char instruction_get_code(char **line)
+int instruction_is_valid(char **line)
 {
     bool label = is_a_label(line[0]);
-    int i = 0;
+    int id = 0;
 
     if (label && !line[1])
         return (0);
-    while (op_tab[i].mnemonique) {
-        if (my_strcmp(op_tab[i].mnemonique, line[label]))
-            break;
-        i++;
-    }
-    if (!op_tab[i].mnemonique ||
-        !arguments_are_valid(op_tab[i].type, line + 1 + label))
+    if ((id = get_instruction_id(line[0])) < 1)
         return (-1);
-    return (op_tab[i].code);
+    //checker si les arguments sont bons (nombres et types)
+    return (id);
 }

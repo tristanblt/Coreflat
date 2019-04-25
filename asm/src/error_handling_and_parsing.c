@@ -40,14 +40,15 @@ instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
 instruction_t *check_and_parse_instruction(char **line)
 {
     instruction_t *instruction = my_calloc(1, sizeof(instruction_t));
+    int id = instruction_is_valid(line);
 
-    instruction->code = IC_add;
-    // JUST TO PAS SEGFAULT
-    instruction->description = my_calloc(1, sizeof(char));
-    instruction->description[0] = NULL;
-    instruction->args = my_calloc(1, sizeof(int));
-    instruction->args[0] = NULL;
-    // END JUST TO PAS SEGFAULT
+    if (id == -1)
+        return (false);
+    instruction->code = id;
+    if ((instruction->description = parse_description(line)) == NULL)
+        return (NULL);
+    if ((instruction->args = parse_args(line)) == NULL)
+        return (NULL);
     return (instruction);
 }
 
@@ -61,7 +62,7 @@ instruction_t **get_instructions_array(char **file)
     for (int i = 0; file[i] != NULL; i++) {
         if (!is_an_instruction(file[i]))
             continue;
-        if ((line = multiple_split(file[i], (char [3]){' ', SEPARATOR_CHAR, 0})) == NULL)
+        if ((line = multiple_split(file[i], (char [5]){' ', SEPARATOR_CHAR, '\n', '\r', 0})) == NULL)
             return (NULL);
         tmp_instr = check_and_parse_instruction(line);
         free_double_arr(line);

@@ -17,15 +17,16 @@ SRC	=	../src/op.c									\
 		$(SRCPATH)/get_file.c						\
 		$(SRCPATH)/multiple_split.c					\
 		$(SRCPATH)/my_strncpy.c						\
-		$(SRCPATH)/free_utils.c		\
-		$(SRCPATH)/instruction_is_valid.c	\
-		$(SRCPATH)/argument_type.c	\
+		$(SRCPATH)/free_utils.c						\
+		$(SRCPATH)/instruction_is_valid.c			\
+		$(SRCPATH)/argument_type.c					\
+		$(SRCPATH)/parse_instruction.c				\
 
 OBJ	=	$(SRC:%.c=%.o)
 
-CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-		-Iinclude			\
-		-Iinclude -I../include -g			\
+CFLAGS	=	-W -Wall -Wextra -Wshadow				\
+			-Iinclude								\
+			-Iinclude -I../include -g				\
 
 LIB	=	my
 

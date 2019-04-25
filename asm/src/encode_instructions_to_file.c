@@ -29,19 +29,33 @@ int create_file(char *file_name)
     return (open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0664));
 }
 
+void write_description(char *description, int fd)
+{
+    char c = 0;
+    int i = 0;
+
+    for (i = 0; description[i] != -1; i++) {
+        if (description[i] == T_REG)
+            c += 1;
+        if (description[i] == T_DIR)
+            c += 2;
+        if (description[i] == T_IND)
+            c += 3;
+        c <<= 2;
+    }
+    for (; i < 3; i++)
+        c <<= 2;
+    write(fd, &c, 1);
+}
+
 bool encode_and_write_instructions(int fd, instruction_t **instructions)
 {
-    my_printf("TEST : \n");
     for (int i = 0; instructions[i]; i++) {
-        my_printf("Code : %i, Sumarry : ", instructions[i]->code);
-        for (int j = 0; instructions[i]->description[j]; j++) {
-            my_printf("%i, ", instructions[i]->description[j]);
+        write(fd, &instructions[i]->code, 1);
+        write_description(instructions[i]->description, fd);
+        for (int j = 0; instructions[i]->args[j] != -1; j++) {
+            write(fd, &instructions[i]->args[j], 1);
         }
-        my_printf("Arguments : ");
-        for (int j = 0; instructions[i]->args[j]; j++) {
-            my_printf("%i, ", instructions[i]->args[j]);
-        }
-        my_printf("\n");
     }
     return (true);
 }
@@ -58,7 +72,10 @@ bool encode_instructions_to_file(char *file_name, instruction_t **instructions)
         return (false);
     }
     free(file_name);
-    if (encode_and_write_instructions(fd, instructions) == false)
+    if (encode_and_write_instructions(fd, instructions) == false) {
+        close(fd);
         return (false);
+    }
+    close(fd);
     return (true);
 }

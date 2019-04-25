@@ -78,12 +78,24 @@ void *my_memset(void *alloced, char c, int count);
 char *my_strncpy(char *dest, char const *src, int n);
 char **multiple_split(char *str, char *split);
 int my_arrlen(char **arr);
+int my_argslen(char **arr);
+
 void free_double_arr(char **arr);
 void free_instructions(instruction_t **arr);
 
+// error handling
 bool argument_is_valid(char *argument, char type);
 bool char_is_in_string(char c, char *str);
 char instruction_get_code(char **line);
+int instruction_is_valid(char **line);
+
+// parsing
+int get_instruction_id(char *start_line);
+int *parse_args(char **line);
+char *parse_description(char **line);
+bool argument_is_indirect(char *argument);
+bool argument_is_register(char *argument);
+bool argument_is_direct(char *argument);
 
 //END PROTOTYPES
 

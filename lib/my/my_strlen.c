@@ -25,3 +25,11 @@ int my_arrlen(char **arr)
     for (i = 0; arr[i]; i++);
     return (i);
 }
+
+int my_argslen(char **arr)
+{
+    int i = 0;
+
+    for (i = 0; arr[i] && arr[i][0] != '#'; i++);
+    return (i);
+}
