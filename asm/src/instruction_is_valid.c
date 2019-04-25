@@ -29,6 +29,15 @@ bool is_a_label(char *str)
 
 bool arguments_are_valid(args_type_t *types, char **line)
 {
+    int arguments = 0;
+    int expected = 0;
+
+    while (line[arguments])
+        arguments++;
+    while (expected < 4 && types[expected])
+        expected++;
+    if (arguments != expected)
+        return (false);
     for (int i = 0; line[i]; i++)
         if (!argument_is_valid(line[i], types[i]))
             return (false);
