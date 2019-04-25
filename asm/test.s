@@ -1,3 +1,5 @@
 
-sti r1 %:help %10
-help: live %:help
+    .name "mtn ca marche"
+    .comment "je m'appel Jean cristof"
+
+    live %1#salut
