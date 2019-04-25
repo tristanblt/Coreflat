@@ -13,7 +13,7 @@ bool is_an_instruction(char *line)
     for (int i = 0; line[i]; i++) {
         if (line[i] == COMMENT_CHAR)
             return (false);
-        if (line[i] != '\n' && line[i] != ' ' && line[i] != SEPARATOR_CHAR)
+        if (line[i] != '\n' && line[i] != '\r' && line[i] != ' ' && line[i] != SEPARATOR_CHAR)
             return (true);
     }
     return (false);
@@ -76,7 +76,7 @@ instruction_t **get_instructions_array(char **file)
     return (instructions);
 }
 
-instruction_t **error_handling_and_parsing(char *file_path)
+instruction_t **error_handling_and_parsing(char *file_path, header_t **header)
 {
     FILE *fd = fopen(file_path, "r");
     char **file = NULL;
@@ -86,6 +86,6 @@ instruction_t **error_handling_and_parsing(char *file_path)
     if ((file = get_file(fd)) == NULL)
         return (NULL);
     fclose(fd);
-    
+    //*header = get_header(file);
     return (get_instructions_array(file));
 }

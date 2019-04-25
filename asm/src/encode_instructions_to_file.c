@@ -93,7 +93,14 @@ bool encode_and_write_instructions(int fd, instruction_t **instructions)
     return (true);
 }
 
-bool encode_instructions_to_file(char *file_name, instruction_t **instructions)
+void write_header(header_t *header, int fd)
+{
+    write(fd, header->magic, 4);
+    write(fd, header->prog_name, PROG_NAME_LENGTH);
+    write(fd, header->comment, COMMENT_LENGTH);
+}
+
+bool encode_instructions_to_file(char *file_name, instruction_t **instructions, header_t *header)
 {
     int fd;
 
@@ -105,6 +112,7 @@ bool encode_instructions_to_file(char *file_name, instruction_t **instructions)
         return (false);
     }
     free(file_name);
+    //write_header(header, fd);
     if (encode_and_write_instructions(fd, instructions) == false) {
         close(fd);
         return (false);

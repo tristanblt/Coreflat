@@ -71,9 +71,9 @@ struct instruction {
 
 //PROTOTYPES
 
-bool encode_instructions_to_file(char *file_name, instruction_t **instructions);
+bool encode_instructions_to_file(char *file_name, instruction_t **instructions, header_t *header);
 bool arguments_handling(int ac, char **av);
-instruction_t **error_handling_and_parsing(char *file_path);
+instruction_t **error_handling_and_parsing(char *file_path, header_t **header);
 char **get_file(FILE *fd);
 void *my_memset(void *alloced, char c, int count);
 char *my_strncpy(char *dest, char const *src, int n);

@@ -11,12 +11,15 @@
 int main(int ac, char **av)
 {
     instruction_t **instructions = NULL;
+    header_t *header = NULL;
 
     if (!arguments_handling(ac, av))
         return (EXIT_FAIL);
-    if ((instructions = error_handling_and_parsing(av[1])) == NULL)
+    if ((instructions = error_handling_and_parsing(av[1], &header)) == NULL)
         return (EXIT_FAIL);
-    if (!encode_instructions_to_file(my_strdup(av[1]), instructions)) {
+    // calc prog_size
+    // labels management
+    if (!encode_instructions_to_file(my_strdup(av[1]), instructions, header)) {
         free_instructions(instructions);
         return (EXIT_FAIL);
     }
