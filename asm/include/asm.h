@@ -63,6 +63,7 @@ struct instruction {
     char code; // the var which stock the enum which correspond to the instruction
     char *description; // the description of arguments
     int *args;
+    char *label;
 };
 
 //END STRUCTS

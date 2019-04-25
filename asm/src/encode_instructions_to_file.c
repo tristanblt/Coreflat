@@ -48,14 +48,47 @@ void write_description(char *description, int fd)
     write(fd, &c, 1);
 }
 
+void write_reverse_bytes(int arg, char size, int fd)
+{
+    int i = 0;
+    int temp = arg;
+    int max = size * 8 - 8;
+
+    for (i = 0; i < size; i++) {
+        temp = arg;
+        temp <<= max;
+        max -= 8;
+        write(fd, &temp, 1);
+    }
+}
+
+void write_with_good_size(char c, int arg, int fd)
+{
+    if (c == T_REG)
+        write_reverse_bytes(arg, 1, fd);
+    if (c == T_DIR)
+        write_reverse_bytes(arg, DIR_SIZE, fd);
+    if (c == T_IND)
+        write_reverse_bytes(arg, IND_SIZE, fd);
+}
+
+bool have_one_argument(int code)
+{
+    if (code == IC_live || code == IC_zjmp || code == IC_fork ||
+    code == IC_lfork)
+        return (true);
+    return (false);
+}
+
 bool encode_and_write_instructions(int fd, instruction_t **instructions)
 {
     for (int i = 0; instructions[i]; i++) {
         write(fd, &instructions[i]->code, 1);
-        write_description(instructions[i]->description, fd);
-        for (int j = 0; instructions[i]->args[j] != -1; j++) {
-            write(fd, &instructions[i]->args[j], 1);
-        }
+        if (!have_one_argument(instructions[i]->code))
+            write_description(instructions[i]->description, fd);
+        for (int j = 0; instructions[i]->args[j] != -1; j++)
+            write_with_good_size(instructions[i]->description[j],
+            instructions[i]->args[j], fd);
     }
     return (true);
 }
