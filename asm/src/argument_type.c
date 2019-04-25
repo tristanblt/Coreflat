@@ -50,8 +50,6 @@ bool argument_is_indirect(char *argument)
 
 bool argument_is_valid(char *argument, char type)
 {
-    if (!type)
-        return (true);
     if (type & T_REG && argument_is_register(argument))
         return (true);
     if (type & T_DIR && argument_is_direct(argument))
