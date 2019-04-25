@@ -62,6 +62,7 @@ instruction_t **get_instructions_array(char **file)
     for (int i = 0; file[i] != NULL; i++) {
         if (!is_an_instruction(file[i]))
             continue;
+        clean_comments(file[i]);
         if ((line = multiple_split(file[i], (char [5]){' ', SEPARATOR_CHAR, '\n', '\r', 0})) == NULL)
             return (NULL);
         tmp_instr = check_and_parse_instruction(line);
@@ -85,5 +86,6 @@ instruction_t **error_handling_and_parsing(char *file_path)
     if ((file = get_file(fd)) == NULL)
         return (NULL);
     fclose(fd);
+    
     return (get_instructions_array(file));
 }

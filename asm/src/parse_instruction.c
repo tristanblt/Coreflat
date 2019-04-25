@@ -7,6 +7,7 @@
 
 #include "asm.h"
 #include "my.h"
+#include "op.h"
 
 int get_instruction_id_next(char *start_line)
 {
@@ -48,6 +49,16 @@ int get_instruction_id(char *start_line)
     if (my_strcmp(start_line, "ldi"))
         return (IC_ldi);
     return (get_instruction_id_next(start_line));
+}
+
+void clean_comments(char *line)
+{
+    for (int i = 0; line[i]; i++) {
+        if (line[i] == COMMENT_CHAR) {
+            line[i] = 0;
+            return;
+        }
+    }
 }
 
 int *parse_args(char **line)

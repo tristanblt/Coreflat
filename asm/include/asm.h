@@ -96,6 +96,7 @@ char *parse_description(char **line);
 bool argument_is_indirect(char *argument);
 bool argument_is_register(char *argument);
 bool argument_is_direct(char *argument);
+void clean_comments(char *line);
 
 //END PROTOTYPES
 

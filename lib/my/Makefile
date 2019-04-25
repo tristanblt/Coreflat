@@ -25,7 +25,7 @@ OBJS	=	$(SRCS:%.c=%.o)
 
 CC	=	gcc
 
-CFLAGS	=	-W -Wall -Wextra -Wshadow -Werror
+CFLAGS	=	-W -Wall -Wextra -Wshadow -Werror -I../../include
 
 AR	=	ar rc
 

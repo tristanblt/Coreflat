@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "op.h"
 
 int my_strlen(char const *str)
 {
@@ -30,6 +31,6 @@ int my_argslen(char **arr)
 {
     int i = 0;
 
-    for (i = 0; arr[i] && arr[i][0] != '#'; i++);
+    for (i = 0; arr[i] && arr[i][0] != COMMENT_CHAR; i++);
     return (i);
 }
