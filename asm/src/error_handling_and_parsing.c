@@ -86,6 +86,6 @@ instruction_t **error_handling_and_parsing(char *file_path, header_t **header)
     if ((file = get_file(fd)) == NULL)
         return (NULL);
     fclose(fd);
-    //*header = get_header(file);
+    *header = get_header(file);
     return (get_instructions_array(file));
 }

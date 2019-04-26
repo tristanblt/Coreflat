@@ -56,7 +56,7 @@ void write_reverse_bytes(int arg, char size, int fd)
 
     for (i = 0; i < size; i++) {
         temp = arg;
-        temp <<= max;
+        temp >>= max;
         max -= 8;
         write(fd, &temp, 1);
     }
@@ -93,11 +93,22 @@ bool encode_and_write_instructions(int fd, instruction_t **instructions)
     return (true);
 }
 
+void write_n_zeros(int n, int fd)
+{
+    int temp = 0;
+
+    for (int i = 0; i < n; i++) {
+        write(fd, &temp, 1);
+    }
+}
+
 void write_header(header_t *header, int fd)
 {
-    write(fd, header->magic, 4);
-    write(fd, header->prog_name, PROG_NAME_LENGTH);
-    write(fd, header->comment, COMMENT_LENGTH);
+    write_reverse_bytes(header->magic, 4, fd);
+    write(fd, header->prog_name, my_strlen(header->prog_name));
+    write_n_zeros(PROG_NAME_LENGTH -  my_strlen(header->prog_name), fd);
+    write(fd, header->comment, my_strlen(header->comment));
+    write_n_zeros(COMMENT_LENGTH -  my_strlen(header->comment), fd);
 }
 
 bool encode_instructions_to_file(char *file_name, instruction_t **instructions, header_t *header)
@@ -112,7 +123,7 @@ bool encode_instructions_to_file(char *file_name, instruction_t **instructions, 
         return (false);
     }
     free(file_name);
-    //write_header(header, fd);
+    write_header(header, fd);
     if (encode_and_write_instructions(fd, instructions) == false) {
         close(fd);
         return (false);

@@ -24,5 +24,6 @@ int main(int ac, char **av)
         return (EXIT_FAIL);
     }
     free_instructions(instructions);
+    free_header(header);
     return (EXIT_SUCCESS);
 }

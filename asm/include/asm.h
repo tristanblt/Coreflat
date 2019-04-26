@@ -83,6 +83,7 @@ int my_argslen(char **arr);
 
 void free_double_arr(char **arr);
 void free_instructions(instruction_t **arr);
+void free_header(header_t *header);
 
 // error handling
 bool argument_is_valid(char *argument, char type);
@@ -97,6 +98,7 @@ bool argument_is_indirect(char *argument);
 bool argument_is_register(char *argument);
 bool argument_is_direct(char *argument);
 void clean_comments(char *line);
+header_t *get_header(char **file);
 
 //END PROTOTYPES
 

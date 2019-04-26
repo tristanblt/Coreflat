@@ -25,3 +25,8 @@ void free_instructions(instruction_t **arr)
     }
     free(arr);
 }
+
+void free_header(header_t *header)
+{
+    free(header);
+}
