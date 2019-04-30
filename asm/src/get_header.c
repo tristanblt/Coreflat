@@ -12,11 +12,16 @@
 header_t *init_header(void)
 {
     header_t *header = malloc(sizeof(header_t));
+    int magic = COREWAR_EXEC_MAGIC;
 
     if (!header)
         return (NULL);
-    header->magic = COREWAR_EXEC_MAGIC;
-    header->prog_size = 0;
+    *header = (header_t){0};
+    for (int i = 0; i < 4; i++) {
+        header->magic <<= 8;
+        header->magic |= magic & 255;
+        magic >>= 8;
+    }
     return (header);
 }
 

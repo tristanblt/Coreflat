@@ -44,11 +44,23 @@ bool arguments_are_valid(args_type_t *types, char **line)
     return (true);
 }
 
-char instruction_get_code(char **line)
+char *get_label(char *instruction)
+{
+    char *label = my_strdup(instruction);
+
+    if (!label)
+        return (NULL);
+    label[my_strlen(label) - 1] = 0;
+    return (label);
+}
+
+char instruction_get_code(char **line, char **label_name)
 {
     bool label = is_a_label(line[0]);
     int i = 0;
 
+    if (label && !(*label_name = get_label(line[0])))
+        return (-1);
     if (label && !line[1])
         return (0);
     while (op_tab[i].mnemonique) {

@@ -83,6 +83,8 @@ bool have_one_argument(int code)
 bool encode_and_write_instructions(int fd, instruction_t **instructions)
 {
     for (int i = 0; instructions[i]; i++) {
+        if (!instructions[i]->code)
+            continue;
         write(fd, &instructions[i]->code, 1);
         if (!have_one_argument(instructions[i]->code))
             write_description(instructions[i]->description, fd);
@@ -104,11 +106,12 @@ void write_n_zeros(int n, int fd)
 
 void write_header(header_t *header, int fd)
 {
-    write_reverse_bytes(header->magic, 4, fd);
-    write(fd, header->prog_name, my_strlen(header->prog_name));
-    write_n_zeros(PROG_NAME_LENGTH -  my_strlen(header->prog_name), fd);
-    write(fd, header->comment, my_strlen(header->comment));
-    write_n_zeros(COMMENT_LENGTH -  my_strlen(header->comment), fd);
+    /* write_reverse_bytes(header->magic, 4, fd); */
+    /* write(fd, header->prog_name, my_strlen(header->prog_name)); */
+    /* write_n_zeros(PROG_NAME_LENGTH -  my_strlen(header->prog_name), fd); */
+    /* write(fd, header->comment, my_strlen(header->comment)); */
+    /* write_n_zeros(COMMENT_LENGTH -  my_strlen(header->comment), fd); */
+    write(fd, header, sizeof(header_t));
 }
 
 bool encode_instructions_to_file(char *file_name, instruction_t **instructions, header_t *header)

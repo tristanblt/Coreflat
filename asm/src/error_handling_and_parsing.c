@@ -40,10 +40,13 @@ instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
 instruction_t *check_and_parse_instruction(char **line)
 {
     instruction_t *instruction = my_calloc(1, sizeof(instruction_t));
-    int id = instruction_get_code(line);
+    int id;
 
-    if (id == -1)
-        return (false);
+    if (!instruction)
+        return (NULL);
+    *instruction = (instruction_t){0};
+    if ((id=instruction_get_code(line, &instruction->label)) == -1)
+        return (NULL);
     instruction->code = id;
     if ((instruction->description = parse_description(line)) == NULL)
         return (NULL);

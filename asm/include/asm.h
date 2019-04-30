@@ -88,7 +88,7 @@ void free_header(header_t *header);
 // error handling
 bool argument_is_valid(char *argument, char type);
 bool char_is_in_string(char c, char *str);
-char instruction_get_code(char **line);
+char instruction_get_code(char **line, char **label_name);
 
 // parsing
 int get_instruction_id(char *start_line);
