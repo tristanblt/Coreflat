@@ -19,6 +19,8 @@ void free_double_arr(char **arr)
 void free_instructions(instruction_t **arr)
 {
     for (int i = 0; arr[i]; i++) {
+        if (arr[i]->label)
+            free(arr[i]->label);
         free(arr[i]->args);
         free(arr[i]->description);
         free(arr[i]);
