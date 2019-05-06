@@ -11,6 +11,8 @@
 
 int get_instruction_id_next(char *start_line)
 {
+    if (my_strcmp(start_line, "ldi"))
+        return (IC_ldi);
     if (my_strcmp(start_line, "sti"))
         return (IC_sti);
     if (my_strcmp(start_line, "fork"))
@@ -46,8 +48,6 @@ int get_instruction_id(char *start_line)
         return (IC_xor);
     if (my_strcmp(start_line, "zjmp"))
         return (IC_zjmp);
-    if (my_strcmp(start_line, "ldi"))
-        return (IC_ldi);
     return (get_instruction_id_next(start_line));
 }
 

@@ -13,7 +13,8 @@ bool is_an_instruction(char *line)
     for (int i = 0; line[i]; i++) {
         if (line[i] == COMMENT_CHAR)
             return (false);
-        if (line[i] != '\n' && line[i] != '\r' && line[i] != ' ' && line[i] != SEPARATOR_CHAR)
+        if (line[i] != '\n' && line[i] != '\r' && line[i] != ' ' && line[i]
+            != SEPARATOR_CHAR)
             return (true);
     }
     return (false);
@@ -66,7 +67,8 @@ instruction_t **get_instructions_array(char **file)
         if (!is_an_instruction(file[i]))
             continue;
         clean_comments(file[i]);
-        if ((line = multiple_split(file[i], (char [5]){' ', SEPARATOR_CHAR, '\n', '\r', 0})) == NULL)
+        if ((line = multiple_split(file[i],
+            (char [5]){' ', SEPARATOR_CHAR, '\n', '\r', 0})) == NULL)
             return (NULL);
         tmp_instr = check_and_parse_instruction(line);
         free_double_arr(line);

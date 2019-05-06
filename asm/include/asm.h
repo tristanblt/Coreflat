@@ -60,8 +60,8 @@ enum INSTRUCTION_CODES {
 // STRUCTS
 
 struct instruction {
-    char code; // the var which stock the enum which correspond to the instruction
-    char *description; // the description of arguments
+    char code;
+    char *description;
     int *args;
     char *label;
 };
@@ -71,7 +71,8 @@ struct instruction {
 
 //PROTOTYPES
 
-bool encode_instructions_to_file(char *file_name, instruction_t **instructions, header_t *header);
+bool encode_instructions_to_file(char *file_name, instruction_t **instructions,
+header_t *header);
 bool arguments_handling(int ac, char **av);
 instruction_t **error_handling_and_parsing(char *file_path, header_t **header);
 char **get_file(FILE *fd);
@@ -99,6 +100,15 @@ bool argument_is_register(char *argument);
 bool argument_is_direct(char *argument);
 void clean_comments(char *line);
 header_t *get_header(char **file);
+
+// writing
+
+void write_n_zeros(int n, int fd);
+void write_header(header_t *header, int fd);
+void write_description(char *description, int fd);
+void write_reverse_bytes(int arg, char size, int fd);
+void write_with_good_size(char c, int arg, int fd);
+
 
 //END PROTOTYPES
 

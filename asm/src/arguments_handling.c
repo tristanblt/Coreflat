@@ -37,7 +37,7 @@ bool arguments_handling(int ac, char **av)
     if (my_strlen(av[1]) == 0)
         return (my_puterr("[file_name] can't be empty (-h for help)"));
     if (!end_of_file(av[1], ".s"))
-        return (my_puterr("[file_name] need to be a \".s\" file (-h for help)"));
+        return (my_puterr("[file_name] need to be a .s file (-h for help)"));
     fd = open(av[1], O_RDONLY);
     if (fd == -1)
         return (my_puterr("[file_name] is not a file (-h for help)"));

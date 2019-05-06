@@ -25,16 +25,6 @@ header_t *init_header(void)
     return (header);
 }
 
-bool line_is_empty(char *line)
-{
-    if (!line)
-        return (true);
-    for (int i = 0; line[i]; i++)
-        if (line[i] != ' '&&line[i] != '\r'&&line[i] != '\n'&&line[i] != '\t')
-            return (false);
-    return (true);
-}
-
 void clean_name_and_comment(char *str)
 {
     int i = my_strlen(str) - 1;
@@ -54,7 +44,8 @@ bool fill_name(char *line, header_t *header)
     while (*line == ' ')
         line++;
     clean_name_and_comment(line);
-    if (my_strlen(line) == 1 || line[0] != '"' || line[my_strlen(line) - 1] != '"')
+    if (my_strlen(line) == 1 || line[0] != '"' || line[my_strlen(line) - 1]
+        != '"')
         return (false);
     for (int i = 0, count = 0; line[i]; i++) {
         if (line[i] == '"')
@@ -64,7 +55,7 @@ bool fill_name(char *line, header_t *header)
     }
     (line++, line[my_strlen(line) - 1] = 0);
     if (my_strlen(line) > PROG_NAME_LENGTH)
-        return (my_dprintf(2,"Error: Name too long\n")%1);
+        return (my_dprintf(2, "Error: Name too long\n")%1);
     my_strncpy(header->prog_name, line, my_strlen(line));
     return (true);
 }
@@ -77,7 +68,8 @@ bool fill_comment(char *line, header_t *header)
     while (*line == ' ')
         line++;
     clean_name_and_comment(line);
-    if (my_strlen(line) == 1 || line[0] != '"' || line[my_strlen(line) - 1] != '"')
+    if (my_strlen(line) == 1 || line[0] != '"' || line[my_strlen(line) - 1]
+        != '"')
         return (false);
     for (int i = 0, count = 0; line[i]; i++) {
         if (line[i] == '"')
@@ -87,7 +79,7 @@ bool fill_comment(char *line, header_t *header)
     }
     (line++, line[my_strlen(line) - 1] = 0);
     if (my_strlen(line) > COMMENT_LENGTH)
-        return (my_dprintf(2,"Error: Comment too long\n")%1);
+        return (my_dprintf(2, "Error: Comment too long\n")%1);
     my_strncpy(header->comment, line, my_strlen(line));
     return (true);
 }

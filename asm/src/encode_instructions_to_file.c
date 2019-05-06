@@ -29,53 +29,10 @@ int create_file(char *file_name)
     return (open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0664));
 }
 
-void write_description(char *description, int fd)
-{
-    char c = 0;
-    int i = 0;
-
-    for (i = 0; description[i] != -1; i++) {
-        if (description[i] == T_REG)
-            c += 1;
-        if (description[i] == T_DIR)
-            c += 2;
-        if (description[i] == T_IND)
-            c += 3;
-        c <<= 2;
-    }
-    for (; i < 3; i++)
-        c <<= 2;
-    write(fd, &c, 1);
-}
-
-void write_reverse_bytes(int arg, char size, int fd)
-{
-    int i = 0;
-    int temp = arg;
-    int max = size * 8 - 8;
-
-    for (i = 0; i < size; i++) {
-        temp = arg;
-        temp >>= max;
-        max -= 8;
-        write(fd, &temp, 1);
-    }
-}
-
-void write_with_good_size(char c, int arg, int fd)
-{
-    if (c == T_REG)
-        write_reverse_bytes(arg, 1, fd);
-    if (c == T_DIR)
-        write_reverse_bytes(arg, DIR_SIZE, fd);
-    if (c == T_IND)
-        write_reverse_bytes(arg, IND_SIZE, fd);
-}
-
 bool have_one_argument(int code)
 {
     if (code == IC_live || code == IC_zjmp || code == IC_fork ||
-    code == IC_lfork)
+        code == IC_lfork)
         return (true);
     return (false);
 }
@@ -95,26 +52,8 @@ bool encode_and_write_instructions(int fd, instruction_t **instructions)
     return (true);
 }
 
-void write_n_zeros(int n, int fd)
-{
-    int temp = 0;
-
-    for (int i = 0; i < n; i++) {
-        write(fd, &temp, 1);
-    }
-}
-
-void write_header(header_t *header, int fd)
-{
-    /* write_reverse_bytes(header->magic, 4, fd); */
-    /* write(fd, header->prog_name, my_strlen(header->prog_name)); */
-    /* write_n_zeros(PROG_NAME_LENGTH -  my_strlen(header->prog_name), fd); */
-    /* write(fd, header->comment, my_strlen(header->comment)); */
-    /* write_n_zeros(COMMENT_LENGTH -  my_strlen(header->comment), fd); */
-    write(fd, header, sizeof(header_t));
-}
-
-bool encode_instructions_to_file(char *file_name, instruction_t **instructions, header_t *header)
+bool encode_instructions_to_file(char *file_name, instruction_t **instructions,
+header_t *header)
 {
     int fd;
 
