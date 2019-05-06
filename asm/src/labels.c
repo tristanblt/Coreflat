@@ -28,7 +28,6 @@ int cum_size)
         if (instructions[i]->label &&
             my_strcmp(instructions[i]->label, label))
             break;
-    my_printf("%d %d\n", instructions[i]->cumulative_size, cum_size);
     return (instructions[i]->cumulative_size - cum_size);
 }
 
