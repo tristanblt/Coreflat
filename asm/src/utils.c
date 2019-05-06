@@ -16,3 +16,11 @@ bool line_is_empty(char *line)
             return (false);
     return (true);
 }
+
+int get_arg_number(int code)
+{
+    for (int i = 0; op_tab[i].code; i++)
+        if (op_tab[i].code == code)
+            return (op_tab[i].nbr_args);
+    return (0);
+}

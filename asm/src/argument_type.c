@@ -20,11 +20,15 @@ bool argument_is_label(char *argument)
 
 bool argument_is_direct(char *argument)
 {
+    bool neg = 0;
+
     if (argument_is_label(argument))
         return (true);
     if (argument[0] != DIRECT_CHAR || !argument[1])
         return (false);
-    if (!is_num(&argument[1]))
+    if (argument[1] == '-')
+        neg = true;
+    if (!is_num(&argument[1 + neg]))
         return (false);
     return (true);
 }
@@ -43,7 +47,9 @@ bool argument_is_register(char *argument)
 
 bool argument_is_indirect(char *argument)
 {
-    if (is_num(argument))
+    bool neg = argument[0] == '-';
+
+    if (is_num(argument + neg))
         return (true);
     return (false);
 }

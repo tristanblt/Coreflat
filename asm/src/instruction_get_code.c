@@ -54,7 +54,7 @@ char *get_label(char *instruction)
     return (label);
 }
 
-char instruction_get_code(char **line, char **label_name)
+char instruction_get_code(char **line, char **label_name, char **labels)
 {
     bool label = is_a_label(line[0]);
     int i = 0;
@@ -71,5 +71,8 @@ char instruction_get_code(char **line, char **label_name)
     if (!op_tab[i].mnemonique ||
         !arguments_are_valid(op_tab[i].type, line + 1 + label))
         return (-1);
+    for (int j = label + 1, arg = 0; line[j]; j++, arg++)
+        if (argument_is_label(line[j])&&!(labels[arg]=my_strdup(line[j]+2)))
+            return (-1);
     return (op_tab[i].code);
 }

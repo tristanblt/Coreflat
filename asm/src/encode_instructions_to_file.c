@@ -29,7 +29,7 @@ int create_file(char *file_name)
     return (open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0664));
 }
 
-bool have_one_argument(int code)
+bool has_one_argument(int code)
 {
     if (code == IC_live || code == IC_zjmp || code == IC_fork ||
         code == IC_lfork)
@@ -39,15 +39,19 @@ bool have_one_argument(int code)
 
 bool encode_and_write_instructions(int fd, instruction_t **instructions)
 {
+    int args = 0;
+
     for (int i = 0; instructions[i]; i++) {
         if (!instructions[i]->code)
             continue;
         write(fd, &instructions[i]->code, 1);
-        if (!have_one_argument(instructions[i]->code))
+        if (!has_one_argument(instructions[i]->code))
             write_description(instructions[i]->description, fd);
-        for (int j = 0; instructions[i]->args[j] != -1; j++)
+        args = get_arg_number(instructions[i]->code);
+        for (int j = 0; j < args; j++) {
             write_with_good_size(instructions[i]->description[j],
             instructions[i]->args[j], fd);
+        }
     }
     return (true);
 }

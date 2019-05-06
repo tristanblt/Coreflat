@@ -64,6 +64,9 @@ struct instruction {
     char *description;
     int *args;
     char *label;
+    char **label_args;
+    int size;
+    int cumulative_size;
 };
 
 //END STRUCTS
@@ -81,6 +84,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 char **multiple_split(char *str, char *split);
 int my_arrlen(char **arr);
 int my_argslen(char **arr);
+bool has_one_argument(int code);
 
 void free_double_arr(char **arr);
 void free_instructions(instruction_t **arr);
@@ -89,7 +93,7 @@ void free_header(header_t *header);
 // error handling
 bool argument_is_valid(char *argument, char type);
 bool char_is_in_string(char c, char *str);
-char instruction_get_code(char **line, char **label_name);
+char instruction_get_code(char **line, char **label_name, char **labels);
 
 // parsing
 int get_instruction_id(char *start_line);
@@ -98,17 +102,27 @@ char *parse_description(char **line);
 bool argument_is_indirect(char *argument);
 bool argument_is_register(char *argument);
 bool argument_is_direct(char *argument);
+bool argument_is_label(char *argument);
 void clean_comments(char *line);
 header_t *get_header(char **file);
+int get_instruction_size(instruction_t *instruction);
 
 // writing
-
 void write_n_zeros(int n, int fd);
 void write_header(header_t *header, int fd);
 void write_description(char *description, int fd);
 void write_reverse_bytes(int arg, char size, int fd);
 void write_with_good_size(char c, int arg, int fd);
 
+// utils
+bool line_is_empty(char *line);
+bool is_a_label(char *str);
+int get_arg_number(int code);
+
+// labels
+void compute_instruction_size(instruction_t **instructions);
+int labels_get_values(instruction_t **instructions);
+bool check_multiple_label_definitions(instruction_t **instructions);
 
 //END PROTOTYPES
 
