@@ -22,7 +22,7 @@ SRC	=	../src/op.c									\
 		$(SRCPATH)/argument_type.c					\
 		$(SRCPATH)/parse_instruction.c				\
 		$(SRCPATH)/writing_in_file.c				\
-		$(SRCPATH)/utils.c				\
+		$(SRCPATH)/utils.c							\
 		$(SRCPATH)/get_header.c						\
 
 OBJ	=	$(SRC:%.c=%.o)
