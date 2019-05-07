@@ -63,37 +63,40 @@ void clean_comments(char *line)
 
 int *parse_args(char **line)
 {
-    int n_args = my_argslen(line) - 1;
+    int start = 1 + is_a_label(line[0]);
+    int n_args = my_argslen(line) - start;
     int *args = my_calloc(n_args + 1, sizeof(int));
 
     if (args == NULL)
         return (NULL);
     args[n_args] = -1;
     for (int i = 0; i < n_args; i++) {
-        if (argument_is_register(line[i + 1]))
-            args[i] = my_get_nbr(line[i + 1] + 1);
-        if (argument_is_direct(line[i + 1]))
-            args[i] = my_get_nbr(line[i + 1] + 1);
-        if (argument_is_indirect(line[i + 1]))
-            args[i] = my_get_nbr(line[i + 1]);
+        args[i] = 0;
+        if (argument_is_register(line[i + start]))
+            args[i] = my_get_nbr(line[i + start] + 1);
+        if (argument_is_direct(line[i + start]))
+            args[i] = my_get_nbr(line[i + start] + 1);
+        if (argument_is_indirect(line[i + start]))
+            args[i] = my_get_nbr(line[i + start]);
     }
     return (args);
 }
 
 char *parse_description(char **line)
 {
-    int n_args = my_argslen(line) - 1;
+    int start = 1 + is_a_label(line[0]);
+    int n_args = my_argslen(line) - start;
     char *description = my_calloc(n_args + 1, sizeof(char));
 
     if (description == NULL)
         return (NULL);
     description[n_args] = -1;
     for (int i = 0; i < n_args; i++) {
-        if (argument_is_register(line[i + 1]))
+        if (argument_is_register(line[i + start]))
             description[i] = T_REG;
-        if (argument_is_direct(line[i + 1]))
+        if (argument_is_direct(line[i + start]))
             description[i] = T_DIR;
-        if (argument_is_indirect(line[i + 1]))
+        if (argument_is_indirect(line[i + start]))
             description[i] = T_IND;
     }
     return (description);

@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "asm.h"
+#include "op.h"
 
 bool is_an_instruction(char *line)
 {
@@ -46,12 +47,19 @@ instruction_t *check_and_parse_instruction(char **line)
     if (!instruction)
         return (NULL);
     *instruction = (instruction_t){0};
-    if ((id=instruction_get_code(line, &instruction->label)) == -1)
+    instruction->label_args = malloc(sizeof(char *) * MAX_ARGS_NUMBER);
+    if (!instruction->label_args)
+        return (NULL);
+    for (int i = 0; i < MAX_ARGS_NUMBER; i++)
+        instruction->label_args[i] = NULL;
+    if ((id=instruction_get_code(line, &instruction->label,
+                                instruction->label_args)) == -1)
         return (NULL);
     instruction->code = id;
-    if ((instruction->description = parse_description(line)) == NULL)
-        return (NULL);
-    if ((instruction->args = parse_args(line)) == NULL)
+    if (!id)
+        return (instruction);
+    if ((instruction->description = parse_description(line)) == NULL ||
+        (instruction->args = parse_args(line)) == NULL)
         return (NULL);
     return (instruction);
 }

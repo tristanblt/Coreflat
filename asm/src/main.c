@@ -17,9 +17,14 @@ int main(int ac, char **av)
         return (EXIT_FAIL);
     if ((instructions = error_handling_and_parsing(av[1], &header)) == NULL)
         return (EXIT_FAIL);
-    // calc prog_size
-    // labels management
+    compute_instruction_size(instructions);
+    if (labels_get_values(instructions)) {
+        free_instructions(instructions);
+        free_header(header);
+        return (84);
+    }
     if (!encode_instructions_to_file(my_strdup(av[1]), instructions, header)) {
+        free_header(header);
         free_instructions(instructions);
         return (EXIT_FAIL);
     }

@@ -9,27 +9,29 @@ SRCPATH = src
 
 NAME	=	asm
 
-SRC	=	../src/op.c									\
-		$(SRCPATH)/main.c							\
-		$(SRCPATH)/encode_instructions_to_file.c	\
-		$(SRCPATH)/arguments_handling.c				\
-		$(SRCPATH)/error_handling_and_parsing.c		\
-		$(SRCPATH)/get_file.c						\
-		$(SRCPATH)/multiple_split.c					\
-		$(SRCPATH)/my_strncpy.c						\
-		$(SRCPATH)/free_utils.c						\
-		$(SRCPATH)/instruction_is_valid.c			\
-		$(SRCPATH)/argument_type.c					\
-		$(SRCPATH)/parse_instruction.c				\
-		$(SRCPATH)/writing_in_file.c				\
-		$(SRCPATH)/utils.c							\
-		$(SRCPATH)/get_header.c						\
+SRC	=	../src/op.c										\
+		$(SRCPATH)/main.c								\
+		$(SRCPATH)/encode_instructions_to_file.c		\
+		$(SRCPATH)/arguments_handling.c					\
+		$(SRCPATH)/error_handling_and_parsing.c			\
+		$(SRCPATH)/get_file.c							\
+		$(SRCPATH)/multiple_split.c						\
+		$(SRCPATH)/my_strncpy.c							\
+		$(SRCPATH)/free_utils.c							\
+		$(SRCPATH)/instruction_get_code.c				\
+		$(SRCPATH)/argument_type.c						\
+		$(SRCPATH)/parse_instruction.c					\
+		$(SRCPATH)/writing_in_file.c					\
+		$(SRCPATH)/utils.c								\
+		$(SRCPATH)/get_header.c							\
+		$(SRCPATH)/get_instruction_size.c				\
+		$(SRCPATH)/labels.c								\
+		$(SRCPATH)/check_multiple_label_definitions.c	\
 
 OBJ	=	$(SRC:%.c=%.o)
 
-CFLAGS	=	-W -Wall -Wextra -Wshadow				\
-			-Iinclude								\
-			-Iinclude -I../include -g				\
+CFLAGS	=	-W -Wall -Wextra -Wshadow	\
+		-Iinclude -I../include -g	\
 
 LIB	=	my
 
