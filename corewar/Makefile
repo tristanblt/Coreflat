@@ -7,7 +7,8 @@
 
 NAME	=	corewar
 
-SRC	=	src/main.c		\
+SRC	=	src/main.c				\
+		src/get_cor_file.c		\
 
 OBJ	=	$(SRC:%.c=%.o)
 

@@ -6,10 +6,15 @@
 */
 
 #include "my.h"
-#include <stdlib.h>
+#include "corewar.h"
 
 int main(void)
 {
-    my_printf("bonsoir %f\n", 1.300011);
+    char *file = NULL;
+    int size = 0;
+
+    if ((file = get_cor_file("test", &size)) == NULL)
+        return (EXIT_FAIL);
+    
     return (0);
 }
