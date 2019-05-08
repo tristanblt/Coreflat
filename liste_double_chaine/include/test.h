@@ -11,6 +11,7 @@
 typedef struct list_s
 {
     int val;
+    int id;
     struct list_s *prev;
     struct list_s *next;
 } list_t;
