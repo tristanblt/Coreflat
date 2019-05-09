@@ -60,20 +60,24 @@ void delete_in_list(list_t *list)
 void add_to_next(list_t *list, int val)
 {
     list_t *new = NULL;
+    static int id = 0;
 
     new = malloc(sizeof(list_t));
     if (new != NULL) {
         new->val = val;
+        new->id = id;
         new->prev = list;
         new->next = list->next;
         list->next->prev = new;
         list->next = new;
+        id++;
     }
 }
 
 void add_to_prev(list_t *list, int val)
 {
     list_t *new = NULL;
+    static int id = 0;
 
     new = malloc(sizeof(list_t));
     if (new != NULL) {
@@ -82,6 +86,8 @@ void add_to_prev(list_t *list, int val)
         new->prev = list->prev;
         list->prev->next = new;
         list->prev = new;
+        new->id = id;
+        id++;
     }
 }
 
@@ -118,9 +124,8 @@ int main(int ac, char **av)
     for (int i = 1; i < 10; i++)
         add_to_next(list, i);
     add_n_to_next(list, 5, 0);
-    list = go_n_next(list, 5);
     for (tmp = list->next; tmp != list; tmp = tmp->next)
-        printf("%d\n", tmp->val);
+        printf("%d, id = %d\n", tmp->val, tmp->id);
     clear_list(list);
     return (0);
 }
