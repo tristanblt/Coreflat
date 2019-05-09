@@ -31,6 +31,7 @@
 // TYPEDEFS
 
 typedef struct instruction instruction_t;
+typedef struct champion champion_t;
 
 //END TYPEDEFS
 
@@ -63,10 +64,17 @@ struct instruction {
     char code;
     char *description;
     int *args;
-    char *label;
-    char **label_args;
-    int size;
-    int cumulative_size;
+};
+
+struct champion {
+    instruction_t **instructions;
+    header_t *header;
+    int pc;
+    int *registers;
+    int buffer_cycle;
+    int alive;
+    int nbr_live;
+    int cycle_to_die;
 };
 
 //END STRUCTS
@@ -75,6 +83,12 @@ struct instruction {
 //PROTOTYPES
 
 char *get_cor_file(char *path, int *size);
+instruction_t **parse_instructions(char *file, int size);
+header_t *parse_header(char **file, int *size);
+int reverse_bytes(unsigned int x);
+int reverse_bytes_two(unsigned int x);
+bool start_cycle(champion_t **champions);
+champion_t *create_champion(char *path);
 
 //END PROTOTYPES
 

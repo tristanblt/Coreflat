@@ -7,8 +7,13 @@
 
 NAME	=	corewar
 
-SRC	=	src/main.c				\
-		src/get_cor_file.c		\
+SRC	=	src/main.c						\
+		src/get_cor_file.c				\
+		src/parse_instructions.c		\
+		src/parse_header.c				\
+		src/cycle_manager.c				\
+		src/champion_manager.c			\
+		../src/op.c
 
 OBJ	=	$(SRC:%.c=%.o)
 

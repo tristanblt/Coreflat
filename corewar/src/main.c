@@ -10,11 +10,14 @@
 
 int main(void)
 {
-    char *file = NULL;
-    int size = 0;
+    champion_t **champions = NULL;
 
-    if ((file = get_cor_file("test", &size)) == NULL)
-        return (EXIT_FAIL);
-    
+    // create chamption
+    champion_t *temp;
+    if ((temp = create_champion("test")) == NULL)
+        return (NULL);
+    //champions = push_champion(champions, temp);
+    // end create champion
+    start_cycle(&temp);
     return (0);
 }
