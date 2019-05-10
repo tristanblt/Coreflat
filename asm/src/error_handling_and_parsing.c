@@ -100,5 +100,9 @@ instruction_t **error_handling_and_parsing(char *file_path, header_t **header)
         return (NULL);
     fclose(fd);
     *header = get_header(file);
+    if (!*header) {
+        free_double_arr(file);
+        return (NULL);
+    }
     return (get_instructions_array(file));
 }
