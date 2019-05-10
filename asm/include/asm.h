@@ -102,7 +102,7 @@ char *parse_description(char **line);
 bool argument_is_indirect(char *argument);
 bool argument_is_register(char *argument);
 bool argument_is_direct(char *argument);
-bool argument_is_label(char *argument);
+bool argument_is_label(char *argument, int type);
 void clean_comments(char *line);
 header_t *get_header(char **file);
 int get_instruction_size(instruction_t *instruction);

@@ -8,11 +8,17 @@
 #include "asm.h"
 #include "my.h"
 
-bool argument_is_label(char *argument)
+bool argument_is_label(char *argument, int type)
 {
-    if (argument[0] != DIRECT_CHAR || argument[1] != LABEL_CHAR || !argument[2])
+    int start = 0;
+
+    if (!type && argument[0] == DIRECT_CHAR)
+        start++;
+    if (type == T_DIR && argument[0] == DIRECT_CHAR)
+        start++;
+    if (argument[start] != LABEL_CHAR || !argument[start + 1])
         return (false);
-    for (int i = 2; argument[i]; i++)
+    for (int i = start + 1; argument[i]; i++)
         if (!char_is_in_string(argument[i], LABEL_CHARS))
             return (false);
     return (true);
@@ -22,7 +28,7 @@ bool argument_is_direct(char *argument)
 {
     bool neg = 0;
 
-    if (argument_is_label(argument))
+    if (argument_is_label(argument, T_DIR))
         return (true);
     if (argument[0] != DIRECT_CHAR || !argument[1])
         return (false);
@@ -49,6 +55,8 @@ bool argument_is_indirect(char *argument)
 {
     bool neg = argument[0] == '-';
 
+    if (argument_is_label(argument, T_IND))
+        return (true);
     if (is_num(argument + neg))
         return (true);
     return (false);
