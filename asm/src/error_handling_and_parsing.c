@@ -74,7 +74,6 @@ instruction_t **get_instructions_array(char **file)
     for (int i = 0; file[i] != NULL; i++) {
         if (!is_an_instruction(file[i]))
             continue;
-        clean_comments(file[i]);
         if ((line = multiple_split(file[i],
             (char [5]){' ', SEPARATOR_CHAR, '\n', '\r', 0})) == NULL)
             return (NULL);
@@ -99,6 +98,8 @@ instruction_t **error_handling_and_parsing(char *file_path, header_t **header)
     if ((file = get_file(fd)) == NULL)
         return (NULL);
     fclose(fd);
+    for (int i = 0; file[i]; i++)
+        clean_comments(file[i]);
     *header = get_header(file);
     if (!*header) {
         free_double_arr(file);
