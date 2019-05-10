@@ -14,6 +14,8 @@ int get_program_size(instruction_t **inst)
     int reversed_size = 0;
 
     for (; inst[j]; j++);
+    if (!j)
+        return (0);
     j--;
     size = inst[j]->cumulative_size + inst[j]->size;
     for (int i = 0; i < 4; i++) {
