@@ -8,17 +8,6 @@
 #include "asm.h"
 #include "my.h"
 
-void compute_instruction_size(instruction_t **instructions)
-{
-    for (int i = 0; instructions[i]; i++) {
-        instructions[i]->size = get_instruction_size(instructions[i]);
-        instructions[i]->cumulative_size = 0;
-        if (i)
-            instructions[i]->cumulative_size +=
-                instructions[i-1]->cumulative_size + instructions[i-1]->size;
-    }
-}
-
 int get_byte_difference(instruction_t **instructions, char *label,
 int cum_size)
 {

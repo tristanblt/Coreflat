@@ -112,15 +112,16 @@ void write_n_zeros(int n, int fd);
 void write_header(header_t *header, int fd);
 void write_description(char *description, int fd);
 void write_reverse_bytes(int arg, char size, int fd);
-void write_with_good_size(char c, int arg, int fd);
+void write_with_good_size(char c, int arg, int fd, int code);
 
 // utils
 bool line_is_empty(char *line);
 bool is_a_label(char *str);
 int get_arg_number(int code);
+bool uses_indexes(int code);
 
 // labels
-void compute_instruction_size(instruction_t **instructions);
+int compute_instruction_size(instruction_t **instructions);
 int labels_get_values(instruction_t **instructions);
 bool check_multiple_label_definitions(instruction_t **instructions);
 

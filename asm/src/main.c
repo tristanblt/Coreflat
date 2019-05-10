@@ -17,11 +17,11 @@ int main(int ac, char **av)
         return (EXIT_FAIL);
     if ((instructions = error_handling_and_parsing(av[1], &header)) == NULL)
         return (EXIT_FAIL);
-    compute_instruction_size(instructions);
+    header->prog_size = compute_instruction_size(instructions);
     if (labels_get_values(instructions)) {
         free_instructions(instructions);
         free_header(header);
-        return (84);
+        return (EXIT_FAIL);
     }
     if (!encode_instructions_to_file(my_strdup(av[1]), instructions, header)) {
         free_header(header);

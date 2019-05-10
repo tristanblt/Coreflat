@@ -24,3 +24,11 @@ int get_arg_number(int code)
             return (op_tab[i].nbr_args);
     return (0);
 }
+
+bool uses_indexes(int code)
+{
+    if (code == IC_ldi || code == IC_lldi || code == IC_fork ||
+        code == IC_lfork || code == IC_zjmp || code == IC_sti)
+        return (true);
+    return (false);
+}

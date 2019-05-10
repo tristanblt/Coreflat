@@ -50,7 +50,7 @@ bool encode_and_write_instructions(int fd, instruction_t **instructions)
         args = get_arg_number(instructions[i]->code);
         for (int j = 0; j < args; j++) {
             write_with_good_size(instructions[i]->description[j],
-            instructions[i]->args[j], fd);
+            instructions[i]->args[j], fd, instructions[i]->code);
         }
     }
     return (true);

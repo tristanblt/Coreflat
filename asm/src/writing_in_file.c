@@ -55,12 +55,16 @@ void write_reverse_bytes(int arg, char size, int fd)
     }
 }
 
-void write_with_good_size(char c, int arg, int fd)
+void write_with_good_size(char c, int arg, int fd, int code)
 {
     if (c == T_REG)
         write_reverse_bytes(arg, 1, fd);
-    if (c == T_DIR)
-        write_reverse_bytes(arg, DIR_SIZE, fd);
+    if (c == T_DIR) {
+        if (uses_indexes(code))
+            write_reverse_bytes(arg, IND_SIZE, fd);
+        else
+            write_reverse_bytes(arg, DIR_SIZE, fd);
+    }
     if (c == T_IND)
         write_reverse_bytes(arg, IND_SIZE, fd);
 }
