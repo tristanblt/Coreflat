@@ -8,14 +8,6 @@
 #include "asm.h"
 #include "my.h"
 
-bool char_is_in_string(char c, char *str)
-{
-    for (int i = 0; str[i]; i++)
-        if (str[i] == c)
-            return (true);
-    return (false);
-}
-
 bool is_a_label(char *str)
 {
     for (int i = 0; str[i]; i++) {
