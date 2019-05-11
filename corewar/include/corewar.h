@@ -33,7 +33,7 @@
 typedef struct instruction instruction_t;
 typedef struct champion champion_t;
 typedef struct pc pc_t;
-typedef struct list list_t;
+typedef struct list_t list_t;
 
 //END TYPEDEFS
 
@@ -81,11 +81,11 @@ struct champion {
     char **registers;
 };
 
-struct list_s
+struct list_t
 {
     char val;
-    struct list_s *prev;
-    struct list_s *next;
+    struct list_t *prev;
+    struct list_t *next;
 };
 
 //END STRUCTS
