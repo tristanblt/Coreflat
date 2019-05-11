@@ -23,8 +23,8 @@ champion_t *create_champion(char *path)
         return (NULL);
     if ((champion->instructions = parse_instructions(file, size)) == NULL)
         return (NULL);
-    champion->nbr_live = 0;
-    champion->alive = CYCLE_TO_DIE;
-    champion->cycle_to_die = CYCLE_TO_DIE;
+    //champion->nbr_live = 0;
+    //champion->alive = CYCLE_TO_DIE;
+    //champion->cycle_to_die = CYCLE_TO_DIE;
     return (champion);
 }

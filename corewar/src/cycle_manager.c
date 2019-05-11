@@ -23,9 +23,9 @@ bool do_a_cycle(champion_t *champion, int i)
 
 bool champion_cycle(champion_t *champion, int i)
 {
-    for (int i = 0; champion->pcs[i].memory; i++) {
+    for (int i = 0; champion->pcs[i]->memory; i++) {
         if (!do_a_cycle(champion, i))
-            return (false)
+            return (false);
     }
     return (true);
 }
