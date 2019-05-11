@@ -15,7 +15,7 @@ int main(void)
     // create chamption
     champion_t *temp;
     if ((temp = create_champion("test")) == NULL)
-        return (NULL);
+        return (84);
     //champions = push_champion(champions, temp);
     // end create champion
     start_cycle(&temp);
