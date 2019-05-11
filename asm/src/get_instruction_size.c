@@ -12,18 +12,18 @@ int get_arg_size(instruction_t *inst, int arg)
 {
     if (has_one_argument(inst->code)) {
         if (uses_indexes(inst->code))
-            return (3);
-        return (5);
+            return (1 + IND_SIZE);
+        return (1 + REG_SIZE);
     }
     if (inst->description[arg] == T_REG)
         return (1);
     if (inst->description[arg] == T_DIR) {
         if (uses_indexes(inst->code))
-            return (2);
-        return (4);
+            return (IND_SIZE);
+        return (REG_SIZE);
     }
     if (inst->description[arg] == T_IND)
-        return (2);
+        return (IND_SIZE);
     return (0);
 }
 
