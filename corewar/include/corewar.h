@@ -80,6 +80,14 @@ struct champion {
     char **registers;
 };
 
+typedef struct list_s
+{
+    int val;
+    int id;
+    struct list_s *prev;
+    struct list_s *next;
+} list_t;
+
 //END STRUCTS
 
 
@@ -92,6 +100,20 @@ int reverse_bytes(unsigned int x);
 int reverse_bytes_two(unsigned int x);
 bool start_cycle(champion_t **champions);
 champion_t *create_champion(char *path);
+
+// list_t functions
+void add_next(list_t *list, int val);
+void add_prev(list_t *list, int val);
+void add_n_next(list_t *list, int nb, int val);
+void add_n_prev(list_t *list, int nb, int val);
+list_t *create_list(void);
+void clear_list(list_t *list);
+void delete_in_list(list_t *list);
+list_t *go_next(list_t *list);
+list_t *go_n_next(list_t *list, int nb);
+list_t *go_prev(list_t *list);
+list_t *go_n_prev(list_t *list, int nb);
+
 
 //END PROTOTYPES
 

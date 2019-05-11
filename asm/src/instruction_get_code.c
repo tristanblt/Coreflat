@@ -44,7 +44,7 @@ bool arguments_are_valid(args_type_t *types, char **line)
     return (true);
 }
 
-char *get_label(char *instruction)
+char *get_instruction_label(char *instruction)
 {
     char *label = my_strdup(instruction);
 
@@ -54,12 +54,21 @@ char *get_label(char *instruction)
     return (label);
 }
 
+char *get_label(char *arg)
+{
+    if (arg[0] == DIRECT_CHAR)
+        arg++;
+    if (arg[0] == LABEL_CHAR)
+        arg++;
+    return (my_strdup(arg));
+}
+
 char instruction_get_code(char **line, char **label_name, char **labels)
 {
     bool label = is_a_label(line[0]);
     int i = 0;
 
-    if (label && !(*label_name = get_label(line[0])))
+    if (label && !(*label_name = get_instruction_label(line[0])))
         return (-1);
     if (label && !line[1])
         return (0);
@@ -72,7 +81,7 @@ char instruction_get_code(char **line, char **label_name, char **labels)
         !arguments_are_valid(op_tab[i].type, line + 1 + label))
         return (-1);
     for (int j = label + 1, arg = 0; line[j]; j++, arg++)
-        if (argument_is_label(line[j])&&!(labels[arg]=my_strdup(line[j]+2)))
+        if (argument_is_label(line[j],0)&&!(labels[arg]=get_label(line[j])))
             return (-1);
     return (op_tab[i].code);
 }

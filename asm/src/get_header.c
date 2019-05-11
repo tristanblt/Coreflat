@@ -29,7 +29,7 @@ void clean_name_and_comment(char *str)
 {
     int i = my_strlen(str) - 1;
 
-    while (str[i] != '"' && i)
+    while ((str[i] == ' ' || str[i] == '\n' || str[i] == '\t') && i)
         i--;
     if (!i)
         return;
