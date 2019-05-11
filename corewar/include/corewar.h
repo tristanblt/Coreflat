@@ -83,8 +83,7 @@ struct champion {
 
 struct list_s
 {
-    int val;
-    int id;
+    char val;
     struct list_s *prev;
     struct list_s *next;
 };

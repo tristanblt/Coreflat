@@ -16,7 +16,6 @@ void add_next(list_t *list, int val)
     new = malloc(sizeof(list_t));
     if (new != NULL) {
         new->val = val;
-        new->id = id;
         new->prev = list;
         new->next = list->next;
         list->next->prev = new;
@@ -37,7 +36,6 @@ void add_prev(list_t *list, int val)
         new->prev = list->prev;
         list->prev->next = new;
         list->prev = new;
-        new->id = id;
         id++;
     }
 }

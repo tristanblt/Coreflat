@@ -30,6 +30,7 @@ list_t *create_list(void)
     list = malloc(sizeof(list_t));
     if (list == NULL)
         return (NULL);
+    list->val = 0;
     list->next = list;
     list->prev = list;
     add_n_next(list, MEM_SIZE - 1, 0);
