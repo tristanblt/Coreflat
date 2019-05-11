@@ -16,34 +16,17 @@ int find_cycle_n(int code)
     return (0);
 }
 
+bool do_a_cycle(champion_t *champion, int i)
+{
+    return (true);
+}
+
 bool champion_cycle(champion_t *champion, int i)
 {
-    static int instruction[4] = {-1};
-
-    if (champion->buffer_cycle == 0) {
-        instruction[i]++;
-        if (champion->instructions[instruction[i]] == NULL) {
-            instruction[i] = 0;
-            //return (false); // changer de cellule (fin de cycle des instructions)
-        }
-        champion->buffer_cycle = find_cycle_n(champion->instructions[instruction[i]]->code);
-        if (champion->instructions[instruction[i]]->code == IC_live) {
-            champion->alive = champion->cycle_to_die;
-            champion->nbr_live++;
-        }
+    for (int i = 0; champion->pcs[i].memory; i++) {
+        if (!do_a_cycle(champion, i))
+            return (false)
     }
-    else {
-        champion->buffer_cycle--;
-        champion->alive--;
-    }
-    if (champion->alive == 0)
-        return (false);
-    if (champion->nbr_live > NBR_LIVE) {
-        printf("%i\n", champion->cycle_to_die);
-        champion->cycle_to_die -= CYCLE_DELTA;
-    }
-    if (champion->cycle_to_die <= 0)
-        return (false);
     return (true);
 }
 

@@ -32,6 +32,7 @@
 
 typedef struct instruction instruction_t;
 typedef struct champion champion_t;
+typedef struct op op_t;
 
 //END TYPEDEFS
 
@@ -66,15 +67,17 @@ struct instruction {
     int *args;
 };
 
+struct pc {
+    int cycles;
+    list_t *memory;
+    instruction_t *instruction;
+};
+
 struct champion {
     instruction_t **instructions;
     header_t *header;
-    int pc;
-    int *registers;
-    int buffer_cycle;
-    int alive;
-    int nbr_live;
-    int cycle_to_die;
+    pc_t *pcs;
+    char **registers;
 };
 
 //END STRUCTS
