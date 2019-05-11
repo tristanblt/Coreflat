@@ -27,7 +27,7 @@ bool is_a_label(char *str)
     return (false);
 }
 
-bool arguments_are_valid(args_type_t *types, char **line)
+bool arguments_are_valid(args_type_t *types, char **line, int nb)
 {
     int arguments = 0;
     int expected = 0;
@@ -36,11 +36,15 @@ bool arguments_are_valid(args_type_t *types, char **line)
         arguments++;
     while (expected < 4 && types[expected])
         expected++;
-    if (arguments != expected)
+    if (arguments != expected) {
+        my_dprintf(2, "Line %d: Expected %d argument(s)\n", nb, expected);
         return (false);
+    }
     for (int i = 0; line[i]; i++)
-        if (!argument_is_valid(line[i], types[i]))
+        if (!argument_is_valid(line[i], types[i])) {
+            my_dprintf(2, "Line %d: Argument %d: Wrong argument type\n", nb, i);
             return (false);
+        }
     return (true);
 }
 
@@ -63,7 +67,7 @@ char *get_label(char *arg)
     return (my_strdup(arg));
 }
 
-char instruction_get_code(char **line, char **label_name, char **labels)
+char instruction_get_code(char **line, char **label_name, char **labels, int nb)
 {
     bool label = is_a_label(line[0]);
     int i = 0;
@@ -77,8 +81,10 @@ char instruction_get_code(char **line, char **label_name, char **labels)
             break;
         i++;
     }
-    if (!op_tab[i].mnemonique ||
-        !arguments_are_valid(op_tab[i].type, line + 1 + label))
+    if (!op_tab[i].mnemonique)
+        return (-1+my_dprintf(2, "Line %d: Unknown instruction: %s\n",
+nb, labels[label])%1);
+    if (!arguments_are_valid(op_tab[i].type, line + 1 + label, nb))
         return (-1);
     for (int j = label + 1, arg = 0; line[j]; j++, arg++)
         if (argument_is_label(line[j],0)&&!(labels[arg]=get_label(line[j])))

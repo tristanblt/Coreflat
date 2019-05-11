@@ -39,7 +39,7 @@ instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
     return (new_arr);
 }
 
-instruction_t *check_and_parse_instruction(char **line)
+instruction_t *check_and_parse_instruction(char **line, int nb)
 {
     instruction_t *instruction = my_calloc(1, sizeof(instruction_t));
     int id;
@@ -53,7 +53,7 @@ instruction_t *check_and_parse_instruction(char **line)
     for (int i = 0; i < MAX_ARGS_NUMBER; i++)
         instruction->label_args[i] = NULL;
     if ((id=instruction_get_code(line, &instruction->label,
-                                instruction->label_args)) == -1)
+                                instruction->label_args, nb)) == -1)
         return (NULL);
     instruction->code = id;
     if (!id)
@@ -77,7 +77,7 @@ instruction_t **get_instructions_array(char **file)
         if ((line = multiple_split(file[i],
             (char [5]){' ', SEPARATOR_CHAR, '\n', '\r', 0})) == NULL)
             return (NULL);
-        tmp_instr = check_and_parse_instruction(line);
+        tmp_instr = check_and_parse_instruction(line, i);
         free_double_arr(line);
         if (tmp_instr == NULL)
             return (NULL);
