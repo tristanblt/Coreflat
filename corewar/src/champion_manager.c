@@ -41,5 +41,6 @@ champion_t *create_champion(char *path)
     champion->instructions = file + size;
     if (parse_instructions(file, size) == false)
         return (NULL);
+    champion->start_offset = -1;
     return (champion);
 }

@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-proc_t **init_processes(champion_t **champions)
+proc_t **init_processes(champion_t **champions, list_t *memory)
 {
     proc_t **procs = NULL;
     int n_champs;
@@ -21,7 +21,8 @@ proc_t **init_processes(champion_t **champions)
         procs[i] = malloc(sizeof(proc_t));
         if (procs[i] == NULL)
             return (NULL);
-        //procs[i]->pc = 
+        procs[i]->pc = go_n_next(memory, champions[i]->start_offset);
+        procs[i]->instruction = malloc(sizeof(instruction_t));
     }
     return (procs);
 }

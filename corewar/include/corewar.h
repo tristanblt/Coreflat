@@ -75,6 +75,7 @@ struct instruction {
 };
 
 struct proc {
+    bool is_active;
     int cycles;
     instruction_t *instruction;
     list_t *pc;
@@ -83,9 +84,8 @@ struct proc {
 
 struct champion {
     char *instructions;
-    int size;
+    int start_offset;
     header_t *header;
-    proc_t **procs;
     int *registers;
     int last_live;
 };
@@ -107,10 +107,12 @@ bool parse_instructions(char *file, int size);
 header_t *parse_header(char **file, int *size);
 int reverse_bytes(unsigned int x);
 int reverse_bytes_two(unsigned int x);
-bool start_corewar(champion_t **champions);
+bool start_corewar(champion_t **champions, list_t *memory);
 champion_t *create_champion(char *path);
 champion_t **push_champion(champion_t **arr, champion_t *add);
-proc_t **init_processes(champion_t **champions);
+proc_t **init_processes(champion_t **champions, list_t *memory);
+bool load_champion_instructions_in_mem(champion_t **champ, list_t *mem);
+bool parse_instruction_from_mem(proc_t *proc);
 
 // list_t functions
 void add_next(list_t *list, int val);

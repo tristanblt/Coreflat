@@ -11,7 +11,10 @@
 int main(void)
 {
     champion_t **champions = malloc(sizeof(champion_t *));
+    list_t *memory = create_list();
 
+    if (memory == NULL)
+        return (EXIT_FAIL);
     // create chamption
     champion_t *temp;
     if ((temp = create_champion("test")) == NULL)
@@ -19,7 +22,9 @@ int main(void)
     if ((champions = push_champion(champions, temp)) == NULL)
         return (EXIT_FAIL);
     // end create champion
-    if (!start_corewar(champions))
+    if (!load_champion_instructions_in_mem(champions, memory))
+        return (EXIT_FAIL);
+    if (!start_corewar(champions, memory))
         return (EXIT_FAIL);
     return (0);
 }
