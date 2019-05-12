@@ -69,8 +69,7 @@ int *parse_args(char **file, int *size, char *description)
         return (args);
     }
     for (int i = 0; description[i]; i++)
-        switch (description[i])
-        {
+        switch (description[i]) {
         case 1: args[i] = file[0][0];
             *file += 1;
             *size -= 1;

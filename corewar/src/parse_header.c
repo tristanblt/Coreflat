@@ -13,11 +13,11 @@ int reverse_bytes(unsigned int x)
     unsigned int out = 0;
     unsigned int byte;
 
-    for(int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; ++i) {
         byte = (x >> 8 * i) & 0xff;
         out |= byte << (24 - 8 * i);
     }
-    return out;
+    return (out);
 }
 
 int reverse_bytes_two(unsigned int x)
@@ -25,11 +25,11 @@ int reverse_bytes_two(unsigned int x)
     unsigned int out = 0;
     unsigned int byte;
 
-    for(int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 2; ++i) {
         byte = (x >> 8 * i) & 0xff;
         out |= byte << (8 - 8 * i);
     }
-    return out;
+    return (out);
 }
 
 char *copy_str(char *str, int size)
@@ -39,7 +39,6 @@ char *copy_str(char *str, int size)
     if (ret == NULL)
         return (NULL);
     for (int i = 0; i < size && str[i]; i++) {
-        
     }
     ret[PROG_NAME_LENGTH] = 0;
     return (ret);

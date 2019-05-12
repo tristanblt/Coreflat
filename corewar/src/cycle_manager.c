@@ -16,32 +16,30 @@ int find_cycle_n(int code)
     return (0);
 }
 
-bool do_a_cycle(champion_t *champion, int i)
+bool do_a_cycle(proc_t ***procs, int i)
 {
+    
     return (true);
 }
 
-bool champion_cycle(champion_t *champion, int i)
+bool do_corewar_cycle(proc_t ***procs)
 {
-    for (int i = 0; champion->pcs[i]->memory; i++) {
-        if (!do_a_cycle(champion, i))
+    for (int i = 0; procs[0][i]; i++)
+        if (!do_a_cycle(procs, i))
+            return (false);
+    return (true);
+}
+
+bool start_corewar(champion_t **champions)
+{
+    proc_t **procs = init_processes(champions);
+
+    while (true) {
+        if (!check_lives())
+            break;
+        if (!do_corewar_cycle(&procs))
             return (false);
     }
-    return (true);
-}
-
-bool champions_cycle(champion_t **champions)
-{
-    for (int i = 0; i < 1; i++)
-        if (!champion_cycle(champions[i], i))
-            return (false);
-    return (true);
-}
-
-bool start_cycle(champion_t **champions)
-{
-    while (1)
-        if (!champions_cycle(champions))
-            break;
+    // display winner
     return (true);
 }

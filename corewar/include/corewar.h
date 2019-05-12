@@ -27,12 +27,18 @@
 
 // END DEFINES
 
+// GLOBALS VAR
+
+int nbr_lives = 0;
+int cycle_to_die = CYCLE_TO_DIE;
+
+// END GLOBALS VAR
 
 // TYPEDEFS
 
 typedef struct instruction instruction_t;
 typedef struct champion champion_t;
-typedef struct pc pc_t;
+typedef struct proc proc_t;
 typedef struct list_t list_t;
 
 //END TYPEDEFS
@@ -68,17 +74,19 @@ struct instruction {
     int *args;
 };
 
-struct pc {
+struct proc {
     int cycles;
-    list_t *memory;
     instruction_t *instruction;
+    list_t *pc;
+    int carry;
 };
 
 struct champion {
     instruction_t **instructions;
     header_t *header;
-    pc_t **pcs;
-    char **registers;
+    proc_t **procs;
+    int *registers;
+    int last_live;
 };
 
 struct list_t
@@ -98,7 +106,7 @@ instruction_t **parse_instructions(char *file, int size);
 header_t *parse_header(char **file, int *size);
 int reverse_bytes(unsigned int x);
 int reverse_bytes_two(unsigned int x);
-bool start_cycle(champion_t **champions);
+bool start_corewar(champion_t **champions);
 champion_t *create_champion(char *path);
 
 // list_t functions
