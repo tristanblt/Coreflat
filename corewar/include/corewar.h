@@ -113,6 +113,8 @@ champion_t **push_champion(champion_t **arr, champion_t *add);
 proc_t **init_processes(champion_t **champions, list_t *memory);
 bool load_champion_instructions_in_mem(champion_t **champ, list_t *mem);
 bool parse_instruction_from_mem(proc_t *proc);
+char *parse_description(char c);
+bool has_one_argument(int code);
 
 // list_t functions
 void add_next(list_t *list, int val);
