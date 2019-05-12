@@ -21,6 +21,22 @@ SRC	=	src/main.c						\
 		src/list/move_in_list.c			\
 		src/write_in_mem.c				\
 		src/parse_instruction_from_mem.c\
+		src/instructions/add.c			\
+		src/instructions/aff.c			\
+		src/instructions/and.c			\
+		src/instructions/fork.c			\
+		src/instructions/ld.c			\
+		src/instructions/ldi.c			\
+		src/instructions/lfork.c		\
+		src/instructions/live.c			\
+		src/instructions/lld.c			\
+		src/instructions/lldi.c			\
+		src/instructions/or.c			\
+		src/instructions/st.c			\
+		src/instructions/sti.c			\
+		src/instructions/sub.c			\
+		src/instructions/xor.c			\
+		src/instructions/zjmp.c			\
 
 OBJ	=	$(SRC:%.c=%.o)
 

@@ -40,6 +40,7 @@ typedef struct instruction instruction_t;
 typedef struct champion champion_t;
 typedef struct proc proc_t;
 typedef struct list_t list_t;
+typedef struct fct fct_t;
 
 //END TYPEDEFS
 
@@ -68,6 +69,11 @@ enum INSTRUCTION_CODES {
 
 // STRUCTS
 
+struct fct {
+    bool (*fct)(proc_t ***, int);
+    int code;
+};
+
 struct instruction {
     char code;
     char *description;
@@ -78,6 +84,7 @@ struct proc {
     bool is_active;
     int cycles;
     instruction_t *instruction;
+    champion_t *champion;
     list_t *pc;
     int carry;
 };
@@ -127,6 +134,24 @@ list_t *go_n_next(list_t *list, int nb);
 list_t *go_prev(list_t *list);
 list_t *go_n_prev(list_t *list, int nb);
 
+// instructions
+
+bool add(proc_t ***procs, int i);
+bool aff(proc_t ***procs, int i);
+bool and(proc_t ***procs, int i);
+bool fork_vm(proc_t ***procs, int i);
+bool ld(proc_t ***procs, int i);
+bool ldi(proc_t ***procs, int i);
+bool lfork(proc_t ***procs, int i);
+bool live(proc_t ***procs, int i);
+bool lld(proc_t ***procs, int i);
+bool lldi(proc_t ***procs, int i);
+bool or(proc_t ***procs, int i);
+bool st(proc_t ***procs, int i);
+bool sti(proc_t ***procs, int i);
+bool sub(proc_t ***procs, int i);
+bool xor(proc_t ***procs, int i);
+bool zjmp(proc_t ***procs, int i);
 
 //END PROTOTYPES
 
