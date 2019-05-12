@@ -18,6 +18,7 @@ SRC	=	src/main.c						\
 		src/list/create_list.c		\
 		src/list/destroy_list.c		\
 		src/list/move_in_list.c		\
+		src/write_in_mem.c		\
 
 OBJ	=	$(SRC:%.c=%.o)
 

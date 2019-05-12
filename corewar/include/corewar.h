@@ -82,7 +82,9 @@ struct proc {
 };
 
 struct champion {
-    instruction_t **instructions;
+    char *instructions;
+    int size;
+    int start_offset;
     header_t *header;
     proc_t **procs;
     int *registers;
