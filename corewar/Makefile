@@ -7,8 +7,9 @@
 
 NAME	=	corewar
 
-SRC	=	src/main.c						\
-		src/get_cor_file.c				\
+MAIN	=	src/main.c
+
+SRC	=	src/get_cor_file.c				\
 		src/parse_instructions.c		\
 		src/parse_header.c				\
 		src/cycle_manager.c				\
@@ -38,7 +39,7 @@ SRC	=	src/main.c						\
 		src/instructions/xor.c			\
 		src/instructions/zjmp.c			\
 
-OBJ	=	$(SRC:%.c=%.o)
+OBJ	=	$(SRC:%.c=%.o) $(MAIN:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
 		-Iinclude -I../include			\

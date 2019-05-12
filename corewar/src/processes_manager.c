@@ -23,6 +23,12 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
             return (NULL);
         procs[i]->pc = go_n_next(memory, champions[i]->start_offset);
         procs[i]->instruction = malloc(sizeof(instruction_t));
+        if (!procs[i]->instruction)
+            return (NULL);
+        *procs[i]->instruction = (instruction_t){0};
+        procs[i]->instruction->args = malloc(sizeof(int) * 4);
+        if (!procs[i]->instruction->args)
+            return (NULL);
     }
     return (procs);
 }
