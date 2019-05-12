@@ -18,7 +18,7 @@ int find_cycle_n(int code)
 
 bool do_a_cycle(proc_t ***procs, int i)
 {
-    
+
     return (true);
 }
 
@@ -30,10 +30,17 @@ bool do_corewar_cycle(proc_t ***procs)
     return (true);
 }
 
-bool start_corewar(champion_t **champions)
+bool check_lives()
+{
+    return (true);
+}
+
+bool start_corewar(champion_t **champions, list_t *memory)
 {
     proc_t **procs = init_processes(champions);
 
+    if (procs == NULL)
+        return (false);
     while (true) {
         if (!check_lives())
             break;

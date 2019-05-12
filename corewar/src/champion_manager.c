@@ -8,6 +8,23 @@
 #include "my.h"
 #include "corewar.h"
 
+champion_t **push_champion(champion_t **arr, champion_t *add)
+{
+    champion_t **new_arr = NULL;
+    int nb_elem_arr;
+    int copy_elems;
+
+    for (nb_elem_arr = 0; arr[nb_elem_arr] != NULL; nb_elem_arr++);
+    new_arr = malloc(sizeof(champion_t *) * (nb_elem_arr + 2));
+    if (new_arr == NULL)
+        return (NULL);
+    for (copy_elems = 0; copy_elems < nb_elem_arr; copy_elems++)
+        new_arr[copy_elems] = arr[copy_elems];
+    new_arr[copy_elems] = add;
+    new_arr[copy_elems + 1] = NULL;
+    free(arr);
+    return (new_arr);
+}
 
 champion_t *create_champion(char *path)
 {
@@ -21,10 +38,8 @@ champion_t *create_champion(char *path)
         return (NULL);
     if ((champion->header = parse_header(&file, &size)) == NULL)
         return (NULL);
-    if ((champion->instructions = parse_instructions(file, size)) == NULL)
+    champion->instructions = file + size;
+    if (parse_instructions(file, size) == false)
         return (NULL);
-    //champion->nbr_live = 0;
-    //champion->alive = CYCLE_TO_DIE;
-    //champion->cycle_to_die = CYCLE_TO_DIE;
     return (champion);
 }

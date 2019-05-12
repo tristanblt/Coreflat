@@ -5,8 +5,8 @@
 ** asm
 */
 
-#ifndef ASM_H_
-#define ASM_H_
+#ifndef CORE_H_
+#define CORE_H_
 
 // INCLUDES
 
@@ -29,8 +29,8 @@
 
 // GLOBALS VAR
 
-int nbr_lives = 0;
-int cycle_to_die = CYCLE_TO_DIE;
+//int nbr_lives = 0;
+//int cycle_to_die = CYCLE_TO_DIE;
 
 // END GLOBALS VAR
 
@@ -82,7 +82,8 @@ struct proc {
 };
 
 struct champion {
-    instruction_t **instructions;
+    char *instructions;
+    int size;
     header_t *header;
     proc_t **procs;
     int *registers;
@@ -102,12 +103,14 @@ struct list_t
 //PROTOTYPES
 
 char *get_cor_file(char *path, int *size);
-instruction_t **parse_instructions(char *file, int size);
+bool parse_instructions(char *file, int size);
 header_t *parse_header(char **file, int *size);
 int reverse_bytes(unsigned int x);
 int reverse_bytes_two(unsigned int x);
 bool start_corewar(champion_t **champions);
 champion_t *create_champion(char *path);
+champion_t **push_champion(champion_t **arr, champion_t *add);
+proc_t **init_processes(champion_t **champions);
 
 // list_t functions
 void add_next(list_t *list, int val);
@@ -125,4 +128,4 @@ list_t *go_n_prev(list_t *list, int nb);
 
 //END PROTOTYPES
 
-#endif /* !ASM_H_ */
+#endif /* !CORE_H_ */

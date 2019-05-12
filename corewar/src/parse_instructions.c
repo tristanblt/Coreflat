@@ -86,19 +86,19 @@ int *parse_args(char **file, int *size, char *description)
     return (args);
 }
 
-instruction_t *parse_instruction(char **file, int *size)
+bool parse_instruction(char **file, int *size)
 {
     instruction_t *instruction = malloc(sizeof(instruction_t));
 
     if (instruction == NULL)
-        return (NULL);
+        return (false);
     instruction->code = file[0][0];
     *file += 1;
     *size -= 1;
     if (!has_one_argument(instruction->code)) {
         instruction->description = parse_description(file[0][0]);
         if (instruction->description == NULL)
-            return (NULL);
+            return (false);
         *file += 1;
         *size -= 1;
     }
@@ -106,20 +106,15 @@ instruction_t *parse_instruction(char **file, int *size)
         instruction->description = NULL;
     instruction->args = parse_args(file, size, instruction->description);
     if (instruction->args == NULL)
-        return (NULL);
-    return (instruction);
+        return (false);
+    free(instruction);
+    return (true);
 }
 
-instruction_t **parse_instructions(char *file, int size)
+bool parse_instructions(char *file, int size)
 {
-    instruction_t **instructions = malloc(sizeof(instruction_t));
-    instruction_t *temp = NULL;
-
-    while (size > 0) {
-        temp = parse_instruction(&file, &size);
-        if (temp == NULL)
-            return (NULL);
-        instructions = push_instruction(instructions, temp);
-    }
-    return (instructions);
+    while (size > 0)
+        if (!parse_instruction(&file, &size))
+            return (false);
+    return (true);
 }

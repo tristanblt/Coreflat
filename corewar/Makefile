@@ -13,11 +13,12 @@ SRC	=	src/main.c						\
 		src/parse_header.c				\
 		src/cycle_manager.c				\
 		src/champion_manager.c			\
-		../src/op.c			\
-		src/list/add_to_list.c		\
-		src/list/create_list.c		\
-		src/list/destroy_list.c		\
-		src/list/move_in_list.c		\
+		../src/op.c						\
+		src/list/add_to_list.c			\
+		src/list/create_list.c			\
+		src/list/destroy_list.c			\
+		src/list/move_in_list.c			\
+		src/processes_manager.c
 
 OBJ	=	$(SRC:%.c=%.o)
 
