@@ -22,8 +22,28 @@ bool end_of_file(char *path, char *end)
     return (true);
 }
 
-bool argument_handling(int ac, char **av)
+champion_t *add_champion(char *path, int n, int a)
 {
+    champion_t *temp;
+
+    if (!end_of_file(path, ".cor"))
+        return (NULL);
+    if ((temp = create_champion(path, n, a)) == NULL)
+        return (NULL);
+    return (temp);
+}
+
+bool argument_handling(int ac, char **av, champion_t ***champions)
+{
+    champion_t *temp;
+    int n = 0;
+    int a = 0;
+
     argument_error_handling(ac, av);
+    for (int i = 1; i < ac; i++) {
+        if ((temp = add_champion(av[i], n, a))) {
+            *champions = push_champion(*champions, temp);
+        }
+    }
     return (true);
 }

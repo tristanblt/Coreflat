@@ -8,21 +8,19 @@
 #include "my.h"
 #include "corewar.h"
 
-int main(void)
+int main(int ac, char **av)
 {
     champion_t **champions = malloc(sizeof(champion_t *));
     list_t *memory = create_list();
 
     if (memory == NULL || !champions)
         return (EXIT_FAIL);
-    *champions = NULL;
-    // create chamption
-    champion_t *temp;
-    if ((temp = create_champion("test.cor")) == NULL)
-        return (EXIT_FAIL);
-    if ((champions = push_champion(champions, temp)) == NULL)
-        return (EXIT_FAIL);
-    // end create champion
+    if (!argument_handling(ac, av, &champions))
+        return (false);
+    for (int i = 0; champions[i]; i++) {
+        printf("%s\n", champions[i]->header->prog_name);
+    }
+    return ('a');
     if (!load_champion_instructions_in_mem(champions, memory))
         return (EXIT_FAIL);
     if (!start_corewar(champions, memory))

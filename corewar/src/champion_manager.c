@@ -26,7 +26,7 @@ champion_t **push_champion(champion_t **arr, champion_t *add)
     return (new_arr);
 }
 
-champion_t *create_champion(char *path)
+champion_t *create_champion(char *path, int n, int a)
 {
     char *file = NULL;
     int size = 0;
