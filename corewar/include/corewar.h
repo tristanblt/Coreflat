@@ -151,6 +151,8 @@ bool is_instruction_code_valid(char code);
 void dump_memory(list_t *mem);
 int get_nb_from_mem(list_t *mem, int size, int offset);
 proc_t **push_proc(proc_t **arr, proc_t *add);
+bool argument_error_handling(int ac, char **av);
+bool end_of_file(char *path, char *end);
 
 // list_t functions
 void add_next(list_t *list, int val);
