@@ -126,7 +126,7 @@ bool instruction_is_valid(instruction_t *instruction);
 bool uses_indexes(int code);
 bool is_instruction_code_valid(char code);
 void dump_memory(list_t *mem);
-int get_int_from_mem(proc_t *proc, int size);
+int get_nb_from_mem(list_t *mem, int size, int offset);
 
 // list_t functions
 void add_next(list_t *list, int val);

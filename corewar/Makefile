@@ -44,6 +44,7 @@ SRC	=	src/get_cor_file.c				\
 		src/instruction_is_valid.c		\
 		src/utils.c						\
 		src/dump_memory.c			\
+		src/get_nb_from_mem.c			\
 
 SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
 
