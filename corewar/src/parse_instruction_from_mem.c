@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-int get_arguments_from_mem(proc_t *proc, int size)
+int get_int_from_mem(proc_t *proc, int size)
 {
     int argument = 0;
 
@@ -57,7 +57,7 @@ void parse_arguments_from_mem(proc_t *proc)
             size = DIR_SIZE;
         else
             size = 1;
-        proc->instruction->args[i] = get_arguments_from_mem(proc, size);
+        proc->instruction->args[i] = get_int_from_mem(proc, size);
     }
 }
 

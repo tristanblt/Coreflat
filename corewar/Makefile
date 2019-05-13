@@ -42,6 +42,7 @@ SRC	=	src/get_cor_file.c				\
 		src/instructions/zjmp.c			\
 		src/instruction_is_valid.c		\
 		src/utils.c						\
+		src/dump_memory.c			\
 
 SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
 
