@@ -157,6 +157,7 @@ bool sti(proc_t ***procs, int i);
 bool sub(proc_t ***procs, int i);
 bool xor(proc_t ***procs, int i);
 bool zjmp(proc_t ***procs, int i);
+int get_value_from_instrution(proc_t *proc, int arg);
 
 //END PROTOTYPES
 
