@@ -63,7 +63,7 @@ fclean	:	clean
 
 re	:	fclean all
 
-tests_run	:
+tests_run	:	lib
 			$(CC) -o $(TEST_NAME) $(CFLAGS) $(SRC) $(SRC_TEST) $(LDFLAGS) $(TEST_FLAGS)
 			./unit_tests
 
