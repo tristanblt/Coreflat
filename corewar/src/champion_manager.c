@@ -43,12 +43,5 @@ champion_t *create_champion(char *path)
     if (parse_instructions(file, size) == false)
         return (NULL);
     champion->start_offset = -1;
-    champion->registers = malloc(sizeof(int) * REG_NUMBER);
-    if (champion->registers == NULL)
-        return (NULL);
-    for (int i = 0; i < REG_NUMBER; i++)
-        champion->registers = 0;
-    champion->registers[0] = champion_n;
-    champion_n++;
     return (champion);
 }

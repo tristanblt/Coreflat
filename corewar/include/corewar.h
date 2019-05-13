@@ -87,13 +87,13 @@ struct proc {
     champion_t *champion;
     list_t *pc;
     int carry;
+    int *registers;
 };
 
 struct champion {
     char *instructions;
     int start_offset;
     header_t *header;
-    int *registers;
     int last_live;
 };
 

@@ -17,6 +17,6 @@ bool zjmp(proc_t ***procs, int i)
     if (index > 0)
         procs[0][i]->pc = go_n_next(procs[0][i]->pc, index);
     else if (index < 0)
-        procs[0][i]->pc = go_n_prev(procs[0][i]->pc, index);
+        procs[0][i]->pc = go_n_prev(procs[0][i]->pc, -index);
     return (true);
 }

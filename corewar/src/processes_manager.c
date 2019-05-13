@@ -29,6 +29,12 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
         if (!(procs[i]->instruction->args = malloc(sizeof(int) * 4)))
             return (NULL);
         procs[i]->champion = champions[i];
+        procs[i]->registers = malloc(sizeof(int) * REG_NUMBER);
+        if (procs[i]->registers == NULL)
+            return (NULL);
+        for (int i = 0; i < REG_NUMBER; i++)
+            procs[i]->registers = 0;
+        procs[i]->registers[0] = -1;
     }
     return (procs);
 }
