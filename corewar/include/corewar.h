@@ -29,8 +29,8 @@
 
 // GLOBALS VAR
 
-//int nbr_lives = 0;
-//int cycle_to_die = CYCLE_TO_DIE;
+extern int nbr_lives;
+extern int cycle_to_die;
 
 // END GLOBALS VAR
 
@@ -95,6 +95,7 @@ struct champion {
     int start_offset;
     header_t *header;
     int last_live;
+    bool dead;
 };
 
 struct list_t
@@ -161,6 +162,7 @@ bool sub(proc_t ***procs, int i);
 bool xor(proc_t ***procs, int i);
 bool zjmp(proc_t ***procs, int i);
 int get_value_from_instrution(proc_t *proc, int arg);
+proc_t *create_new_proc(proc_t *proc);
 
 //END PROTOTYPES
 

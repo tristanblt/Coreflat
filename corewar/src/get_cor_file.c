@@ -66,10 +66,6 @@ char *load_file_in_mem(char const *filepath)
 
 char *get_cor_file(char *path, int *size)
 {
-    char *cor_path = my_strcat(path, ".cor");
-
-    if (cor_path == NULL)
-        return (NULL);
-    *size = get_file_size(cor_path);
-    return (load_file_in_mem(cor_path));
+    *size = get_file_size(path);
+    return (load_file_in_mem(path));
 }

@@ -35,10 +35,12 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
     procs = malloc(sizeof(proc_t *) * (n_champs + 2));
     if (procs == NULL)
         return (NULL);
+    procs[n_champs] = NULL;
     for (int i = 0; i < n_champs; i++) {
         procs[i] = malloc(sizeof(proc_t));
         if (procs[i] == NULL)
             return (NULL);
+        *procs[i] = (proc_t){0};
         procs[i]->pc = go_n_next(memory, champions[i]->start_offset);
         procs[i]->instruction = malloc(sizeof(instruction_t));
         if (!procs[i]->instruction)
@@ -50,8 +52,8 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
         procs[i]->registers = malloc(sizeof(int) * REG_NUMBER);
         if (procs[i]->registers == NULL)
             return (NULL);
-        for (int i = 0; i < REG_NUMBER; i++)
-            procs[i]->registers = 0;
+        for (int j = 0; j < REG_NUMBER; j++)
+            procs[i]->registers[j] = 0;
         procs[i]->registers[0] = -1;
     }
     return (procs);

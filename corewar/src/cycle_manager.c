@@ -8,6 +8,9 @@
 #include "my.h"
 #include "corewar.h"
 
+int cycle_to_die = 0;
+int nbr_lives = 0;
+
 int find_cycle_n(int code)
 {
     for (int i = 0; op_tab[i].code; i++)
@@ -59,9 +62,21 @@ bool do_corewar_cycle(proc_t ***procs, fct_t *fcts)
     return (true);
 }
 
-bool check_lives()
+bool check_lives(champion_t **champions, proc_t **procs)
 {
-    return (true);
+    bool over = true;
+
+    for (int i = 0; champions[i]; i++) {
+        champions[i]->last_live++;
+        if (champions[i]->last_live > cycle_to_die)
+            champions[i]->dead = true;
+        else
+            over = false;
+    }
+    for (int i = 0; procs[i]; i++)
+        if (procs[i]->champion->dead)
+            procs[i]->is_active = false;
+    return (!over);
 }
 
 fct_t *init_fcts(void)
@@ -98,7 +113,7 @@ bool start_corewar(champion_t **champions, list_t *memory)
     if (procs == NULL)
         return (false);
     while (true) {
-        if (!check_lives(champions))
+        if (!check_lives(champions, procs))
             break;
         if (!do_corewar_cycle(&procs, fcts))
             return (false);
