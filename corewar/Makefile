@@ -2,10 +2,12 @@
 ## EPITECH PROJECT, 2019
 ## Makefile
 ## File description:
-## Makefile for
+## Makefile for corewar
 ##
 
 NAME	=	corewar
+
+TEST_NAME	=	unit_tests
 
 MAIN	=	src/main.c
 
@@ -38,6 +40,10 @@ SRC	=	src/get_cor_file.c				\
 		src/instructions/sub.c			\
 		src/instructions/xor.c			\
 		src/instructions/zjmp.c			\
+		src/instruction_is_valid.c		\
+		src/utils.c						\
+
+SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
 
 OBJ	=	$(SRC:%.c=%.o) $(MAIN:%.c=%.o)
 
@@ -49,6 +55,8 @@ LIB	=	my
 LIB_PATH=	../lib/my
 
 LDFLAGS	=	-L$(LIB_PATH) -l$(LIB)
+
+TEST_FLAGS	=	-lcriterion --coverage
 
 CC	=	gcc
 
@@ -64,12 +72,18 @@ $(NAME)	:	$(OBJ) lib
 
 clean	:
 		make clean -C $(LIB_PATH)
-		$(RM) $(OBJ)
+		$(RM) $(OBJ) *.gc*
 
 fclean	:	clean
 		make fclean -C $(LIB_PATH)
 		$(RM) $(NAME)
+		$(RM) $(TEST_NAME)
 
 re	:	fclean all
+
+tests_run	:	lib
+			$(CC) -o $(TEST_NAME) $(CFLAGS) $(SRC) $(SRC_TEST) $(LDFLAGS) $(TEST_FLAGS)
+			./unit_tests
+			gcovr --exclude tests
 
 .PHONY	:	lib clean fclean re
