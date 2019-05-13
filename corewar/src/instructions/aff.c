@@ -14,6 +14,6 @@ bool aff(proc_t ***procs, int i)
 
     if (reg < 0 && reg >= REG_NUMBER)
         return (true);
-    my_printf("%c", procs[0][i]->champion->registers[reg] % 256);
+    my_printf("%c", procs[0][i]->registers[reg] % 256);
     return (true);
 }

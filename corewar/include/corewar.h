@@ -87,13 +87,13 @@ struct proc {
     champion_t *champion;
     list_t *pc;
     int carry;
+    int *registers;
 };
 
 struct champion {
     char *instructions;
     int start_offset;
     header_t *header;
-    int *registers;
     int last_live;
 };
 
@@ -127,6 +127,7 @@ bool uses_indexes(int code);
 bool is_instruction_code_valid(char code);
 void dump_memory(list_t *mem);
 int get_nb_from_mem(list_t *mem, int size, int offset);
+proc_t **push_proc(proc_t **arr, proc_t *add);
 
 // list_t functions
 void add_next(list_t *list, int val);
