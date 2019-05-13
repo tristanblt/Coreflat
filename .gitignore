@@ -6,3 +6,4 @@
 asm/asm.exe
 *.cor
 corewar_binaries/
+*.gc*
