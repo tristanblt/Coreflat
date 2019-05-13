@@ -8,6 +8,24 @@
 #include "my.h"
 #include "corewar.h"
 
+proc_t **push_proc(proc_t **arr, proc_t *add)
+{
+    proc_t **new_arr = NULL;
+    int nb_elem_arr;
+    int copy_elems;
+
+    for (nb_elem_arr = 0; arr[nb_elem_arr] != NULL; nb_elem_arr++);
+    new_arr = malloc(sizeof(proc_t *) * (nb_elem_arr + 2));
+    if (new_arr == NULL)
+        return (NULL);
+    for (copy_elems = 0; copy_elems < nb_elem_arr; copy_elems++)
+        new_arr[copy_elems] = arr[copy_elems];
+    new_arr[copy_elems] = add;
+    new_arr[copy_elems + 1] = NULL;
+    free(arr);
+    return (new_arr);
+}
+
 proc_t **init_processes(champion_t **champions, list_t *memory)
 {
     proc_t **procs = NULL;
