@@ -113,6 +113,7 @@ bool start_corewar(champion_t **champions, list_t *memory)
     if (procs == NULL)
         return (false);
     while (true) {
+        dump_memory(memory);
         if (!check_lives(champions, procs))
             break;
         if (!do_corewar_cycle(&procs, fcts))

@@ -31,7 +31,6 @@ champion_t *create_champion(char *path, int n, int a)
     char *file = NULL;
     int size = 0;
     champion_t *champion = malloc(sizeof(champion_t));
-    static int champion_n = 1;
 
     if (champion == NULL)
         return (NULL);
@@ -43,6 +42,7 @@ champion_t *create_champion(char *path, int n, int a)
     champion->instructions = file + sizeof(header_t);
     if (parse_instructions(file, size) == false)
         return (NULL);
-    champion->start_offset = -1;
+    champion->start_offset = a;
+    champion->prog_number = n;
     return (champion);
 }

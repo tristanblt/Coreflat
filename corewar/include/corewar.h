@@ -57,7 +57,6 @@ typedef struct champion champion_t;
 typedef struct proc proc_t;
 typedef struct list_t list_t;
 typedef struct fct fct_t;
-typedef struct info info_t;
 
 //END TYPEDEFS
 
@@ -113,6 +112,8 @@ struct champion {
     header_t *header;
     int last_live;
     bool dead;
+    int prog_number;
+
 };
 
 struct list_t
@@ -120,11 +121,6 @@ struct list_t
     char val;
     struct list_t *prev;
     struct list_t *next;
-};
-
-struct info_t
-{
-    int nb_champ;
 };
 
 //END STRUCTS
