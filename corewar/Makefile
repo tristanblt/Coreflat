@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2019
 ## Makefile
 ## File description:
-## Makefile for
+## Makefile for corewar
 ##
 
 NAME	=	corewar
@@ -24,6 +24,8 @@ SRC	=	src/get_cor_file.c				\
 		src/list/move_in_list.c			\
 		src/write_in_mem.c				\
 		src/parse_instruction_from_mem.c\
+		src/instruction_is_valid.c	\
+		src/utils.c			\
 
 SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
 
@@ -38,7 +40,7 @@ LIB_PATH=	../lib/my
 
 LDFLAGS	=	-L$(LIB_PATH) -l$(LIB)
 
-TEST_FLAGS	=	-lcriterion
+TEST_FLAGS	=	-lcriterion --coverage
 
 CC	=	gcc
 
@@ -54,7 +56,7 @@ $(NAME)	:	$(OBJ) lib
 
 clean	:
 		make clean -C $(LIB_PATH)
-		$(RM) $(OBJ)
+		$(RM) $(OBJ) *.gc*
 
 fclean	:	clean
 		make fclean -C $(LIB_PATH)
@@ -66,5 +68,6 @@ re	:	fclean all
 tests_run	:	lib
 			$(CC) -o $(TEST_NAME) $(CFLAGS) $(SRC) $(SRC_TEST) $(LDFLAGS) $(TEST_FLAGS)
 			./unit_tests
+			gcovr --exclude tests
 
 .PHONY	:	lib clean fclean re
