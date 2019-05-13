@@ -58,6 +58,8 @@ void clean_comments(char *line)
             line[i] = 0;
             return;
         }
+        if (line[i] == '\t')
+            line[i] = ' ';
     }
 }
 
