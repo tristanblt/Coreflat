@@ -52,7 +52,8 @@ header_t *parse_header(char **file, int *size)
         return (NULL);
     *file += 4;
     *size -= 4;
-    header = malloc(sizeof(header_t));
+    if (!(header = malloc(sizeof(header_t))))
+        return (NULL);
     for (int i = 0; i < PROG_NAME_LENGTH && file[0][i]; i++)
         header->prog_name[i] = file[0][i];
     *file += PROG_NAME_LENGTH + 8;
@@ -61,5 +62,6 @@ header_t *parse_header(char **file, int *size)
         header->comment[i] = file[0][i];
     *file += COMMENT_LENGTH + 4;
     *size -= COMMENT_LENGTH + 4;
+    header->prog_size = *size;
     return (header);
 }

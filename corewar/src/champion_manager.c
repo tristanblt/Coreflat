@@ -31,14 +31,16 @@ champion_t *create_champion(char *path)
     char *file = NULL;
     int size = 0;
     champion_t *champion = malloc(sizeof(champion_t));
+    static int champion_n = 1;
 
     if (champion == NULL)
         return (NULL);
+    *champion = (champion_t){0};
     if ((file = get_cor_file(path, &size)) == NULL)
         return (NULL);
     if ((champion->header = parse_header(&file, &size)) == NULL)
         return (NULL);
-    champion->instructions = file + size;
+    champion->instructions = file + sizeof(header_t);
     if (parse_instructions(file, size) == false)
         return (NULL);
     champion->start_offset = -1;
