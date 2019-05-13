@@ -7,6 +7,8 @@
 
 NAME	=	corewar
 
+TEST_NAME	=	unit_tests
+
 MAIN	=	src/main.c
 
 SRC	=	src/get_cor_file.c				\
@@ -23,6 +25,8 @@ SRC	=	src/get_cor_file.c				\
 		src/write_in_mem.c				\
 		src/parse_instruction_from_mem.c\
 
+SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
+
 OBJ	=	$(SRC:%.c=%.o) $(MAIN:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
@@ -33,6 +37,8 @@ LIB	=	my
 LIB_PATH=	../lib/my
 
 LDFLAGS	=	-L$(LIB_PATH) -l$(LIB)
+
+TEST_FLAGS	=	-lcriterion
 
 CC	=	gcc
 
@@ -53,7 +59,12 @@ clean	:
 fclean	:	clean
 		make fclean -C $(LIB_PATH)
 		$(RM) $(NAME)
+		$(RM) $(TEST_NAME)
 
 re	:	fclean all
+
+tests_run	:
+			$(CC) -o $(TEST_NAME) $(CFLAGS) $(SRC) $(SRC_TEST) $(LDFLAGS) $(TEST_FLAGS)
+			./unit_tests
 
 .PHONY	:	lib clean fclean re

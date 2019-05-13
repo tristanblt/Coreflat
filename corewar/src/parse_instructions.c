@@ -28,21 +28,15 @@ instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
 
 char *parse_description(char c)
 {
-    char *description = malloc(4 * sizeof(char));
-    char offset = 0;
-    unsigned char temp;
+    char *description = malloc((1 + MAX_ARGS_NUMBER) * sizeof(char));
 
     if (description == NULL)
         return (NULL);
-    for (int i = 0; i < 4; i++)
-        description[i] = 0;
-    for (int i = 0; i < 4; i++) {
-        temp = c;
-        temp <<= offset;
-        temp >>= 6;
-        offset += 2;
-        description[i] = temp;
+    for (int i = 0; i < MAX_ARGS_NUMBER; i++) {
+        description[MAX_ARGS_NUMBER - i - 1] = c & 3;
+        c >>= 2;
     }
+    description[MAX_ARGS_NUMBER] = 0;
     return (description);
 }
 

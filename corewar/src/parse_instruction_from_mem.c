@@ -38,6 +38,7 @@ int get_argument(proc_t *proc, int size)
 
 bool get_description(proc_t *proc)
 {
+    proc->pc = proc->pc->next;
     if (has_one_argument(proc->instruction->code)) {
         if (!proc->instruction->description)
             proc->instruction->description = malloc(sizeof(char) * 2);
@@ -45,7 +46,8 @@ bool get_description(proc_t *proc)
             return (false);
         proc->instruction->description[1] = 0;
         proc->instruction->description[0] = T_DIR;
-        if (has_one_argument(proc->instruction->code))
+        if (has_one_argument(proc->instruction->code) ||
+            uses_indexes(proc->instruction->code))
             proc->instruction->description[0] = T_IND;
         return (true);
     }
@@ -63,13 +65,16 @@ bool parse_instruction_from_mem(proc_t *proc)
     int size = 0;
 
     proc->instruction->code = proc->pc->val;
-    if (!is_instruction_code_valid(proc->instruction->code))
-        return (false);
-    proc->pc = proc->pc->next;
+    if (!is_instruction_code_valid(proc->instruction->code)) {
+        proc->instruction->code = 0;
+        return (true);
+    }
     if (!get_description(proc))
         return (false);
     for (int i = 0; proc->instruction->description[i]; i++) {
-        if (proc->instruction->description[i] == T_IND)
+        if (proc->instruction->description[i] == T_IND ||
+            (proc->instruction->description[i] == T_DIR &&
+            uses_indexes(proc->instruction->code)))
             size = IND_SIZE;
         else if (proc->instruction->description[i] == T_DIR)
             size = DIR_SIZE;
