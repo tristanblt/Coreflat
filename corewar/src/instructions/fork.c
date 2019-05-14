@@ -40,9 +40,9 @@ bool fork_vm(proc_t ***procs, int i)
     if (!to_add)
         return (false);
     if (offset > 0)
-        go_n_next(to_add->pc, offset);
+        to_add->pc = go_n_next(to_add->pc, offset);
     else
-        go_n_prev(to_add->pc, -offset);
+        to_add->pc = go_n_prev(to_add->pc, -offset);
     if (!(*procs = push_proc(*procs, to_add)))
         return (false);
     return (true);

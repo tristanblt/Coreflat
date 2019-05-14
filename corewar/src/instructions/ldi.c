@@ -10,25 +10,22 @@
 
 bool ldi(proc_t ***procs, int i)
 {
-    int query = get_value_from_instrution(procs[0][i], 0);
-    int add = get_value_from_instrution(procs[0][i], 1);
-    int temp = 0;
+    int index_1 = get_value_from_instrution((*procs)[i], 0);
+    int index_2 = get_value_from_instrution((*procs)[i], 1);
     int sum = 0;
-    int reg = get_value_from_instrution(procs[0][i], 2);
+    int reg = (*procs)[i]->instruction->args[2] - 1;
 
     if (!registers_are_valid((*procs)[i]->instruction))
         return (true);
     if ((*procs)[i]->instruction->description[0] == 3) {
-        query = (query - (*procs)[i]->instruction->size) % IDX_MOD;
-        if (query > 0)
-            temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, query);
-        else
-            temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, -query);
+        index_1 -= (*procs)[i]->instruction->size;
+        index_1 = get_nb_from_mem((*procs)[i]->pc, IND_SIZE, index_1 % IDX_MOD);
     }
-    sum = add + temp;
-    if (query > 0)
-        procs[0][i]->registers[reg] = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, sum % IDX_MOD);
+    sum = (index_1 + index_2 - (*procs)[i]->instruction->size) % IDX_MOD;
+    (*procs)[i]->registers[reg] = get_nb_from_mem((*procs)[i]->pc, REG_SIZE, sum);
+    if (!(*procs)[i]->registers[reg])
+        (*procs)[i]->carry = 1;
     else
-        procs[0][i]->registers[reg] = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, -sum % IDX_MOD);
+        (*procs)[i]->carry = 0;
     return (true);
 }

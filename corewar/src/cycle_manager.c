@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-int cycle_to_die = CYCLE_TO_DIE;
+int cycle_to_die = /* CYCLE_TO_DIE */1000;
 int nbr_lives = 0;
 
 int find_cycle_n(int code)
@@ -25,6 +25,7 @@ bool exec_cycle(proc_t ***procs, int i, fct_t *fcts)
 
     if (!procs[0][i]->instruction->code)
         return (true);
+//    my_printf("%d\n", (*procs)[i]->instruction->code);
     for (int j = 0; fcts[j].code; j++) {
         if (fcts[j].code == procs[0][i]->instruction->code) {
             ret = fcts[j].fct(procs, i);
@@ -101,7 +102,7 @@ fct_t *init_fcts(void)
     fcts[12] = (fct_t) {lld, IC_lld};
     fcts[13] = (fct_t) {lldi, IC_lldi};
     fcts[14] = (fct_t) {lfork, IC_lfork};
-    fcts[15] = (fct_t) {add, IC_add};
+    fcts[15] = (fct_t) {aff, IC_aff};
     fcts[16] = (fct_t) {0};
     return (fcts);
 }
@@ -120,7 +121,7 @@ bool start_corewar(champion_t **champions, list_t *memory)
         if (!do_corewar_cycle(&procs, fcts))
             return (false);
     }
-    dump_memory(memory);
+    /* dump_memory(memory); */
     // display winner
     return (true);
 }

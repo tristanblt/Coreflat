@@ -10,13 +10,14 @@
 
 bool ld(proc_t ***procs, int i)
 {
-    int to_store = get_value_from_instrution(procs[0][i], 0) % IDX_MOD;
-    int reg = get_value_from_instrution(procs[0][i], 1);
+    int to_store = get_value_from_instrution(procs[0][i], 0);
+    int reg = procs[0][i]->instruction->args[1] - 1;
 
     if ((*procs)[i]->instruction->description[0] == 3) {
-        to_store -=(*procs)[i]->instruction->size;
-        to_store = get_nb_from_mem(procs[0][i]->pc, REG_SIZE, to_store);
-    }
+        to_store -= (*procs)[i]->instruction->size;
+        to_store = get_nb_from_mem(procs[0][i]->pc, REG_SIZE, to_store%IDX_MOD);
+    } else
+        to_store %= IDX_MOD;
     procs[0][i]->registers[reg] = to_store;
     if (!to_store)
         (*procs)[i]->carry = 1;

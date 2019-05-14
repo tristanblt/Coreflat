@@ -62,8 +62,8 @@ void parse_arguments_from_mem(proc_t *proc)
 
 bool parse_instruction_from_mem(proc_t *proc)
 {
-    proc->instruction->code = proc->pc->val;
     proc->instruction->size = 2;
+    proc->instruction->code = proc->pc->val;
     proc->pc = proc->pc->next;
     if (!is_instruction_code_valid(proc->instruction->code)) {
         proc->instruction->code = 0;
