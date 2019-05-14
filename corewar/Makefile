@@ -47,6 +47,8 @@ SRC	=	src/get_cor_file.c				\
 		src/get_nb_from_mem.c			\
 		src/arguments_handling.c	\
 		src/argument_error_handling.c	\
+		src/parse_args.c				\
+		src/start_corewar.c				\
 
 SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
 
