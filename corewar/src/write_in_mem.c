@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include "my.h"
 
 void load_in_mem(list_t *mem, char *to_write, int size, int offset)
 {

@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-int cycle_to_die = 0;
+int cycle_to_die = CYCLE_TO_DIE;
 int nbr_lives = 0;
 
 int find_cycle_n(int code)
@@ -23,7 +23,9 @@ bool exec_cycle(proc_t ***procs, int i, fct_t *fcts)
 {
     bool ret = true;
 
-    for (int j = 0; fcts[j].code; i++) {
+    if (!procs[0][i]->instruction->code)
+        return (true);
+    for (int j = 0; fcts[j].code; j++) {
         if (fcts[j].code == procs[0][i]->instruction->code) {
             ret = fcts[j].fct(procs, i);
             break;
@@ -36,8 +38,7 @@ bool exec_cycle(proc_t ***procs, int i, fct_t *fcts)
 
 void new_cycle(proc_t *proc)
 {
-    if (!parse_instruction_from_mem(proc))
-        proc->is_active = false;
+    parse_instruction_from_mem(proc);
     proc->cycles = find_cycle_n(proc->instruction->code);
 }
 
@@ -45,7 +46,7 @@ bool do_a_cycle(proc_t ***procs, int i, fct_t *fcts)
 {
     if (!procs[0][i]->is_active)
         return (true);
-    if (procs[0][i]->cycles == 0) {
+    if (procs[0][i]->cycles <= 0) {
         if (!exec_cycle(procs, i, fcts))
             return (false);
         new_cycle(procs[0][i]);
@@ -113,12 +114,13 @@ bool start_corewar(champion_t **champions, list_t *memory)
     if (procs == NULL)
         return (false);
     while (true) {
-        dump_memory(memory);
+        /* dump_memory(memory); */
         if (!check_lives(champions, procs))
             break;
         if (!do_corewar_cycle(&procs, fcts))
             return (false);
     }
+    dump_memory(memory);
     // display winner
     return (true);
 }

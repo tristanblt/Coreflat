@@ -10,7 +10,7 @@
 
 bool zjmp(proc_t ***procs, int i)
 {
-    int index = procs[0][i]->instruction->args[0];
+    int index = procs[0][i]->instruction->args[0] - 1 - DIR_SIZE;
 
     if (procs[0][i]->carry != 1)
         return (true);

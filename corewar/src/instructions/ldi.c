@@ -16,10 +16,15 @@ bool ldi(proc_t ***procs, int i)
     int sum = 0;
     int reg = get_value_from_instrution(procs[0][i], 2);
 
-    if (query > 0)
-        temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, query % IDX_MOD);
-    else
-        temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, -query % IDX_MOD);
+    if (!registers_are_valid((*procs)[i]->instruction))
+        return (true);
+    if ((*procs)[i]->instruction->description[0] == 3) {
+        query = (query - (*procs)[i]->instruction->size) % IDX_MOD;
+        if (query > 0)
+            temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, query);
+        else
+            temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, -query);
+    }
     sum = add + temp;
     if (query > 0)
         procs[0][i]->registers[reg] = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, sum % IDX_MOD);

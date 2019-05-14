@@ -39,7 +39,7 @@ champion_t *create_champion(char *path, int n, int a)
         return (NULL);
     if ((champion->header = parse_header(&file, &size)) == NULL)
         return (NULL);
-    champion->instructions = file + sizeof(header_t);
+    champion->instructions = file;
     if (parse_instructions(file, size) == false)
         return (NULL);
     champion->start_offset = a;

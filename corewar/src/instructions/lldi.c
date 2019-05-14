@@ -16,10 +16,12 @@ bool lldi(proc_t ***procs, int i)
     int sum = 0;
     int reg = get_value_from_instrution(procs[0][i], 2);
 
-    if (query > 0)
-        temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, query);
-    else
-        temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, -query);
+    if ((*procs)[i]->instruction->description[0] == 3) {
+        if (query > 0)
+            temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, query) - (*procs)[i]->instruction->size;
+        else
+            temp = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, -query) - (*procs)[i]->instruction->size;
+    }
     sum = add + temp;
     if (query > 0)
         procs[0][i]->registers[reg] = get_nb_from_mem(procs[0][i]->pc, IND_SIZE, sum);

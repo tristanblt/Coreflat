@@ -8,11 +8,22 @@
 #include "my.h"
 #include "corewar.h"
 
+char *get_champ_name(proc_t **procs, int nb)
+{
+    for (int i = 0; procs[i]; i++)
+        if (procs[i]->champion->prog_number==nb && !procs[i]->champion->dead) {
+            procs[i]->champion->last_live = 0;
+            return (procs[i]->champion->header->prog_name);
+        }
+    return (NULL);
+}
+
 bool live(proc_t ***procs, int i)
 {
-    my_printf("The player %i(%s) is alive.",
-    procs[0][i]->registers[0],
-    procs[0][i]->champion->header->prog_name);
-    procs[0][i]->champion->last_live = 0;
+    int nb = procs[0][i]->instruction->args[0];
+    char *name = get_champ_name(*procs, nb);
+
+    if (name)
+        my_printf("The player %i(%s) is alive.\n", nb, name);
     return (true);
 }

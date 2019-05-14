@@ -19,25 +19,30 @@ proc_t *create_new_proc(proc_t *proc)
     new_proc->carry = proc->carry;
     new_proc->is_active = true;
     new_proc->instruction = malloc(sizeof(instruction_t));
-    *new_proc->instruction = (instruction_t){0};
-    new_proc->registers = malloc(sizeof(register_t) * REG_NUMBER);
+    new_proc->registers = malloc(sizeof(int) * REG_NUMBER);
     if (!new_proc->registers || !new_proc->instruction)
         return (false);
     for (int i = 0; i < REG_NUMBER; i++)
         new_proc->registers[i] = proc->registers[i];
+    *new_proc->instruction = (instruction_t){0};
+    new_proc->instruction->args = malloc(sizeof(int) * 4);
+    if (!new_proc->instruction->args)
+        return (NULL);
+    new_proc->pc = proc->pc;
     return (new_proc);
 }
 
 bool fork_vm(proc_t ***procs, int i)
 {
     proc_t *to_add = create_new_proc((*procs)[i]);
+    int offset = ((*procs)[i]->instruction->args[0] - 1 - IND_SIZE) % IDX_MOD;
 
     if (!to_add)
         return (false);
-    if ((*procs)[i]->instruction->args[0] > 0)
-        go_n_next(to_add->pc, (*procs)[i]->instruction->args[0] % IDX_MOD);
+    if (offset > 0)
+        go_n_next(to_add->pc, offset);
     else
-        go_n_prev(to_add->pc, -(*procs)[i]->instruction->args[0] % IDX_MOD);
+        go_n_prev(to_add->pc, -offset);
     if (!(*procs = push_proc(*procs, to_add)))
         return (false);
     return (true);

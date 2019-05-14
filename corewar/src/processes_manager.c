@@ -32,7 +32,7 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
     int n_champs;
 
     for (n_champs = 0; champions[n_champs]; n_champs++);
-    procs = malloc(sizeof(proc_t *) * (n_champs + 2));
+    procs = malloc(sizeof(proc_t *) * (n_champs + 1));
     if (procs == NULL)
         return (NULL);
     procs[n_champs] = NULL;
@@ -54,7 +54,8 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
             return (NULL);
         for (int j = 0; j < REG_NUMBER; j++)
             procs[i]->registers[j] = 0;
-        procs[i]->registers[0] = -1;
+        procs[i]->registers[0] = champions[i]->prog_number;
+        procs[i]->is_active = true;
     }
     return (procs);
 }

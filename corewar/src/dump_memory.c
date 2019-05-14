@@ -8,22 +8,19 @@
 #include "corewar.h"
 #include "my.h"
 
-void convert_int_to_hexa(int nb, char *str, int size, bool nul)
+void convert_int_to_hexa(int nb, char *str, int size, bool null)
 {
-    int pow = 1;
+    char *base = "0123456789ABCDEF";
 
-    for (int i = size - 1; i >= 0; i--, pow *= 0x10) {
-        str[i] = (nb / pow) % 0x10;
-        if (str[i] < 10)
-            str[i] += '0';
-        else
-            str[i] += 'A' - 10;
+    for (int i = size - 1; i >= 0; i--) {
+        str[i] = base[nb & 15];
+        nb >>= 4;
     }
     for (int i = 0; str[i]; i++)
-        if (str[i] == '0' && nul && i != size - 1)
+        if (str[i] == '0' && null && i != size - 1)
             str[i] = ' ';
         else
-            nul = false;
+            null = false;
 }
 
 void dump_memory(list_t *mem)
