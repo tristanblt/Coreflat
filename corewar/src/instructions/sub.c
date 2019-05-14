@@ -12,7 +12,7 @@ bool sub(proc_t ***procs, int i)
 {
     int sub = 0;
 
-    sub = procs[0][i]->registers[procs[0][i]->instruction->args[0] - 1] +
+    sub = procs[0][i]->registers[procs[0][i]->instruction->args[0] - 1] -
     procs[0][i]->registers[procs[0][i]->instruction->args[1] - 1];
     procs[0][i]->registers[procs[0][i]->instruction->args[2] - 1] = sub;
     if (sub == 0)

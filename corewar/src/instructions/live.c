@@ -26,7 +26,9 @@ bool live(proc_t ***procs, int i)
     if (name)
         my_printf("The player %i(%s) is alive.\n", nb, name);
     nbr_lives++;
-    if (!(nbr_lives % NBR_LIVE))
+    if (nbr_lives > NBR_LIVE) {
         cycle_to_die -= CYCLE_DELTA;
+        nbr_lives = 0;
+    }
     return (true);
 }

@@ -16,7 +16,7 @@ fct_t *init_second_fcts(fct_t *fcts)
     fcts[12] = (fct_t) {lld, IC_lld};
     fcts[13] = (fct_t) {lldi, IC_lldi};
     fcts[14] = (fct_t) {lfork, IC_lfork};
-    fcts[15] = (fct_t) {add, IC_add};
+    fcts[15] = (fct_t) {aff, IC_aff};
     fcts[16] = (fct_t) {0};
     return (fcts);
 }
@@ -55,7 +55,8 @@ void display_winner(champion_t **champions)
     for (int i = 0; champions[i]; i++) {
         biggest = true;
         for (int j = 0; champions[j]; j++)
-            champions[i] < champions[j] ? biggest = false : 0;
+            champions[i]->last_live > champions[j]->last_live ?
+            biggest = false : 0;
         if (biggest) {
             my_printf("The player %d(%s) has won.\n",
 champions[i]->prog_number, champions[i]->header->prog_name);

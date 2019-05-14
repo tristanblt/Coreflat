@@ -57,17 +57,25 @@ bool do_a_cycle(proc_t ***procs, int i, fct_t *fcts)
 
 bool check_lives(champion_t **champions, proc_t **procs)
 {
-    bool over = true;
+    static bool is_first_instruction = true;
+    int alives = 0;
 
     for (int i = 0; champions[i]; i++) {
-        champions[i]->last_live++;
-        if (champions[i]->last_live > cycle_to_die)
-            champions[i]->dead = true;
+        if (!is_first_instruction)
+            champions[i]->last_live++;
         else
-            over = false;
+            is_first_instruction = false;
+        if (champions[i]->last_live > cycle_to_die) {
+            champions[i]->dead = true;
+        }
     }
     for (int i = 0; procs[i]; i++)
         if (procs[i]->champion->dead)
             procs[i]->is_active = false;
-    return (!over);
+    for (int i = 0; champions[i]; i++)
+        if (!champions[i]->dead)
+            alives++;
+    if (alives <= 1)
+        return (false);
+    return (true);
 }
