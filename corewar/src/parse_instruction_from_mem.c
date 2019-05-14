@@ -77,5 +77,9 @@ bool parse_instruction_from_mem(proc_t *proc)
         return (true);
     }
     parse_arguments_from_mem(proc);
+    if (!registers_are_valid(proc->instruction)) {
+        proc->pc = go_n_prev(proc->pc, proc->instruction->size - 1);
+        proc->instruction->code = 0;
+    }
     return (true);
 }

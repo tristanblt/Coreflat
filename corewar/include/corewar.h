@@ -25,6 +25,8 @@
 
 // DEFINES
 
+#define ABS(value) (value > 0 ? value : -value)
+
 #define USAGE "USAGE\n      ./corewar [-dump nbr_cycle] \
 [[-n prog_number] [-a load_address] prog_name] ...\n\n\
 DESCRIPTION\n      -dump nbr_cycle dumps the memory after \

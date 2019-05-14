@@ -12,16 +12,15 @@ bool registers_are_valid(instruction_t *instruction)
 {
     for (int i = 0; instruction->description[i]; i++)
         if (instruction->description[i] == 1 &&
-            (instruction->args[i] < 0 || instruction->args[i] > REG_NUMBER))
+            (instruction->args[i] < 1 || instruction->args[i] > REG_NUMBER))
             return (false);
     return (true);
 }
 
 int get_value_from_instrution(proc_t *proc, int arg)
 {
-    if (proc->instruction->description[arg] == 1) {
+    if (proc->instruction->description[arg] == 1)
         return (proc->registers[proc->instruction->args[arg] - 1]);
-    }
     return (proc->instruction->args[arg]);
 }
 
