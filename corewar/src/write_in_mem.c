@@ -41,9 +41,10 @@ bool load_champion_instructions_in_mem(champion_t **champ, list_t *mem)
         if (champ[i]->start_offset == -1)
             champ[i]->start_offset = i * offset;
     for (int i = 0; champ[i]; i++) {
-        if (check_overlap(mem, champ[i]->start_offset, champ[i]->header->prog_size))
+        if (check_overlap(mem, champ[i]->start_offset, \
+champ[i]->header->prog_size))
             return (false);
-        load_in_mem(mem, champ[i]->instructions,
+        load_in_mem(mem, champ[i]->instructions, \
 champ[i]->header->prog_size, champ[i]->start_offset);
     }
     return (true);

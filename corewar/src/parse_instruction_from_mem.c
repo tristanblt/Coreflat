@@ -14,7 +14,7 @@ int get_argument_from_mem(proc_t *proc, int size)
 
     for (int i = 0; i < size; i++) {
         argument <<= 8;
-        argument += proc->pc->val;
+        argument |= proc->pc->val;
         proc->pc = proc->pc->next;
     }
     proc->instruction->size += size;

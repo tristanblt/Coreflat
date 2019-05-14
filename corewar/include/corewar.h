@@ -129,6 +129,12 @@ struct list_t
 
 //PROTOTYPES
 
+fct_t *init_fcts(void);
+bool do_a_cycle(proc_t ***procs, int i, fct_t *fcts);
+bool check_lives(champion_t **champions, proc_t **procs);
+bool do_corewar_cycle(proc_t ***procs, fct_t *fcts);
+bool start_corewar(champion_t **champions, list_t *memory);
+int *parse_args(char **file, int *size, char *description);
 char *get_cor_file(char *path, int *size);
 bool parse_instructions(char *file, int size);
 header_t *parse_header(char **file, int *size);

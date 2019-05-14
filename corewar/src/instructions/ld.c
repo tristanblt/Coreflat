@@ -19,9 +19,9 @@ bool ld(proc_t ***procs, int i)
     } else
         to_store %= IDX_MOD;
     procs[0][i]->registers[reg] = to_store;
-    if (!to_store)
+    if (!to_store) {
         (*procs)[i]->carry = 1;
-    else
+    } else
         (*procs)[i]->carry = 0;
     return (true);
 }
