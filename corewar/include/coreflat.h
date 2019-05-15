@@ -21,7 +21,7 @@
 ** DEFINES
 */
 
-#define FRAMERATE_LIMIT 30
+#define FRAMERATE_LIMIT 120
 #define WINDOW_NAME "CoreFlat"
 
 #define BACKGROUND_COLOR (sfColor) {20, 20, 20, 255}
@@ -29,11 +29,11 @@
 
 #define CREDITS_TEXT "Credits"
 #define DRAW_CREDITS_TEXT ("\
-Development:\n\
-    - Paul BUGEON\n\
-    - Yoann LE-PECH\n\
-    - Jamil ETTEL\n\
-    - Tristan BOUILLOT\n\
+Development:\n    \
+-  Paul BUGEON\n    \
+-  Yoann LE-PECH\n    \
+-  Jamil ETTEL\n    \
+-  Tristan BOUILLOT\n\
 \n\
 Music:\n\
     - Benjamin DESIGAUX (BROME)")

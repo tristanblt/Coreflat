@@ -123,6 +123,7 @@ struct champion {
 struct list_t
 {
     char val;
+    int owner;
     struct list_t *prev;
     struct list_t *next;
 };

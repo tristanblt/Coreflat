@@ -35,17 +35,17 @@ void draw_header(cw_graph_t *cw_graph)
 void draw_subwindows(cw_graph_t *cw_graph)
 {
     sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {30, 110});
-    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {1000, 760});
+    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {1110, 760});
     sfRectangleShape_setFillColor(cw_graph->interface, SUBWINDOW_COLOR);
     sfRenderWindow_drawRectangleShape(cw_graph->window->window,
     cw_graph->interface, NULL);
-    sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {1060, 110});
-    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {510, 260});
+    sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {1170, 110});
+    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {400, 260});
     sfRectangleShape_setFillColor(cw_graph->interface, SUBWINDOW_COLOR);
     sfRenderWindow_drawRectangleShape(cw_graph->window->window,
     cw_graph->interface, NULL);
-    sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {1060, 400});
-    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {510, 470});
+    sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {1170, 400});
+    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {400, 470});
     sfRectangleShape_setFillColor(cw_graph->interface, SUBWINDOW_COLOR);
     sfRenderWindow_drawRectangleShape(cw_graph->window->window,
     cw_graph->interface, NULL);

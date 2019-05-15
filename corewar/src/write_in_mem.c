@@ -8,12 +8,13 @@
 #include "corewar.h"
 #include "my.h"
 
-void load_in_mem(list_t *mem, char *to_write, int size, int offset)
+void load_in_mem(list_t *mem, char *to_write, int size, champion_t *champion)
 {
-    for (int i = 0; i < offset; i++)
+    for (int i = 0; i < champion->start_offset; i++)
         mem = mem->next;
     for (int i = 0; i < size; i++) {
         mem->val = to_write[i];
+        mem->owner = champion->prog_number;
         mem = mem->next;
     }
 }
@@ -45,7 +46,7 @@ bool load_champion_instructions_in_mem(champion_t **champ, list_t *mem)
 champ[i]->header->prog_size))
             return (false);
         load_in_mem(mem, champ[i]->instructions, \
-champ[i]->header->prog_size, champ[i]->start_offset);
+champ[i]->header->prog_size, champ[i]);
     }
     return (true);
 }
