@@ -65,10 +65,11 @@ champions[i]->prog_number, champions[i]->header->prog_name);
     }
 }
 
-bool start_corewar(champion_t **champions, list_t *memory)
+bool start_corewar(champion_t **champions, list_t *memory, int dump)
 {
     proc_t **procs = init_processes(champions, memory);
     fct_t *fcts = init_fcts();
+    int cycles = 0;
 
     if (procs == NULL)
         return (false);
@@ -77,8 +78,12 @@ bool start_corewar(champion_t **champions, list_t *memory)
             break;
         if (!do_corewar_cycle(&procs, fcts))
             return (false);
+        cycles++;
+        if (cycles == dump) {
+            dump_memory(memory);
+            break;
+        }
     }
     display_winner(champions);
-    /* dump_memory(memory); */
     return (true);
 }

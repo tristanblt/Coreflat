@@ -35,7 +35,7 @@ proc_t *create_new_proc(proc_t *proc)
 bool fork_vm(proc_t ***procs, int i)
 {
     proc_t *to_add = create_new_proc((*procs)[i]);
-    int offset = ((*procs)[i]->instruction->args[0] - 1 - IND_SIZE) % IDX_MOD;
+    int offset = ((*procs)[i]->instruction->args[0] % IDX_MOD) - 1 - IND_SIZE;
 
     if (!to_add)
         return (false);

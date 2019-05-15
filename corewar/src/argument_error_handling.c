@@ -21,13 +21,13 @@ bool is_option_valid(char **av, bool *expected, int *i)
     return (true);
 }
 
-bool argument_error_handling(char **av)
+bool argument_error_handling(int ac, char **av)
 {
     int champions = 0;
     bool expected = false;
     int fd = 0;
 
-    for (int i = 1; av[i]; i++) {
+    for (int i = 1; i < ac; i++) {
         if (end_of_file(av[i], ".cor")) {
             fd = open(av[i], O_RDONLY);
             if (fd == -1)

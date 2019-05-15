@@ -21,6 +21,8 @@ void convert_int_to_hexa(int nb, char *str, int size, bool null)
             str[i] = ' ';
         else
             null = false;
+    if (str[0] == '0' && str[1] == '0')
+        str[0] = ' ', str[1] = ' ';
 }
 
 void dump_memory(list_t *mem)

@@ -135,14 +135,13 @@ fct_t *init_fcts(void);
 bool do_a_cycle(proc_t ***procs, int i, fct_t *fcts);
 bool check_lives(champion_t **champions, proc_t **procs);
 bool do_corewar_cycle(proc_t ***procs, fct_t *fcts);
-bool start_corewar(champion_t **champions, list_t *memory);
+bool start_corewar(champion_t **champions, list_t *memory, int dump);
 int *parse_args(char **file, int *size, char *description);
 char *get_cor_file(char *path, int *size);
 bool parse_instructions(char *file, int size);
 header_t *parse_header(char **file, int *size);
 int reverse_bytes(unsigned int x);
 int reverse_bytes_two(unsigned int x);
-bool start_corewar(champion_t **champions, list_t *memory);
 champion_t *create_champion(char *path, int n, int a);
 champion_t **push_champion(champion_t **arr, champion_t *add);
 proc_t **init_processes(champion_t **champions, list_t *memory);
@@ -156,9 +155,9 @@ bool is_instruction_code_valid(char code);
 void dump_memory(list_t *mem);
 int get_nb_from_mem(list_t *mem, int size, int offset);
 proc_t **push_proc(proc_t **arr, proc_t *add);
-bool argument_error_handling(char **av);
+bool argument_error_handling(int ac, char **av);
 bool end_of_file(char *path, char *end);
-bool argument_handling(int ac, char **av, champion_t ***champions);
+bool argument_handling(int ac, char **av, champion_t ***champions, int *);
 
 // list_t functions
 void add_next(list_t *list, int val);

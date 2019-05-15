@@ -1,3 +1,4 @@
+
 /*
 ** EPITECH PROJECT, 2019
 ** EPITECH 2018
@@ -15,7 +16,7 @@ bool end_of_file(char *path, char *end)
 
     if (n <= my_strlen(end) - 1)
         return (false);
-    for (i = n; path[i] != '.'; i--);
+    for (i = n; path[i] && path[i] != '.'; i--);
     path += i;
     if (!my_strcmp(path, end))
         return (false);
@@ -50,15 +51,14 @@ int fill_arguments(char **av, int i, int *buff)
     return (0);
 }
 
-bool argument_handling(int ac, char **av, champion_t ***champions)
+bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
 {
     champion_t *temp;
     int n = 1;
     int a = -1;
-    int dump = -1;
     int buff = 0;
 
-    if (!argument_error_handling(av))
+    if (!argument_error_handling(ac, av))
         return (false);
     for (int i = 1; i < ac; i++) {
         if ((temp = add_champion(av[i], n, a))) {
@@ -73,7 +73,7 @@ bool argument_handling(int ac, char **av, champion_t ***champions)
         case 2: a = buff;
             i += 1;
             break;
-        case 3: dump = buff;
+        case 3: *dump = buff;
             i += 1;
             break;
         }

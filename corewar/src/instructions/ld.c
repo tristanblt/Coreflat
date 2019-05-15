@@ -14,8 +14,8 @@ bool ld(proc_t ***procs, int i)
     int reg = procs[0][i]->instruction->args[1] - 1;
 
     if ((*procs)[i]->instruction->description[0] == 3) {
-        to_store -= (*procs)[i]->instruction->size;
-        to_store = get_nb_from_mem(procs[0][i]->pc, REG_SIZE, to_store%IDX_MOD);
+        to_store = to_store % IDX_MOD - (*procs)[i]->instruction->size;
+        to_store = get_nb_from_mem(procs[0][i]->pc, REG_SIZE, to_store);
     }
     procs[0][i]->registers[reg] = to_store;
     if (!to_store) {
