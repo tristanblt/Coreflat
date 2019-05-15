@@ -8,6 +8,8 @@
 #include "corewar.h"
 #include "my.h"
 
+int nbr_cycles = 0;
+
 fct_t *init_second_fcts(fct_t *fcts)
 {
     fcts[9] = (fct_t) {ldi, IC_ldi};
@@ -83,6 +85,7 @@ bool start_corewar(champion_t **champions, list_t *memory, int dump)
             dump_memory(memory);
             break;
         }
+        nbr_cycles++;
     }
     display_winner(champions);
     return (true);
