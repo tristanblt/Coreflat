@@ -104,6 +104,7 @@ void draw_button(cw_graph_t *cw_graph, sfVector2f pos, sfColor color, char *text
 void draw_icons(cw_graph_t *cw_graph, champion_t **champions);
 void draw_credits(cw_graph_t *cw_graph);
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+void draw_winner(cw_graph_t *cw_graph, champion_t **champions);
 
 //events
 void manage_events(cw_graph_t *cw_graph);

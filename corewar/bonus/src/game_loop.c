@@ -37,7 +37,7 @@ bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     if (procs == NULL)
         return (false);
     while (sfRenderWindow_isOpen(cw_graph->window->window)) {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 25; i++) {
             if (check_lives(champions, procs)) {
                 if (!do_corewar_cycle(&procs, fcts))
                     return (false);
@@ -50,8 +50,9 @@ bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
         draw_interface(cw_graph, champions);
         if (!display_views(cw_graph, champions, memory))
             return (false);
+        if (!check_lives(champions, procs))
+            draw_winner(cw_graph, champions);
         sfRenderWindow_display(cw_graph->window->window);
     }
-    display_winner(champions);
     return (true);
 }

@@ -26,6 +26,7 @@ SRCBONUS	=	bonus/src/main.c						\
 				bonus/src/draw_button.c					\
 				bonus/src/draw_corewar.c				\
 				bonus/src/draw_credits.c				\
+				bonus/src/draw_winner.c					\
 				bonus/src/utils.c						\
 
 SRC	=	src/get_cor_file.c								\
