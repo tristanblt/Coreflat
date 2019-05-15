@@ -194,8 +194,8 @@ bool xor(proc_t ***procs, int i);
 bool zjmp(proc_t ***procs, int i);
 int get_value_from_instrution(proc_t *proc, int arg);
 proc_t *create_new_proc(proc_t *proc);
-void store_at_index_two(list_t *pc, int value, int index);
-void store_at_index_int(list_t *pc, int value, int index);
+void store_at_index_two(list_t *pc, int value, int index, int);
+void store_at_index_int(list_t *pc, int value, int index, int);
 bool registers_are_valid(instruction_t *instruction);
 
 //END PROTOTYPES

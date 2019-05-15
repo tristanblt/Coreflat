@@ -24,7 +24,7 @@ int get_value_from_instrution(proc_t *proc, int arg)
     return (proc->instruction->args[arg]);
 }
 
-void store_at_index_two(list_t *pc, int value, int index)
+void store_at_index_two(list_t *pc, int value, int index, int prog_nb)
 {
     list_t *mem = NULL;
     int curr_byte = 0x00FF;
@@ -41,11 +41,12 @@ void store_at_index_two(list_t *pc, int value, int index)
         curr_byte >>= 8;
         curr_byte |= 0xFF00;
         mem->val = to_write;
+        mem->owner = prog_nb;
         mem = mem->next;
     }
 }
 
-void store_at_index_int(list_t *pc, int value, int index)
+void store_at_index_int(list_t *pc, int value, int index, int prog_nb)
 {
     list_t *mem = NULL;
     int curr_byte = 0x00FFFFFF;
@@ -62,6 +63,7 @@ void store_at_index_int(list_t *pc, int value, int index)
         curr_byte >>= 8;
         curr_byte |= 0xFF000000;
         mem->val = to_write;
+        mem->owner = prog_nb;
         mem = mem->next;
     }
 }
