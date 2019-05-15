@@ -13,9 +13,9 @@ int main(int ac, char **av)
     champion_t **champions = malloc(sizeof(champion_t *));
     list_t *memory = create_list();
 
-    champions[0] = NULL;
     if (memory == NULL || !champions)
         return (EXIT_FAIL);
+    champions[0] = NULL;
     if (!argument_handling(ac, av, &champions))
         return (EXIT_FAIL);
     if (!load_champion_instructions_in_mem(champions, memory))
