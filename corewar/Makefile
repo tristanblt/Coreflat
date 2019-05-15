@@ -7,55 +7,70 @@
 
 NAME	=	corewar
 
+NAME_BONUS	=	coreflat
+
 TEST_NAME	=	unit_tests
 
 MAIN	=	src/main.c
 
-SRC	=	src/get_cor_file.c				\
-		src/parse_instructions.c		\
-		src/parse_header.c				\
-		src/cycle_manager.c				\
-		src/champion_manager.c			\
-		../src/op.c						\
-		src/processes_manager.c			\
-		src/list/add_to_list.c			\
-		src/list/create_list.c			\
-		src/list/destroy_list.c			\
-		src/list/move_in_list.c			\
-		src/write_in_mem.c				\
-		src/parse_instruction_from_mem.c\
-		src/instructions/add.c			\
-		src/instructions/aff.c			\
-		src/instructions/and.c			\
-		src/instructions/fork.c			\
-		src/instructions/ld.c			\
-		src/instructions/ldi.c			\
-		src/instructions/lfork.c		\
-		src/instructions/live.c			\
-		src/instructions/lld.c			\
-		src/instructions/lldi.c			\
-		src/instructions/or.c			\
-		src/instructions/st.c			\
-		src/instructions/sti.c			\
-		src/instructions/sub.c			\
-		src/instructions/xor.c			\
-		src/instructions/zjmp.c			\
-		src/instructions/instruction_utils.c			\
-		src/instruction_is_valid.c		\
-		src/utils.c						\
-		src/dump_memory.c			\
-		src/get_nb_from_mem.c			\
-		src/arguments_handling.c	\
-		src/argument_error_handling.c	\
-		src/parse_args.c				\
-		src/start_corewar.c				\
+SRC_TEST	=	tests/test_parse_instruction_from_mem.c
 
-SRC_TEST	=	tests/test_parse_instruction_from_mem.c	\
+SRCBONUS	=	bonus/src/main.c						\
+				bonus/src/start_graphical_corewar.c		\
+				bonus/src/game_loop.c					\
+				bonus/src/init_game.c					\
+				bonus/src/draw_interface.c				\
+				bonus/src/draw_icons.c					\
+				bonus/src/manage_events.c				\
+				bonus/src/gradients.c					\
+				bonus/src/draw_button.c					\
+				bonus/src/draw_corewar.c				\
+				bonus/src/draw_credits.c				\
+				bonus/src/utils.c						\
+
+SRC	=	src/get_cor_file.c								\
+		src/parse_instructions.c						\
+		src/parse_header.c								\
+		src/cycle_manager.c								\
+		src/champion_manager.c							\
+		../src/op.c										\
+		src/processes_manager.c							\
+		src/list/add_to_list.c							\
+		src/list/create_list.c							\
+		src/list/destroy_list.c							\
+		src/list/move_in_list.c							\
+		src/write_in_mem.c								\
+		src/parse_instruction_from_mem.c				\
+		src/instructions/add.c							\
+		src/instructions/aff.c							\
+		src/instructions/and.c							\
+		src/instructions/fork.c							\
+		src/instructions/ld.c							\
+		src/instructions/ldi.c							\
+		src/instructions/lfork.c						\
+		src/instructions/live.c							\
+		src/instructions/lld.c							\
+		src/instructions/lldi.c							\
+		src/instructions/or.c							\
+		src/instructions/st.c							\
+		src/instructions/sti.c							\
+		src/instructions/sub.c							\
+		src/instructions/xor.c							\
+		src/instructions/zjmp.c							\
+		src/instructions/instruction_utils.c			\
+		src/instruction_is_valid.c						\
+		src/utils.c										\
+		src/dump_memory.c								\
+		src/get_nb_from_mem.c							\
+		src/arguments_handling.c						\
+		src/argument_error_handling.c					\
+		src/parse_args.c								\
+		src/start_corewar.c								\
 
 OBJ	=	$(SRC:%.c=%.o) $(MAIN:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-		-Iinclude -I../include			\
+			-Iinclude -I../include		\
 
 LIB	=	my
 
@@ -63,34 +78,39 @@ LIB_PATH=	../lib/my
 
 LDFLAGS	=	-L$(LIB_PATH) -l$(LIB)
 
+SFMLFLAGS = -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
+
 TEST_FLAGS	=	-lcriterion --coverage
 
 CC	=	gcc
 
 RM	=	rm -f
 
-all	:	$(NAME)
+all:	$(NAME)
 
 lib	:
 		make -C $(LIB_PATH)
 
-$(NAME)	:	$(OBJ) lib
+$(NAME):$(OBJ) lib
 		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean	:
 		make clean -C $(LIB_PATH)
 		$(RM) $(OBJ) *.gc*
 
-fclean	:	clean
+fclean:	clean
 		make fclean -C $(LIB_PATH)
 		$(RM) $(NAME)
 		$(RM) $(TEST_NAME)
 
-re	:	fclean all
+re:		fclean all
 
-tests_run	:	lib
+tests_run:	lib
 			$(CC) -o $(TEST_NAME) $(CFLAGS) $(SRC) $(SRC_TEST) $(LDFLAGS) $(TEST_FLAGS)
 			./unit_tests
 			gcovr --exclude tests
 
-.PHONY	:	lib clean fclean re
+bonus:	lib
+		$(CC) -o $(NAME_BONUS) $(SRC) $(SRCBONUS) $(CFLAGS) $(LDFLAGS) $(SFMLFLAGS)
+
+.PHONY:	lib clean fclean re bonus

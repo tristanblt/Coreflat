@@ -49,6 +49,7 @@ away from each other as possible. The addresses are MEM_SIZE modulo"
 
 extern int nbr_lives;
 extern int cycle_to_die;
+extern int nbr_cycles;
 
 // END GLOBALS VAR
 
