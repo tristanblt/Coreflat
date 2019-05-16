@@ -209,7 +209,7 @@ void draw_champion_settings(cw_graph_t *cw_graph, champion_t **champions, int *s
     cw_graph->g_setts.color = (sfColor) {red * 20, green * 20, blue * 20, 255};
 }
 
-bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions)
+bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions, int *n)
 {
     static int select = -1;
     static int n_added = 0;
@@ -221,6 +221,8 @@ bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions)
     (sfVector2f) {200, 50}) && cw_graph->is_released && select != -1) {
         champions[select]->color = (color_t) {cw_graph->g_setts.color.r,
         cw_graph->g_setts.color.g, cw_graph->g_setts.color.b, 255};
+        champions[select]->prog_number = *n;
+        (*n)++;
         if (!(cw_graph->g_setts.champions =
         push_champion(cw_graph->g_setts.champions, champion_dup(champions[select]))))
             return (false);
@@ -234,6 +236,7 @@ bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions)
 
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 {
+    static int n = 1;
     draw_background(cw_graph);
     if (cw_graph->g_setts.step == 5) {
         if (!(load_champion_instructions_in_mem(cw_graph->g_setts.champions, memory)))
@@ -242,6 +245,7 @@ bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
             return (false);
         cw_graph->g_setts.corewar_launched = true;
         cw_graph->current_view = 3;
+        n = 0;
     }
     switch (cw_graph->g_setts.step)
     {
@@ -252,13 +256,13 @@ bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     case 2: draw_choose_cyc_per_sec(cw_graph);
         break;
     case 3:
-        if (!draw_champions_settings(cw_graph, champions))
+        if (!draw_champions_settings(cw_graph, champions, &n))
             return (false);
         break;
     case 4: draw_ready_to_start(cw_graph);
         break;
     }
-    if (cw_graph->g_setts.step != 3)
+    if (cw_graph->g_setts.step != 3 && cw_graph->g_setts.step != 5)
         draw_button(cw_graph, (sfVector2f) {710, 600},
         cw_graph->interface_gradient, NEXT_TEXT);
     return (true);
