@@ -9,6 +9,7 @@
 
 void draw_winner(cw_graph_t *cw_graph, champion_t **champions)
 {
+    return;
     char *name = NULL;
     bool biggest = true;
 
