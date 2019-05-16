@@ -32,43 +32,42 @@ view_t **views)
     return (true);
 }
 
-void set_truc_machin(proc_t **procs)
+void set_proc_owner(proc_t **procs)
 {
     for (int i = 0; procs[i]; i++) {
         procs[i]->pc->owner = procs[i]->champion->prog_number;
     }
 }
 
-bool launch_corewar(champion_t **champions, proc_t **procs, fct_t *fcts,
+bool launch_corewar(champion_t **champions, cw_graph_t *cw_graph, fct_t *fcts,
 int cycle_per_tour)
 {
-    for (int i = 0; i < cycle_per_tour; i++)
-        if (check_lives(champions, procs)) {
-            if (!do_corewar_cycle(&procs, fcts))
-                return (false);
-            nbr_cycles++;
-            set_truc_machin(procs);
+    if (!cw_graph->g_setts.corewar_launched)
+        return (true);
+    for (int i = 0; i < 10; i++) {
+        if (!check_lives(cw_graph->g_setts.champions, cw_graph->g_setts.procs)) {
+            cw_graph->current_view = 4;
+            cw_graph->g_setts.corewar_launched = false;
+            break;
         }
+        if (!do_corewar_cycle(&cw_graph->g_setts.procs, fcts))
+            return (false);
+        nbr_cycles++;
+        set_proc_owner(cw_graph->g_setts.procs);
+    }
     return (true);
 }
 
 bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 {
-    proc_t **procs = init_processes(champions, memory);
     fct_t *fcts = init_fcts();
     view_t **views = views_fcts();
 
-    if (procs == NULL)
-        return (false);
     while (sfRenderWindow_isOpen(cw_graph->window->window)) {
         manage_events(cw_graph);
         evolve_gradient(&cw_graph->interface_gradient);
-        if (cw_graph->g_setts.corewar_launched) {
-            if (!launch_corewar(champions, procs, fcts, 100))
-                return (false);
-            if (!check_lives(champions, procs))
-                cw_graph->current_view = 4;
-        }
+        if (!launch_corewar(cw_graph->g_setts.champions, cw_graph, fcts, 100))
+            return (false);
         if (!display_views(cw_graph, champions, memory, views))
             return (false);
         sfRenderWindow_display(cw_graph->window->window);

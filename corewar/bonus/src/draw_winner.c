@@ -13,13 +13,13 @@ bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     bool biggest = true;
 
     memory = (void *)memory;
-    for (int i = 0; champions[i]; i++) {
+    for (int i = 0; cw_graph->g_setts.champions[i]; i++) {
         biggest = true;
-        for (int j = 0; champions[j]; j++)
-            champions[i]->last_live > champions[j]->last_live ?
+        for (int j = 0; cw_graph->g_setts.champions[j]; j++)
+            cw_graph->g_setts.champions[i]->last_live > cw_graph->g_setts.champions[j]->last_live ?
             biggest = false : 0;
         if (biggest) {
-            name = champions[i]->header->prog_name;
+            name = cw_graph->g_setts.champions[i]->header->prog_name;
             break;
         }
     }

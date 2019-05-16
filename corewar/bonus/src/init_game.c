@@ -77,5 +77,9 @@ cw_graph_t *init_cw_graph(void)
     cw_graph->g_setts = (game_settings_t) {0};
     cw_graph->g_setts.nb_champions = 2;
     cw_graph->g_setts.pass_step = 1;
+    cw_graph->g_setts.champions = malloc(sizeof(champion_t *));
+    if (cw_graph->g_setts.champions == NULL)
+        return (NULL);
+    cw_graph->g_setts.champions[0] = NULL;
     return (cw_graph);
 }

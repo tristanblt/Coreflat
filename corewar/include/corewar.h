@@ -60,6 +60,7 @@ typedef struct champion champion_t;
 typedef struct proc proc_t;
 typedef struct list_t list_t;
 typedef struct fct fct_t;
+typedef struct color color_t;
 
 //END TYPEDEFS
 
@@ -87,6 +88,13 @@ enum INSTRUCTION_CODES {
 // END ENUMS
 
 // STRUCTS
+
+struct color {
+    char r;
+    char g;
+    char b;
+    char a;
+};
 
 struct fct {
     bool (*fct)(proc_t ***, int);
@@ -118,6 +126,8 @@ struct champion {
     bool dead;
     int prog_number;
 
+    // for graphical use
+    color_t color;
 };
 
 struct list_t

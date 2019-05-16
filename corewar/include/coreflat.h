@@ -22,7 +22,7 @@
 */
 
 #define FRAMERATE_LIMIT 120
-#define WINDOW_NAME "xXx_KEr3llE_xXx"
+#define WINDOW_NAME "CoreFlat"
 
 #define BACKGROUND_COLOR (sfColor) {20, 20, 20, 255}
 #define SUBWINDOW_COLOR (sfColor) {30, 30, 30, 255}
@@ -60,6 +60,7 @@ Have fun, this game was made for this after all !!! <3"
 #define EXIT_TEXT "Exit"
 #define MAIN_MENU_TEXT "Main menu"
 #define NEXT_TEXT "Next"
+#define NEXT_CHAMP_TEXT "Next champion"
 
 #define NBR_ICONS 3
 #define NBR_VIEWS 6
@@ -107,11 +108,15 @@ struct view
 struct game_settings
 {
     int step;
+    int champ_step;
     int corewar_launched;
     int nb_champions;
     int cycles_per_second;
     int pass_step;
     bool automatic_cps;
+    sfColor color;
+    champion_t **champions;
+    proc_t **procs;
 };
 
 struct coreflat
@@ -164,6 +169,7 @@ bool is_in_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size);
 
 // champions
 bool load_all_champions(char *path, champion_t ***champions);
+champion_t *champion_dup(champion_t *dup);
 
 
 
