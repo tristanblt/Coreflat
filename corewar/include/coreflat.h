@@ -133,11 +133,11 @@ struct coreflat
 
 // init
 cw_graph_t *init_cw_graph(void);
+view_t **views_fcts(void);
 
 // starting
 bool start_graphical_corewar(champion_t **champions, list_t *memory);
 bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
-view_t **views_fcts(void);
 
 // drawing
 void draw_interface(cw_graph_t *cw_graph, champion_t **champions);
@@ -161,6 +161,9 @@ void redirection(cw_graph_t *cw_graph, char *to);
 //utils
 char *int_to_str(int nb);
 bool is_in_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size);
+
+// champions
+bool load_all_champions(char *path, champion_t ***champions);
 
 
 

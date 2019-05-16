@@ -121,6 +121,36 @@ void draw_choose_cyc_auto(cw_graph_t *cw_graph)
     draw_checkbox(cw_graph, (sfVector2f) {350, 400}, &cw_graph->g_setts.automatic_cps);
 }
 
+void draw_champion_line(cw_graph_t *cw_graph, char *name, int i)
+{
+    if (is_in_rect(cw_graph, (sfVector2f) {30, 95 + i * 40}, (sfVector2f) {500, 40}))
+        sfRectangleShape_setFillColor(cw_graph->interface, SELECTOR_COLOR);
+    else
+        sfRectangleShape_setFillColor(cw_graph->interface, SELECTOR_COLOR_HOVER);
+    sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {30, 95 + i * 40});
+    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {500, 40});
+    sfRenderWindow_drawRectangleShape(cw_graph->window->window,
+    cw_graph->interface, NULL);
+    sfText_setString(cw_graph->text.text, name);
+    sfText_setPosition(cw_graph->text.text, (sfVector2f) {60, 102 + i * 40});
+    sfText_setCharacterSize(cw_graph->text.text, 20);
+    sfText_setColor(cw_graph->text.text, sfWhite);
+    sfRenderWindow_drawText(cw_graph->window->window,
+    cw_graph->text.text, NULL);
+}
+
+void draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions)
+{
+    sfText_setString(cw_graph->text.text, "Champion settings");
+    sfText_setPosition(cw_graph->text.text, (sfVector2f) {600, 20});
+    sfText_setCharacterSize(cw_graph->text.text, 40);
+    sfText_setColor(cw_graph->text.text, sfWhite);
+    sfRenderWindow_drawText(cw_graph->window->window,
+    cw_graph->text.text, NULL);
+    for (int i = 0; champions[i] && i < 19; i++)
+        draw_champion_line(cw_graph, champions[i]->header->prog_name, i);
+}
+
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 {
     champions = (void *)champions;
@@ -134,6 +164,8 @@ bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     case 1: draw_choose_cyc_auto(cw_graph);
         break;
     case 2: draw_choose_cyc_per_sec(cw_graph);
+        break;
+    case 3: draw_champions_settings(cw_graph, champions);
         break;
     }
     draw_button(cw_graph, (sfVector2f) {710, 600}, cw_graph->interface_gradient, NEXT_TEXT);

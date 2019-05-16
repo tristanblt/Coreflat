@@ -34,6 +34,7 @@ SRCBONUS	=	bonus/src/main.c						\
 				bonus/src/views_manager.c				\
 				bonus/src/redirections.c				\
 				bonus/src/utils.c						\
+				bonus/src/load_all_champions.c			\
 
 SRC	=	src/parse_instructions.c						\
 		src/parse_header.c								\

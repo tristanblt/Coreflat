@@ -26,7 +26,7 @@ char *my_strcat(char *first, char *second)
     return (cat);
 }
 
-bool add_champion(char *name, champion_t ***champions)
+bool add_champion_all(char *name, champion_t ***champions, char *f_path)
 {
     static int nb = 1;
     champion_t *to_add = NULL;
@@ -34,20 +34,20 @@ bool add_champion(char *name, champion_t ***champions)
 
     if (!end_of_file(name, ".cor"))
         return (true);
-    path = my_strcat("bonus/champions/", name);
+    path = my_strcat(f_path, name);
     if (!path)
         return (false);
     to_add = create_champion(path, nb++, -1);
     if (!to_add)
         return (true);
     *champions = push_champion(*champions, to_add);
-    if (*champions)
+    if (*champions == NULL)
         return (false);
     free(path);
     return (true);
 }
 
-bool load_all_champions(char const *path, champion_t ***champions)
+bool load_all_champions(char *path, champion_t ***champions)
 {
     DIR *dir = opendir(path);
     struct dirent *content = NULL;
@@ -55,7 +55,7 @@ bool load_all_champions(char const *path, champion_t ***champions)
     if (!dir)
         return (false);
     while ((content = readdir(dir)))
-        if (!add_champion(content->d_name, champions))
+        if (!add_champion_all(content->d_name, champions, path))
             return (false);
     content = readdir(dir);
     closedir(dir);
