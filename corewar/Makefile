@@ -73,7 +73,8 @@ SRC	=	src/parse_instructions.c						\
 		src/argument_error_handling.c					\
 		src/parse_args.c								\
 		src/start_corewar.c								\
-		src/free_utils.c
+		src/free_utils.c							\
+		src/end_of_file.c							\
 
 OBJ	=	$(SRC:%.c=%.o) $(MAIN:%.c=%.o)
 

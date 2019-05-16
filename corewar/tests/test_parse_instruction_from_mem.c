@@ -76,3 +76,28 @@ Test(parse_instruction_from_mem, multiple_arg_negative_numbers_test)
     cr_assert(proc->instruction->code == IC_sti);
     cr_assert(proc->pc->prev->val == 01 && proc);
 }
+
+Test(argument_handling, basic_test)
+{
+    champion_t **champs = malloc(sizeof(champion_t *) * 1);
+    int dump = -1;
+    int ac = 3;
+    char *av[] = {"./corewar", "tests/files/test.cor",
+"tests/files/test.cor", NULL};
+
+    champs[0] = 0;
+    cr_assert(argument_handling(ac, av, &champs, &dump));
+}
+
+Test(argument_handling, more_arguments)
+{
+    champion_t **champs = malloc(sizeof(champion_t *) * 1);
+    int dump = -1;
+    int ac = 13;
+    char *av[] = {"./corewar", "-n", "10", "-a", "101", "tests/files/test.cor",
+"-a", "6000", "-n", "1000", "tests/files/test.cor", "-dump", "12", NULL};
+
+    champs[0] = 0;
+    cr_assert(argument_handling(ac, av, &champs, &dump));
+    cr_assert(dump == 12);
+}
