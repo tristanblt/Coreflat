@@ -109,6 +109,9 @@ struct game_settings
     int step;
     int corewar_launched;
     int nb_champions;
+    int cycles_per_second;
+    int pass_step;
+    bool automatic_cps;
 };
 
 struct coreflat

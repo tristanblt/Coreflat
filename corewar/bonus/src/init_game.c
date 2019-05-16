@@ -76,5 +76,6 @@ cw_graph_t *init_cw_graph(void)
     cw_graph->current_view = 0;
     cw_graph->g_setts = (game_settings_t) {0};
     cw_graph->g_setts.nb_champions = 2;
+    cw_graph->g_setts.pass_step = 1;
     return (cw_graph);
 }
