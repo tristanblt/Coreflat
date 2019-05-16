@@ -50,6 +50,8 @@ int check_arguments(char **av, int i, int *buff)
     return (0);
 }
 
+
+
 bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
 {
     champion_t *temp;
@@ -60,11 +62,12 @@ bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
     if (!argument_error_handling(ac, av))
         return (false);
     for (int i = 1; i < ac; i++) {
-        if ((temp = add_champion(av[i], n, a))) {
+        if (end_of_file(av[i], ".cor") && (temp = add_champion(av[i], n, a))) {
             *champions = push_champion(*champions, temp);
             n = n + 1;
             a = -1;
-        }
+        } else if (end_of_file(av[i], ".cor"))
+            return (false);
         switch (check_arguments(av, i, &buff)) {
         case 1: n = buff;
             i += 1;

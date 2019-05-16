@@ -35,8 +35,7 @@ SRCBONUS	=	bonus/src/main.c						\
 				bonus/src/redirections.c				\
 				bonus/src/utils.c						\
 
-SRC	=	src/get_cor_file.c								\
-		src/parse_instructions.c						\
+SRC	=	src/parse_instructions.c						\
 		src/parse_header.c								\
 		src/cycle_manager.c								\
 		src/champion_manager.c							\
