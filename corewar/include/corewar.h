@@ -160,6 +160,9 @@ proc_t **push_proc(proc_t **arr, proc_t *add);
 bool argument_error_handling(int ac, char **av);
 bool end_of_file(char *path, char *end);
 bool argument_handling(int ac, char **av, champion_t ***champions, int *);
+void destroy_processes(proc_t **procs);
+void destroy_champions(champion_t **champions);
+void destroy_instruction(instruction_t *instruction);
 
 // list_t functions
 void add_next(list_t *list, int val);
