@@ -64,7 +64,8 @@ void draw_selector(cw_graph_t *cw_graph, sfVector2i limiter, sfVector2f pos, int
 void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value)
 {
     if (is_in_rect(cw_graph, pos, (sfVector2f) {100, 100}) && cw_graph->is_released) {
-        ret = true;
+        *value = !(*value);
+        cw_graph->g_setts.pass_step += *value ? 1 : -1;
     }
     if (is_in_rect(cw_graph, pos, (sfVector2f) {100, 100}) && sfMouse_isButtonPressed(sfMouseLeft))
         sfRectangleShape_setFillColor(cw_graph->interface, SELECTOR_COLOR_CLICKED);
@@ -74,13 +75,12 @@ void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value)
         sfRectangleShape_setFillColor(cw_graph->interface, SELECTOR_COLOR);
     sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {pos.x, pos.y});
     sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {100, 100});
-    sfRectangleShape_setFillColor(cw_graph->interface, SELECTOR_MIDDLE_COLOR);
     sfRenderWindow_drawRectangleShape(cw_graph->window->window,
     cw_graph->interface, NULL);
     if (*value) {
         sfText_setString(cw_graph->text.text, "X");
         sfText_setPosition(cw_graph->text.text, (sfVector2f)
-        {pos.x + 35, pos.y + 15});
+        {pos.x + 27, pos.y});
         sfText_setCharacterSize(cw_graph->text.text, 80);
         sfText_setColor(cw_graph->text.text, sfWhite);
         sfRenderWindow_drawText(cw_graph->window->window,
@@ -91,34 +91,34 @@ void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value)
 void draw_choose_champion(cw_graph_t *cw_graph)
 {
     sfText_setString(cw_graph->text.text, "How many champions ?");
-    sfText_setPosition(cw_graph->text.text, (sfVector2f) {510, 300});
+    sfText_setPosition(cw_graph->text.text, (sfVector2f) {490, 300});
     sfText_setCharacterSize(cw_graph->text.text, 50);
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfRenderWindow_drawText(cw_graph->window->window,
     cw_graph->text.text, NULL);
-    draw_selector(cw_graph, (sfVector2i) {2, 4}, (sfVector2f) {650, 400}, &cw_graph->g_setts.nb_champions);
+    draw_selector(cw_graph, (sfVector2i) {2, 4}, (sfVector2f) {640, 400}, &cw_graph->g_setts.nb_champions);
 }
 
 void draw_choose_cyc_per_sec(cw_graph_t *cw_graph)
 {
     sfText_setString(cw_graph->text.text, "How many cycles per second ? (1 = 1000 cycles/sec)");
-    sfText_setPosition(cw_graph->text.text, (sfVector2f) {510, 300});
+    sfText_setPosition(cw_graph->text.text, (sfVector2f) {160, 300});
     sfText_setCharacterSize(cw_graph->text.text, 50);
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfRenderWindow_drawText(cw_graph->window->window,
     cw_graph->text.text, NULL);
-    draw_selector(cw_graph, (sfVector2i) {1, 9}, (sfVector2f) {650, 400}, &cw_graph->g_setts.cycles_per_second);
+    draw_selector(cw_graph, (sfVector2i) {1, 9}, (sfVector2f) {640, 400}, &cw_graph->g_setts.cycles_per_second);
 }
 
 void draw_choose_cyc_auto(cw_graph_t *cw_graph)
 {
     sfText_setString(cw_graph->text.text, "Automatic cycle per second ?");
-    sfText_setPosition(cw_graph->text.text, (sfVector2f) {510, 300});
+    sfText_setPosition(cw_graph->text.text, (sfVector2f) {510, 420});
     sfText_setCharacterSize(cw_graph->text.text, 50);
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfRenderWindow_drawText(cw_graph->window->window,
     cw_graph->text.text, NULL);
-    draw_checkbox(cw_graph, (sfVector2f) {650, 400}, &cw_graph->g_setts.automatic_cps);
+    draw_checkbox(cw_graph, (sfVector2f) {350, 400}, &cw_graph->g_setts.automatic_cps);
 }
 
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
@@ -136,6 +136,6 @@ bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     case 2: draw_choose_cyc_per_sec(cw_graph);
         break;
     }
-    draw_button(cw_graph, (sfVector2f) {730, 600}, cw_graph->interface_gradient, NEXT_TEXT);
+    draw_button(cw_graph, (sfVector2f) {710, 600}, cw_graph->interface_gradient, NEXT_TEXT);
     return (true);
 }

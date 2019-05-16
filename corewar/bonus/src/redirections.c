@@ -20,6 +20,8 @@ void redirection(cw_graph_t *cw_graph, char *to)
         sfRenderWindow_close(cw_graph->window->window);
     if (my_strcmp(to, MAIN_MENU_TEXT))
         cw_graph->current_view = 0;
-    if (my_strcmp(to, NEXT_TEXT))
-        cw_graph->g_setts.step++;
+    if (my_strcmp(to, NEXT_TEXT)) {
+        cw_graph->g_setts.step += cw_graph->g_setts.pass_step;
+        cw_graph->g_setts.pass_step = 1;;
+    }
 }
