@@ -3,10 +3,10 @@
 
         sti r1 %:live %1
         ld %4 r4
-        ld %100 r15
+        ld %128 r15
 
 start:  ldi r2 %:start r3
-        sti r3 r2 %100
+        sti r3 r2 %128
         add r2 r4 r2
 live:   live %1
         sub r2 r15 r16

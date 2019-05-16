@@ -16,7 +16,8 @@ bool is_option_valid(char **av, bool *expected, int *i)
             return (false);
         if (av[*i][1] != 'd')
             *expected = true;
-    }
+    } else
+        return (false);
     (*i)++;
     return (true);
 }
