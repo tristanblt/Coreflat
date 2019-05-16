@@ -21,7 +21,8 @@ bool and(proc_t ***procs, int i)
         second -= (*procs)[i]->instruction->size;
         second = get_nb_from_mem((*procs)[i]->pc, IND_SIZE, second);
     }
-    procs[0][i]->registers[procs[0][i]->instruction->args[2] - 1] = first & second;
+    procs[0][i]->registers[procs[0][i]->instruction->args[2] - 1] \
+= first & second;
     if ((first & second) == 0)
         procs[0][i]->carry = 1;
     else

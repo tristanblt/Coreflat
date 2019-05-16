@@ -26,6 +26,27 @@ proc_t **push_proc(proc_t **arr, proc_t *add)
     return (new_arr);
 }
 
+proc_t **fill_processes(proc_t **procs, list_t *memory, \
+champion_t **champions, int i)
+{
+    procs[i]->pc = go_n_next(memory, champions[i]->start_offset);
+    procs[i]->instruction = malloc(sizeof(instruction_t));
+    if (!procs[i]->instruction)
+        return (NULL);
+    *procs[i]->instruction = (instruction_t){0};
+    if (!(procs[i]->instruction->args = malloc(sizeof(int) * 4)))
+        return (NULL);
+    procs[i]->champion = champions[i];
+    procs[i]->registers = malloc(sizeof(int) * REG_NUMBER);
+    if (procs[i]->registers == NULL)
+        return (NULL);
+    for (int j = 0; j < REG_NUMBER; j++)
+        procs[i]->registers[j] = 0;
+    procs[i]->registers[0] = champions[i]->prog_number;
+    procs[i]->is_active = true;
+    return (procs);
+}
+
 proc_t **init_processes(champion_t **champions, list_t *memory)
 {
     proc_t **procs = NULL;
@@ -41,21 +62,8 @@ proc_t **init_processes(champion_t **champions, list_t *memory)
         if (procs[i] == NULL)
             return (NULL);
         *procs[i] = (proc_t){0};
-        procs[i]->pc = go_n_next(memory, champions[i]->start_offset);
-        procs[i]->instruction = malloc(sizeof(instruction_t));
-        if (!procs[i]->instruction)
+        if ((procs = fill_processes(procs, memory, champions, i)) == NULL)
             return (NULL);
-        *procs[i]->instruction = (instruction_t){0};
-        if (!(procs[i]->instruction->args = malloc(sizeof(int) * 4)))
-            return (NULL);
-        procs[i]->champion = champions[i];
-        procs[i]->registers = malloc(sizeof(int) * REG_NUMBER);
-        if (procs[i]->registers == NULL)
-            return (NULL);
-        for (int j = 0; j < REG_NUMBER; j++)
-            procs[i]->registers[j] = 0;
-        procs[i]->registers[0] = champions[i]->prog_number;
-        procs[i]->is_active = true;
     }
     return (procs);
 }

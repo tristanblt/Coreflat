@@ -20,6 +20,7 @@ bool sti(proc_t ***procs, int i)
         first = get_nb_from_mem((*procs)[i]->pc, IND_SIZE, first);
     }
     offset = (first + second) % IDX_MOD - (*procs)[i]->instruction->size;
-    store_at_index_int((*procs)[i]->pc, value, offset, (*procs)[i]->champion->prog_number);
+    store_at_index_int((*procs)[i]->pc, value, offset, \
+(*procs)[i]->champion->prog_number);
     return (true);
 }
