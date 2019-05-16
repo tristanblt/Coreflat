@@ -8,31 +8,6 @@
 #include "corewar.h"
 #include "my.h"
 
-bool end_of_file(char *path, char *end)
-{
-    int n = my_strlen(path) - 1;
-    int i = 0;
-
-    if (n <= my_strlen(end) - 1)
-        return (false);
-    for (i = n; path[i] && path[i] != '.'; i--);
-    path += i;
-    if (!my_strcmp(path, end))
-        return (false);
-    return (true);
-}
-
-champion_t *add_champion(char *path, int n, int a)
-{
-    champion_t *temp;
-
-    if (!end_of_file(path, ".cor"))
-        return (NULL);
-    if ((temp = create_champion(path, n, a)) == NULL)
-        return (NULL);
-    return (temp);
-}
-
 int check_arguments(char **av, int i, int *buff)
 {
     if (my_strcmp(av[i], "-n")) {
@@ -50,38 +25,8 @@ int check_arguments(char **av, int i, int *buff)
     return (0);
 }
 
-
-
-bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
+bool check_champion_nb_error(champion_t ***champions)
 {
-    champion_t *temp;
-    int n = 1;
-    int a = -1;
-    int buff = 0;
-
-    if (!argument_error_handling(ac, av))
-        return (false);
-    for (int i = 1; i < ac; i++) {
-        if (end_of_file(av[i], ".cor") && (temp = add_champion(av[i], n, a))) {
-            *champions = push_champion(*champions, temp);
-            n = n + 1;
-            a = -1;
-        } else if (end_of_file(av[i], ".cor"))
-            return (false);
-        switch (check_arguments(av, i, &buff)) {
-        case 1: n = buff;
-            i += 1;
-            break;
-        case 2: a = buff;
-            i += 1;
-            break;
-        case 3: *dump = buff;
-            i += 1;
-            break;
-        }
-        if (*champions == NULL)
-            return (false);
-    }
     for (int i = 0, error = 0; champions[0][i]; i++) {
         for (int j = 0; champions[0][j]; j++) {
             error = i != j && champions[0][i]->prog_number ==
@@ -90,5 +35,46 @@ bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
         if (error)
             return (false);
     }
+    return (true);
+}
+
+bool add_champ_from_argument(char *path, int *n, int *a, champion_t ***champs)
+{
+    champion_t *to_add = NULL;
+
+    if (!end_of_file(path, ".cor"))
+        return (true);
+    if (!(to_add = create_champion(path, *n, *a)))
+        return (false);
+    *champs = push_champion(*champs, to_add);
+    if (!*champs)
+        return (false);
+    (*n)++;
+    *a = -1;
+    return (true);
+}
+
+bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
+{
+    int n = 1;
+    int a = -1;
+    int buff = 0;
+
+    if (!argument_error_handling(ac, av))
+        return (false);
+    for (int i = 1; i < ac; i++) {
+        if (!add_champ_from_argument(av[i], &n, &a, champions))
+            return (false);
+        switch (check_arguments(av, i, &buff)) {
+        case 1: n = buff;
+            break;
+        case 2: a = buff;
+            break;
+        case 3: *dump = buff;
+            break;
+        }
+    }
+    if (!check_champion_nb_error(champions))
+        return (false);
     return (true);
 }
