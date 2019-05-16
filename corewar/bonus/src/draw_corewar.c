@@ -27,6 +27,7 @@ bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     int line = 0;
     int col = 0;
 
+    draw_interface(cw_graph, champions);
     for (int i = 0; i < MEM_SIZE; i++) {
         draw_block(cw_graph, col, line, (sfVector2i) {memory->val, memory->owner});
         memory = memory->next;

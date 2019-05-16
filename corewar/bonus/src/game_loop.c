@@ -7,17 +7,28 @@
 
 #include "coreflat.h"
 
-bool display_views(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
+int display_view(cw_graph_t *cw_graph, champion_t **champions, list_t *memory,
+view_t *view)
 {
-    switch (cw_graph->current_view)
-    {
-    case 0:
-        if (!draw_corewar(cw_graph, champions, memory))
+    if (view->view == cw_graph->current_view) {
+        if (!view->fct(cw_graph, champions, memory))
             return (false);
-        break;
-    case 1: draw_credits(cw_graph);
-        break;
+        return (2);
     }
+    return (true);
+}
+
+bool display_views(cw_graph_t *cw_graph, champion_t **champions, list_t *memory,
+view_t **views)
+{
+    for (int i = 0; views[i]; i++)
+        switch (display_view(cw_graph, champions, memory, views[i]))
+        {
+        case 0: return (false);
+            break;
+        case 2: return (true);
+            break;
+        }
     return (true);
 }
 
@@ -28,34 +39,39 @@ void set_truc_machin(proc_t **procs)
     }
 }
 
+bool launch_corewar(champion_t **champions, proc_t **procs, fct_t *fcts,
+int cycle_per_tour)
+{
+    for (int i = 0; i < cycle_per_tour; i++)
+        if (check_lives(champions, procs)) {
+            if (!do_corewar_cycle(&procs, fcts))
+                return (false);
+            nbr_cycles++;
+            set_truc_machin(procs);
+        }
+    return (true);
+}
+
 bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 {
     proc_t **procs = init_processes(champions, memory);
     fct_t *fcts = init_fcts();
-    int cycles = 0;
+    view_t **views = views_fcts();
 
     if (procs == NULL)
         return (false);
     while (sfRenderWindow_isOpen(cw_graph->window->window)) {
-        for (int i = 0; i < 100; i++) {
-            if (check_lives(champions, procs)) {
-                if (!do_corewar_cycle(&procs, fcts))
-                    return (false);
-                cycles++;
-                nbr_cycles++;
-                set_truc_machin(procs);
-            }
-        }
         manage_events(cw_graph);
-        draw_interface(cw_graph, champions);
-        if (!display_views(cw_graph, champions, memory))
+        evolve_gradient(&cw_graph->interface_gradient);
+        if (cw_graph->g_setts.corewar_launched) {
+            if (!launch_corewar(champions, procs, fcts, 100))
+                return (false);
+            if (!check_lives(champions, procs))
+                cw_graph->current_view = 4;
+        }
+        if (!display_views(cw_graph, champions, memory, views))
             return (false);
-        if (!check_lives(champions, procs))
-            draw_winner(cw_graph, champions);
         sfRenderWindow_display(cw_graph->window->window);
     }
-    int i = 0;
-    for (i = 0; procs[i]; i++);
-    printf("%d\n", i);
     return (true);
 }

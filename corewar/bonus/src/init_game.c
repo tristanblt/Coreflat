@@ -74,5 +74,7 @@ cw_graph_t *init_cw_graph(void)
     if ((cw_graph->icons = init_icons()) == NULL)
         return (NULL);
     cw_graph->current_view = 0;
+    cw_graph->g_setts = (game_settings_t) {0};
+    cw_graph->g_setts.nb_champions = 2;
     return (cw_graph);
 }
