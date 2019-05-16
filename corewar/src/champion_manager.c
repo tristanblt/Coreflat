@@ -26,6 +26,31 @@ champion_t **push_champion(champion_t **arr, champion_t *add)
     return (new_arr);
 }
 
+header_t *get_champion_header(char *file_path, char **file_content)
+{
+    int fd = open(file_path, O_RDONLY);
+    header_t *header = malloc(sizeof(header_t));
+
+    if (fd == -1 || !header)
+        return (NULL);
+    *header = (header_t){0};
+    if (read(fd, header, sizeof(header_t)) != sizeof(header_t))
+        return (NULL);
+    header->magic = reverse_bytes(header->magic);
+    header->prog_size = reverse_bytes(header->prog_size);
+    if (header->magic != COREWAR_EXEC_MAGIC || header->prog_size <= 0 ||
+!(*file_content = malloc(sizeof(char) * (header->prog_size + 1)))) {
+        (free(header), close(fd));
+        return (NULL);
+    }
+    (*file_content)[header->prog_size] = 0;
+    if (read(fd, *file_content, header->prog_size) != header->prog_size) {
+        (free(header), close(fd), free(*file_content));
+        return (NULL);
+    } close(fd);
+    return (header);
+}
+
 champion_t *create_champion(char *path, int n, int a)
 {
     char *file = NULL;
@@ -35,9 +60,7 @@ champion_t *create_champion(char *path, int n, int a)
     if (champion == NULL)
         return (NULL);
     *champion = (champion_t){0};
-    if ((file = get_cor_file(path, &size)) == NULL)
-        return (NULL);
-    if ((champion->header = parse_header(&file, &size)) == NULL)
+    if (!(champion->header = get_champion_header(path, &file)))
         return (NULL);
     champion->instructions = file;
     if (parse_instructions(file, size) == false)

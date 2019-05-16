@@ -1,5 +1,5 @@
     .name "Querelle des Noyaux"
-    .comment "La Querelle des Noyaux est une evenement historique prenant place initialement dans nos coeurs"
+    .comment "La Querelle des Noyaux est un evenement historique prenant place initialement dans nos coeurs"
 
         sti r1 %:live %1
         ld %4 r4
