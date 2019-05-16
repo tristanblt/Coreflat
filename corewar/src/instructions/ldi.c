@@ -15,8 +15,6 @@ bool ldi(proc_t ***procs, int i)
     int sum = 0;
     int reg = (*procs)[i]->instruction->args[2] - 1;
 
-    if (!registers_are_valid((*procs)[i]->instruction))
-        return (true);
     if ((*procs)[i]->instruction->description[0] == 3) {
         index_1 = index_1 % IDX_MOD - (*procs)[i]->instruction->size;
         index_1 = get_nb_from_mem((*procs)[i]->pc, IND_SIZE, index_1);

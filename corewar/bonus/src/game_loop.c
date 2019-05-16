@@ -37,7 +37,7 @@ bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     if (procs == NULL)
         return (false);
     while (sfRenderWindow_isOpen(cw_graph->window->window)) {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 100; i++) {
             if (check_lives(champions, procs)) {
                 if (!do_corewar_cycle(&procs, fcts))
                     return (false);

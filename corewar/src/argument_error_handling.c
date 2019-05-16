@@ -16,7 +16,8 @@ my_strcmp(av[*i], "-dump")) {
             return (false);
         if (av[*i][1] != 'd')
             *expected = true;
-    }
+    } else
+        return (false);
     (*i)++;
     return (true);
 }

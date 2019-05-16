@@ -101,7 +101,7 @@ clean	:
 
 fclean:	clean
 		make fclean -C $(LIB_PATH)
-		$(RM) $(NAME)
+		$(RM) $(NAME) $(NAME_BONUS)
 		$(RM) $(TEST_NAME)
 
 re:		fclean all
