@@ -7,11 +7,12 @@
 
 #include "coreflat.h"
 
-void draw_winner(cw_graph_t *cw_graph, champion_t **champions)
+bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 {
     char *name = NULL;
     bool biggest = true;
 
+    memory = (void *)memory;
     for (int i = 0; champions[i]; i++) {
         biggest = true;
         for (int j = 0; champions[j]; j++)
@@ -41,4 +42,5 @@ void draw_winner(cw_graph_t *cw_graph, champion_t **champions)
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfRenderWindow_drawText(cw_graph->window->window,
     cw_graph->text.text, NULL);
+    return (true);
 }

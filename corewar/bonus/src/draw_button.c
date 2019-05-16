@@ -58,7 +58,7 @@ char *name)
 {
     if (is_in_rect(cw_graph, (sfVector2f) {pos.x - 25, pos.y},
         (sfVector2f) {200, 50}) && cw_graph->is_released)
-        cw_graph->current_view = !cw_graph->current_view;
+        redirection(cw_graph, name);
     if (is_in_rect(cw_graph, (sfVector2f) {pos.x - 25, pos.y},
         (sfVector2f) {200, 50}) && sfMouse_isButtonPressed(sfMouseLeft))
         color = (sfColor) {0, 0, 0, 255};
