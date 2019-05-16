@@ -80,11 +80,11 @@ bool start_corewar(champion_t **champions, list_t *memory, int dump)
             break;
         if (!do_corewar_cycle(&procs, fcts))
             return (false);
-        cycles++;
         if (cycles == dump) {
             dump_memory(memory);
             break;
         }
+        cycles++;
         nbr_cycles++;
     }
     display_winner(champions);

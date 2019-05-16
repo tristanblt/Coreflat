@@ -9,7 +9,6 @@
 
 void draw_winner(cw_graph_t *cw_graph, champion_t **champions)
 {
-    return;
     char *name = NULL;
     bool biggest = true;
 
@@ -23,11 +22,11 @@ void draw_winner(cw_graph_t *cw_graph, champion_t **champions)
             break;
         }
     }
-    sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {0, 0});
-    sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {1600, 900});
-    sfRectangleShape_setFillColor(cw_graph->interface, BACKGROUND_COLOR);
-    sfRenderWindow_drawRectangleShape(cw_graph->window->window,
-    cw_graph->interface, NULL);
+    /* sfRectangleShape_setPosition(cw_graph->interface, (sfVector2f) {0, 0}); */
+    /* sfRectangleShape_setSize(cw_graph->interface, (sfVector2f) {1600, 900}); */
+    /* sfRectangleShape_setFillColor(cw_graph->interface, BACKGROUND_COLOR); */
+    /* sfRenderWindow_drawRectangleShape(cw_graph->window->window, */
+    /* cw_graph->interface, NULL); */
     sfText_setString(cw_graph->text.text, name);
     sfText_setPosition(cw_graph->text.text, (sfVector2f)
     {770, 410});

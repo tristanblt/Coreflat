@@ -54,5 +54,8 @@ bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
             draw_winner(cw_graph, champions);
         sfRenderWindow_display(cw_graph->window->window);
     }
+    int i = 0;
+    for (i = 0; procs[i]; i++);
+    printf("%d\n", i);
     return (true);
 }

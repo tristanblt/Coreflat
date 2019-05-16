@@ -23,8 +23,9 @@ bool live(proc_t ***procs, int i)
     int nb = procs[0][i]->instruction->args[0];
     char *name = get_champ_name(*procs, nb);
 
-    if (name)
-        my_printf("The player %i(%s) is alive.\n", nb, name);
+    if (!name)
+        return (true);
+    my_printf("The player %i(%s) is alive.\n", nb, name);
     nbr_lives++;
     if (nbr_lives > NBR_LIVE) {
         cycle_to_die -= CYCLE_DELTA;
