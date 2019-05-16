@@ -22,7 +22,7 @@
 */
 
 #define FRAMERATE_LIMIT 120
-#define WINDOW_NAME "CoreFlat"
+#define WINDOW_NAME "xXx_KEr3llE_xXx"
 
 #define BACKGROUND_COLOR (sfColor) {20, 20, 20, 255}
 #define SUBWINDOW_COLOR (sfColor) {30, 30, 30, 255}
@@ -39,8 +39,20 @@ Development:\n    \
 -  Tristan BOUILLOT\n\
 \n\
 Music:\n\
-    - Benjamin DESIGAUX (BROME)")
-#define DRAW_HELP_TEXT ("Voila de l'aide (ne me remercie pas)")
+    - Benjamin DESIGAUX (BROME)\n\n\
+All code is made with <3")
+#define DRAW_HELP_TEXT "To play THE Corewar :\n\n\n\
+FIRST :\n       \
+Press the fancy play button\n\n\
+SECOND :\n       \
+Choose the number of warrior/champion you \
+will need for the battle\n\n\
+THEN :\n       \
+You can either create your own champion or\n       \
+choose one of our best contestant \
+(I suggest you choose one of ours)\n\n\n\
+Last but not the least :\n       \
+Have fun, this game was made for this after all !!! <3"
 #define COREWAR_TEXT "Corewar"
 #define BEGIN_TEXT "Begin the war"
 #define HELP_TEXT "Help"
