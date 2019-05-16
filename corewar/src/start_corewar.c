@@ -73,7 +73,7 @@ bool start_corewar(champion_t **champions, list_t *memory, int dump)
     fct_t *fcts = init_fcts();
     int cycles = 0;
 
-    if (procs == NULL)
+    if (procs == NULL || !fcts)
         return (false);
     while (true) {
         if (!check_lives(champions, procs))
@@ -88,5 +88,7 @@ bool start_corewar(champion_t **champions, list_t *memory, int dump)
         nbr_cycles++;
     }
     display_winner(champions);
+    destroy_processes(procs);
+    free(fcts);
     return (true);
 }

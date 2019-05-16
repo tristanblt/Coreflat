@@ -23,5 +23,7 @@ int main(int ac, char **av)
         return (EXIT_FAIL);
     if (!start_corewar(champions, memory, dump))
         return (EXIT_FAIL);
+    destroy_champions(champions);
+    clear_list(memory);
     return (EXIT_SUCCESS);
 }
