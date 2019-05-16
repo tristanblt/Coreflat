@@ -60,6 +60,7 @@ bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 
     if (procs == NULL)
         return (false);
+    system("espeak -p 99 \"Welcome to corflat, be please to press play\"");
     while (sfRenderWindow_isOpen(cw_graph->window->window)) {
         manage_events(cw_graph);
         evolve_gradient(&cw_graph->interface_gradient);
