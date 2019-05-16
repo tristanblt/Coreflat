@@ -52,8 +52,8 @@ instruction_t *check_and_parse_instruction(char **line, int nb)
         return (NULL);
     for (int i = 0; i < MAX_ARGS_NUMBER; i++)
         instruction->label_args[i] = NULL;
-    if ((id=instruction_get_code(line, &instruction->label,
-                                instruction->label_args, nb)) == -1)
+    if ((id=instruction_get_code(line, &instruction->label, \
+instruction->label_args, nb)) == -1)
         return (NULL);
     instruction->code = id;
     if (!id)

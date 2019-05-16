@@ -57,10 +57,10 @@ void display_winner(champion_t **champions)
     for (int i = 0; champions[i]; i++) {
         biggest = true;
         for (int j = 0; champions[j]; j++)
-            champions[i]->last_live > champions[j]->last_live ?
-            biggest = false : 0;
+            champions[i]->last_live > champions[j]->last_live ?\
+biggest = false : 0;
         if (biggest) {
-            my_printf("The player %d(%s) has won.\n",
+            my_printf("The player %d(%s) has won.\n", \
 champions[i]->prog_number, champions[i]->header->prog_name);
             return;
         }

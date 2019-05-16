@@ -1,4 +1,3 @@
-
 /*
 ** EPITECH PROJECT, 2019
 ** EPITECH 2018
@@ -34,7 +33,7 @@ champion_t *add_champion(char *path, int n, int a)
     return (temp);
 }
 
-int fill_arguments(char **av, int i, int *buff)
+int check_arguments(char **av, int i, int *buff)
 {
     if (my_strcmp(av[i], "-n")) {
         *buff = my_get_nbr(av[i + 1]);
@@ -66,7 +65,7 @@ bool argument_handling(int ac, char **av, champion_t ***champions, int *dump)
             n = n + 1;
             a = -1;
         }
-        switch (fill_arguments(av, i, &buff)) {
+        switch (check_arguments(av, i, &buff)) {
         case 1: n = buff;
             i += 1;
             break;

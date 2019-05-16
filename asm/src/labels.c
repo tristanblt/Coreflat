@@ -37,7 +37,7 @@ int label_get_value(instruction_t **instructions, int label)
             !label_is_defined(instructions, instructions[label]->label_args[i]))
             return (-1);
         else if (instructions[label]->label_args[i])
-            instructions[label]->args[i] = get_byte_difference(instructions,
+            instructions[label]->args[i] = get_byte_difference(instructions, \
 instructions[label]->label_args[i], instructions[label]->cumulative_size);
     return (0);
 }
