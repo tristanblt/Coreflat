@@ -12,7 +12,7 @@ int get_ten_pow(int nb)
 {
     int pow = 1;
 
-    while (pow * 10 < nb)
+    while (pow * 10 <= nb)
         pow *= 10;
     return (pow);
 }
