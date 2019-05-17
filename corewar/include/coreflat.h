@@ -66,9 +66,10 @@ Have fun, this game was made for this after all !!! <3"
 #define PAUSE_TEXT "Pause"
 #define PLAY_TEXT "Play"
 #define SETTINGS_TEXT "Settings"
+#define EDITOR_TEXT "Editor"
 
 #define NBR_ICONS 4
-#define NBR_VIEWS 7
+#define NBR_VIEWS 8
 
 #define GAME_SPEED 5
 
@@ -82,6 +83,7 @@ typedef struct text text_t;
 typedef struct icon icon_t;
 typedef struct view view_t;
 typedef struct game_settings game_settings_t;
+typedef struct editor editor_t;
 
 /*
 ** STRUCTS
@@ -130,17 +132,23 @@ struct game_settings
     champion_t **champions;
 };
 
+struct editor
+{
+    int step;
+};
+
 struct coreflat
 {
-    window_t *window;
-    sfRectangleShape *interface;
-    sfCircleShape *buttons;
-    icon_t **icons;
-    sfColor interface_gradient;
-    text_t text;
     bool is_released;
     int current_view;
+    window_t *window;
+    icon_t **icons;
     game_settings_t g_setts;
+    editor_t edit;
+    text_t text;
+    sfRectangleShape *interface;
+    sfCircleShape *buttons;
+    sfColor interface_gradient;
     sfMusic *music;
 };
 
@@ -188,6 +196,7 @@ void draw_selector(cw_graph_t *cw_graph, sfVector2i limiter, sfVector2f pos, int
 *value);
 bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions,
 int *n);
+bool draw_editor(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);

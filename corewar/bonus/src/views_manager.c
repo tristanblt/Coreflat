@@ -30,6 +30,7 @@ view_t **views_fcts(void)
     views[4] = set_fct(4, draw_winner);
     views[5] = set_fct(5, draw_credits);
     views[6] = set_fct(6, draw_settings);
+    views[7] = set_fct(7, draw_editor);
     views[NBR_VIEWS] = NULL;
     return (views);
 }
