@@ -43,12 +43,12 @@ char **multiple_split(char *str, char *split)
             length++;
         if (is_split(str[i], split) && is_split(str[i+1], split) == 0) {
             res[j] = malloc(length + 1);
-            my_memset(res[j], '\0', length + 1);
-            my_strncpy(res[j], &str[i - length + 1], length);
+            res[j] ? my_memset(res[j], '\0', length + 1) : 0;
+            res[j] ? my_strncpy(res[j], &str[i - length + 1], length) : 0;
             length = 0;
             j++;
         }
-        if (res[j] == NULL)
+        if (j && !res[j - 1])
             return (NULL);
     }
     res[j] = NULL;
