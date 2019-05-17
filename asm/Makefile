@@ -7,7 +7,22 @@
 
 SRCPATH = src
 
+BONUSPATH	=	bonus/src
+
 NAME	=	asm
+
+NAME_BONUS	=	disasm
+
+SRC_BONUS	=	$(BONUSPATH)/main.c				\
+			$(BONUSPATH)/parse_header.c			\
+			$(BONUSPATH)/parse_instruction_from_file.c	\
+			$(BONUSPATH)/parse_instruction_and_header.c	\
+			$(BONUSPATH)/compute_instructions_sizes.c	\
+			$(BONUSPATH)/destroy_instructions.c		\
+			$(BONUSPATH)/label.c				\
+			$(BONUSPATH)/utils.c				\
+			$(BONUSPATH)/write_file.c			\
+			../src/op.c					\
 
 SRC	=	../src/op.c										\
 		$(SRCPATH)/main.c								\
@@ -33,6 +48,8 @@ SRC	=	../src/op.c										\
 
 OBJ	=	$(SRC:%.c=%.o)
 
+OBJ_BONUS	=	$(SRC_BONUS:%.c=%.o)
+
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
 		-Iinclude -I../include -g	\
 
@@ -56,12 +73,15 @@ $(NAME)	:	$(OBJ) lib
 
 clean	:
 		make clean -C $(LIB_PATH)
-		$(RM) $(OBJ)
+		$(RM) $(OBJ) $(OBJ_BONUS)
 
 fclean	:	clean
 		make fclean -C $(LIB_PATH)
-		$(RM) $(NAME)
+		$(RM) $(NAME) $(NAME_BONUS)
 
 re	:	fclean all
 
-.PHONY	:	lib clean fclean re
+bonus	:	$(OBJ_BONUS) lib
+		$(CC) -o $(NAME_BONUS) $(OBJ_BONUS) $(LDFLAGS)
+
+.PHONY	:	lib clean fclean re bonus

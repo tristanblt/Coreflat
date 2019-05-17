@@ -4,3 +4,4 @@
 *.a
 unit_tests
 asm
+disasm

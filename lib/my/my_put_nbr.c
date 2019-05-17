@@ -16,6 +16,8 @@ int my_put_nbr(int fd, int nbr)
 {
     int printed = 0;
 
+    if (nbr == -2147483648)
+        return (my_putstr(fd, "-2147483648"));
     if (nbr < 0) {
         printed += my_putchar(fd, '-');
         return (printed + my_put_nbr(fd, -nbr));
