@@ -29,7 +29,7 @@ bool instruction_is_valid(instruction_t *instruction)
     return (true);
 }
 
-char *parse_description(char c, char code)
+char *parse_description_from_file(char c, char code)
 {
     char *description = malloc((1 + MAX_ARGS_NUMBER) * sizeof(char));
 
@@ -91,10 +91,10 @@ instruction_t *parse_instruction_from_file(char *file, int *i, int size)
     if (!inst)
         return (NULL);
     *inst = (instruction_t){0};
-    if (!(inst->label_arg = malloc(sizeof(char *) * 4)))
+    if (!(inst->label_args = malloc(sizeof(char *) * 4)))
         return (NULL);
     for (int j = 0; j < 4; j++)
-        inst->label_arg[j] = NULL;
+        inst->label_args[j] = NULL;
     inst->code = file[*i];
     if (++(*i) > size)
         return (NULL);
@@ -102,7 +102,7 @@ instruction_t *parse_instruction_from_file(char *file, int *i, int size)
         free(inst);
         return (NULL);
     }
-    inst->description = parse_description(file[(*i)], inst->code);
+    inst->description = parse_description_from_file(file[(*i)], inst->code);
     if ((!has_one_argument(inst->code) && ++(*i) > size) ||
         !parse_arguments(file, i, inst, size))
         return (NULL);

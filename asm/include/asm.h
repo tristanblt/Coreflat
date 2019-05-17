@@ -36,6 +36,9 @@ typedef struct instruction instruction_t;
 
 // ENUMS
 
+#ifndef COREWAR_TYPES
+#define COREWAR_TYPES
+
 enum INSTRUCTION_CODES {
     IC_live = 1,
     IC_ld,
@@ -69,6 +72,8 @@ struct instruction {
     int cumulative_size;
 };
 
+#endif
+
 //END STRUCTS
 
 
@@ -97,8 +102,8 @@ char instruction_get_code(char **line, char **label_name, char **labels, int);
 
 // parsing
 int get_instruction_id(char *start_line);
-int *parse_args(char **line);
-char *parse_description(char **line);
+int *parse_args_from_line(char **line);
+char *parse_description_from_line(char **line);
 bool argument_is_indirect(char *argument);
 bool argument_is_register(char *argument);
 bool argument_is_direct(char *argument);

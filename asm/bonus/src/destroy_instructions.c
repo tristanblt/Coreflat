@@ -14,7 +14,7 @@ void destroy_instructions(instruction_t **insts)
         free(insts[i]->args);
         free(insts[i]->description);
         free(insts[i]->label);
-        free(insts[i]->label_arg);
+        free(insts[i]->label_args);
         free(insts[i]);
     }
     free(insts);

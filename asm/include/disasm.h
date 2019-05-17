@@ -13,6 +13,9 @@
 
 typedef struct instruction instruction_t;
 
+#ifndef COREWAR_TYPES
+#define COREWAR_TYPES
+
 enum INSTRUCTION_CODES {
     IC_live = 1,
     IC_ld,
@@ -34,14 +37,16 @@ enum INSTRUCTION_CODES {
 
 struct instruction
 {
-    int cumulative_size;
-    int size;
     int code;
     char *description;
     int *args;
-    char **label_arg;
     char *label;
+    char **label_args;
+    int size;
+    int cumulative_size;
 };
+
+#endif
 
 int reverse_bytes(unsigned int x);
 int reverse_bytes_two(unsigned int x);

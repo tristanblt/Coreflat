@@ -58,8 +58,8 @@ instruction->label_args, nb)) == -1)
     instruction->code = id;
     if (!id)
         return (instruction);
-    if ((instruction->description = parse_description(line)) == NULL ||
-        (instruction->args = parse_args(line)) == NULL)
+    if ((instruction->description = parse_description_from_line(line))==NULL ||
+        (instruction->args = parse_args_from_line(line)) == NULL)
         return (NULL);
     return (instruction);
 }

@@ -66,6 +66,9 @@ typedef struct color color_t;
 
 // ENUMS
 
+#ifndef COREWAR_TYPES
+#define COREWAR_TYPES
+
 enum INSTRUCTION_CODES {
     IC_live = 1,
     IC_ld,
@@ -89,6 +92,18 @@ enum INSTRUCTION_CODES {
 
 // STRUCTS
 
+struct instruction {
+    char code;
+    char *description;
+    int *args;
+    char *label;
+    char **label_args;
+    int size;
+    int cumulative_size;
+};
+
+#endif
+
 struct color {
     int r;
     int g;
@@ -99,13 +114,6 @@ struct color {
 struct fct {
     bool (*fct)(proc_t ***, int);
     int code;
-};
-
-struct instruction {
-    char code;
-    char *description;
-    int *args;
-    int size;
 };
 
 struct proc {

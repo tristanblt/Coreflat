@@ -15,8 +15,8 @@ void write_instruction_args(instruction_t *inst, int fd)
             my_dprintf(fd, "r");
         if (inst->description[i] == 2)
             my_putchar(fd, '%');
-        if (inst->label_arg[i])
-            my_dprintf(fd, ":%s%c", inst->label_arg[i],
+        if (inst->label_args[i])
+            my_dprintf(fd, ":%s%c", inst->label_args[i],
             inst->description[i + 1] ? ' ' : '\n');
         else
             my_dprintf(fd, "%d%c", inst->args[i],

@@ -39,6 +39,10 @@ void redirection_next(cw_graph_t *cw_graph, char *to)
         cw_graph->current_view = 7;
     if (my_strcmp(to, CHANGE_TYPE_TEXT))
         cw_graph->edit.indirect_type = !cw_graph->edit.indirect_type;
+    if (my_strcmp(to, LOAD_TEXT))
+        cw_graph->edit.step = 1;
+    if (my_strcmp(to, CREATE_CHAMPION))
+        cw_graph->edit.step = 2;
 }
 
 void redirection(cw_graph_t *cw_graph, char *to)
