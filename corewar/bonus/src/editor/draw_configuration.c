@@ -5,3 +5,9 @@
 ** draw_configuration
 */
 
+#include "coreflat.h"
+
+void draw_configuration(cw_graph_t *cw_graph)
+{
+
+}
