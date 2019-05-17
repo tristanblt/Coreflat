@@ -38,7 +38,7 @@ icon_t *init_icon(char *path)
 
 icon_t **init_icons(void)
 {
-    icon_t **icons = malloc(sizeof(icon_t *) * NBR_ICONS);
+    icon_t **icons = malloc(sizeof(icon_t *) * (NBR_ICONS + 1));
 
     if (icons == NULL)
         return (NULL);
@@ -80,11 +80,11 @@ cw_graph_t *init_cw_graph(void)
     cw_graph_t *cw_graph = malloc(sizeof(cw_graph_t));
 
     if (cw_graph == NULL)
-        return (false);
+        return (NULL);
     if ((cw_graph->interface = sfRectangleShape_create()) == NULL)
-        return (false);
+        return (NULL);
     if ((cw_graph->buttons = sfCircleShape_create()) == NULL)
-        return (false);
+        return (NULL);
     cw_graph->interface_gradient = (sfColor) {125, 150, 175, 255};
     cw_graph->text.font =
     sfFont_createFromFile("bonus/assets/fonts/montserrat.otf");
@@ -95,6 +95,6 @@ cw_graph_t *init_cw_graph(void)
     if (!(cw_graph->icons = init_icons()) || !init_g_setts(cw_graph))
         return (NULL);
     if ((cw_graph->window = init_window()) == NULL)
-        return (false);
+        return (NULL);
     return (cw_graph);
 }
