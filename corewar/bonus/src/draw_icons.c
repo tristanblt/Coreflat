@@ -79,9 +79,10 @@ void draw_all_processes(cw_graph_t *cw_graph)
     cw_graph->text.text, NULL);
 }
 
-void draw_champion_line(cw_graph_t *cw_graph, champion_t **champions, int i)
+void draw_champion_line(cw_graph_t *cw_graph, champion_t **champions,
+int i, bool dead)
 {
-    sfText_setColor(cw_graph->text.text, sfWhite);
+    sfText_setColor(cw_graph->text.text, dead ? sfRed : sfWhite);
     sfRenderWindow_drawText(cw_graph->window->window,
     cw_graph->text.text, NULL);
     sfText_setString(cw_graph->text.text, "Processes:");
@@ -118,7 +119,7 @@ void draw_icons(cw_graph_t *cw_graph, champion_t **champions)
         sfText_setPosition(cw_graph->text.text, (sfVector2f)
         {1250, 135 + i * 60});
         sfText_setCharacterSize(cw_graph->text.text, 20);
-        draw_champion_line(cw_graph, champions, i);
+        draw_champion_line(cw_graph, champions, i, champions[i]->dead);
     }
     draw_nb_cycle(cw_graph);
     draw_cycle_to_die(cw_graph);

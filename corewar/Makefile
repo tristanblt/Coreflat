@@ -40,6 +40,7 @@ SRCBONUS	=	bonus/src/main.c						\
 				bonus/src/draw_choose_next_2.c			\
 				bonus/src/draw_choose_next.c			\
 				bonus/src/draw_selector.c				\
+				bonus/src/draw_settings.c				\
 				bonus/src/launch_corewar.c				\
 
 SRC	=	src/parse_instructions.c						\

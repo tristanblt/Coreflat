@@ -23,9 +23,19 @@ void is_released(cw_graph_t *cw_graph)
 
 void manage_events(cw_graph_t *cw_graph)
 {
+    static bool is_muted = false;
+
     while (sfRenderWindow_pollEvent(cw_graph->window->window,
         &cw_graph->window->event))
         if (cw_graph->window->event.type == sfEvtClosed)
             sfRenderWindow_close(cw_graph->window->window);
+    /*sfMusic_setVolume(cw_graph->music, cw_graph->g_setts.volume * 10);
+    if (sfKeyboard_isKeyPressed(sfKeySpace)) {
+        is_muted = !is_muted;
+        if (is_muted)
+            sfMusic_pause(cw_graph->music);
+        else
+            sfMusic_play(cw_graph->music);
+    }*/
     is_released(cw_graph);
 }

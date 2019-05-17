@@ -33,6 +33,8 @@ void redirection_next(cw_graph_t *cw_graph, char *to)
         cw_graph->g_setts.corewar_launched = false;
     if (my_strcmp(to, PLAY_TEXT))
         cw_graph->g_setts.corewar_launched = true;
+    if (my_strcmp(to, SETTINGS_TEXT))
+        cw_graph->current_view = 6;
 }
 
 void redirection(cw_graph_t *cw_graph, char *to)

@@ -15,6 +15,7 @@
 #include <string.h>
 #include <SFML/System.h>
 #include <SFML/Graphics.h>
+#include <SFML/Audio.h>
 #include "corewar.h"
 
 /*
@@ -64,9 +65,10 @@ Have fun, this game was made for this after all !!! <3"
 #define NEXT_CHAMP_TEXT "Next champion"
 #define PAUSE_TEXT "Pause"
 #define PLAY_TEXT "Play"
+#define SETTINGS_TEXT "Settings"
 
 #define NBR_ICONS 4
-#define NBR_VIEWS 6
+#define NBR_VIEWS 7
 
 #define GAME_SPEED 5
 
@@ -121,10 +123,11 @@ struct game_settings
     int acceleration;
     int pass_step;
     int champ_added;
+    int volume;
     bool automatic_cps;
     sfColor color;
-    champion_t **champions;
     proc_t **procs;
+    champion_t **champions;
 };
 
 struct coreflat
@@ -138,6 +141,7 @@ struct coreflat
     bool is_released;
     int current_view;
     game_settings_t g_setts;
+    sfMusic *music;
 };
 
 /*
@@ -149,8 +153,8 @@ cw_graph_t *init_cw_graph(void);
 view_t **views_fcts(void);
 
 // starting
-bool start_graphical_corewar(champion_t **champions, list_t *memory);
 bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+bool start_graphical_corewar(champion_t **champions, list_t *memory);
 
 // instruction quiet
 bool live_flat(proc_t ***procs, int i);
@@ -158,47 +162,48 @@ bool aff_flat(proc_t ***procs, int i);
 
 
 // drawing
-void draw_interface(cw_graph_t *cw_graph, champion_t **champions);
-void evolve_gradient(sfColor *gradient);
-void draw_button(cw_graph_t *cw_graph, sfVector2f pos, sfColor color,
-char *text);
-void draw_icons(cw_graph_t *cw_graph, champion_t **champions);
+bool draw_settings(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
-void draw_pause(cw_graph_t *cw_graph);
 bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+bool draw_help(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value);
+void draw_interface(cw_graph_t *cw_graph, champion_t **champions);
+void draw_icons(cw_graph_t *cw_graph, champion_t **champions);
+void draw_choose_cyc_per_sec(cw_graph_t *cw_graph);
+void draw_choose_cyc_auto(cw_graph_t *cw_graph);
+void draw_choose_champion(cw_graph_t *cw_graph);
+void draw_ready_to_start(cw_graph_t *cw_graph);
+void draw_background(cw_graph_t *cw_graph);
+void draw_step_dots(cw_graph_t *cw_graph);
+void evolve_gradient(sfColor *gradient);
+void draw_pause(cw_graph_t *cw_graph);
 bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions,
 list_t *memory);
-bool draw_help(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
-void draw_background(cw_graph_t *cw_graph);
+void draw_button(cw_graph_t *cw_graph, sfVector2f pos, sfColor color,
+char *text);
 void draw_selector(cw_graph_t *cw_graph, sfVector2i limiter, sfVector2f pos, int
 *value);
-void draw_step_dots(cw_graph_t *cw_graph);
-void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value);
-void draw_ready_to_start(cw_graph_t *cw_graph);
-void draw_choose_cyc_auto(cw_graph_t *cw_graph);
-void draw_choose_cyc_per_sec(cw_graph_t *cw_graph);
-void draw_choose_champion(cw_graph_t *cw_graph);
 bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions,
 int *n);
 
 //events
+void redirection(cw_graph_t *cw_graph, char *to);
 void manage_events(cw_graph_t *cw_graph);
 void is_released(cw_graph_t *cw_graph);
-void redirection(cw_graph_t *cw_graph, char *to);
 
 //utils
-char *int_to_str(int nb);
+void draw_text(cw_graph_t *cw_graph, char *name, int size, sfVector2f pos);
 bool is_in_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size);
 int count_process(proc_t **procs, int i);
-void draw_text(cw_graph_t *cw_graph, char *name, int size, sfVector2f pos);
+char *int_to_str(int nb);
 
 // champions
 bool load_all_champions(char *path, champion_t ***champions);
+bool auto_pre_game(cw_graph_t *cw_graph, list_t *memory);
 champion_t *champion_dup(champion_t *dup);
 void set_proc_owner(proc_t **procs);
-bool auto_pre_game(cw_graph_t *cw_graph, list_t *memory);
 
 
 

@@ -55,9 +55,15 @@ icon_t **init_icons(void)
 
 bool init_g_setts(cw_graph_t *cw_graph)
 {
+    /*cw_graph->music = sfMusic_createFromFile("bonus/assets/sounds/music.ogg");
+    if (!cw_graph->music)
+        return (false);
+    sfMusic_setLoop(cw_graph->music, sfTrue);
+    sfMusic_play(cw_graph->music);*/
     cw_graph->current_view = 0;
     cw_graph->g_setts = (game_settings_t) {0};
     cw_graph->g_setts.nb_champions = 2;
+    cw_graph->g_setts.volume = 3;
     cw_graph->g_setts.pass_step = 1;
     cw_graph->g_setts.cycles_per_second = 1;
     cw_graph->g_setts.acceleration = 1;
@@ -65,7 +71,7 @@ bool init_g_setts(cw_graph_t *cw_graph)
     if (cw_graph->g_setts.champions == NULL)
         return (false);
     cw_graph->g_setts.champions[0] = NULL;
-    return (false);
+    return (true);
 }
 
 cw_graph_t *init_cw_graph(void)
@@ -73,8 +79,6 @@ cw_graph_t *init_cw_graph(void)
     cw_graph_t *cw_graph = malloc(sizeof(cw_graph_t));
 
     if (cw_graph == NULL)
-        return (false);
-    if ((cw_graph->window = init_window()) == NULL)
         return (false);
     if ((cw_graph->interface = sfRectangleShape_create()) == NULL)
         return (false);
@@ -87,8 +91,9 @@ cw_graph_t *init_cw_graph(void)
     if (cw_graph->text.font == NULL || cw_graph->text.text == NULL)
         return (NULL);
     sfText_setFont(cw_graph->text.text, cw_graph->text.font);
-    if ((cw_graph->icons = init_icons()) == NULL)
+    if (!(cw_graph->icons = init_icons()) || !init_g_setts(cw_graph))
         return (NULL);
-    init_g_setts(cw_graph);
+    if ((cw_graph->window = init_window()) == NULL)
+        return (false);
     return (cw_graph);
 }
