@@ -176,7 +176,7 @@ bool aff_flat(proc_t ***procs, int i);
 // drawing
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
-void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str, int size);
+void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *);
 bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_help(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
