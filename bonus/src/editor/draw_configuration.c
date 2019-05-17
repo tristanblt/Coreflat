@@ -27,7 +27,7 @@ bool draw_create_champion(cw_graph_t *cw_graph)
             return (false);
     draw_background(cw_graph);
     draw_input_bar(cw_graph, (sfVector2f){500, 400},
-    cw_graph->edit.header->prog_name, 20);
+    cw_graph->edit.header->prog_name);
     if (cw_graph->edit.header->prog_name[0])
         draw_button(cw_graph, (sfVector2f){700, 500}, color, "Edit Champion");
     return (true);
