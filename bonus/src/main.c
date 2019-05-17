@@ -16,7 +16,7 @@ int main(void)
         return (EXIT_FAIL);
     srand((long) champions);
     champions[0] = NULL;
-    if (!load_all_champions("bonus/champions/", &champions))
+    if (!load_all_champions("champions/", &champions))
         return (EXIT_FAIL);
     if (!start_graphical_corewar(champions, memory))
         return (EXIT_FAIL);

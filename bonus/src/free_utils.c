@@ -17,7 +17,6 @@ void free_end(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     free(cw_graph->window);
     sfRectangleShape_destroy(cw_graph->interface);
     sfCircleShape_destroy(cw_graph->buttons);
-    destroy_champions(cw_graph->g_setts.champions);
     destroy_champions(champions);
     for (int i = 0; cw_graph->icons[i]; i++) {
         sfSprite_destroy(cw_graph->icons[i]->sprite);
