@@ -67,6 +67,8 @@ Have fun, this game was made for this after all !!! <3"
 #define PLAY_TEXT "Play"
 #define SETTINGS_TEXT "Settings"
 #define EDITOR_TEXT "Editor"
+#define LOAD_TEXT "Load Champion"
+#define CREATE_CHAMPION "Create Champion"
 
 #define NBR_ICONS 4
 #define NBR_VIEWS 8
@@ -135,6 +137,8 @@ struct game_settings
 struct editor
 {
     int step;
+    instruction_t **instructions;
+    header_t *header;
 };
 
 struct coreflat

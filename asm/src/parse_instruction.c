@@ -63,7 +63,7 @@ void clean_comments(char *line)
     }
 }
 
-int *parse_args(char **line)
+int *parse_args_from_line(char **line)
 {
     int start = 1 + is_a_label(line[0]);
     int n_args = my_argslen(line) - start;
@@ -84,7 +84,7 @@ int *parse_args(char **line)
     return (args);
 }
 
-char *parse_description(char **line)
+char *parse_description_from_line(char **line)
 {
     int start = 1 + is_a_label(line[0]);
     int n_args = my_argslen(line) - start;
