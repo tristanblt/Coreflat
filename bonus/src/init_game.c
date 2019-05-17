@@ -81,6 +81,7 @@ cw_graph_t *init_cw_graph(void)
 
     if (cw_graph == NULL)
         return (NULL);
+    *cw_graph = (cw_graph_t){0};
     if ((cw_graph->interface = sfRectangleShape_create()) == NULL)
         return (NULL);
     if ((cw_graph->buttons = sfCircleShape_create()) == NULL)
