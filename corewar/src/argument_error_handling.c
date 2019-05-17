@@ -29,7 +29,7 @@ bool argument_error_handling(int ac, char **av)
     int fd = 0;
 
     for (int i = 1; i < ac; i++) {
-        if (end_of_file(av[i], ".cor") && (fd = open(av[i], O_RDONLY)) == -1) {
+        if (end_of_file(av[i], ".cor") && (fd = open(av[i], O_RDONLY)) != -1) {
             close(fd);
             champions++;
             expected = false;
