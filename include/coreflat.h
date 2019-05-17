@@ -179,7 +179,7 @@ bool aff_flat(proc_t ***procs, int i);
 // drawing
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
-void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str, int size);
+void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str);
 bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_help(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
@@ -210,6 +210,7 @@ void draw_editor_interface(cw_graph_t *cw_graph);
 void draw_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size, sfColor color);
 void draw_registers(cw_graph_t *cw_graph);
 void draw_all_instructions(cw_graph_t *cw_graph);
+void draw_configuration(cw_graph_t *cw_graph);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
