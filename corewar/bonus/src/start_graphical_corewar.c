@@ -15,5 +15,6 @@ bool start_graphical_corewar(champion_t **champions, list_t *memory)
         return (NULL);
     if (!game_loop(cw_graph, champions, memory))
         return (false);
+    free_end(cw_graph, champions, memory);
     return (true);
 }

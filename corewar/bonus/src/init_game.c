@@ -55,11 +55,11 @@ icon_t **init_icons(void)
 
 bool init_g_setts(cw_graph_t *cw_graph)
 {
-    /*cw_graph->music = sfMusic_createFromFile("bonus/assets/sounds/music.ogg");
+    cw_graph->music = sfMusic_createFromFile("bonus/assets/sounds/music.ogg");
     if (!cw_graph->music)
         return (false);
     sfMusic_setLoop(cw_graph->music, sfTrue);
-    sfMusic_play(cw_graph->music);*/
+    sfMusic_play(cw_graph->music);
     cw_graph->current_view = 0;
     cw_graph->g_setts = (game_settings_t) {0};
     cw_graph->g_setts.nb_champions = 2;

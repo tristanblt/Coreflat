@@ -162,7 +162,6 @@ bool aff_flat(proc_t ***procs, int i);
 
 
 // drawing
-bool draw_settings(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
@@ -179,6 +178,8 @@ void draw_background(cw_graph_t *cw_graph);
 void draw_step_dots(cw_graph_t *cw_graph);
 void evolve_gradient(sfColor *gradient);
 void draw_pause(cw_graph_t *cw_graph);
+bool draw_settings(cw_graph_t *cw_graph, champion_t **champions,
+list_t *memory);
 bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions,
 list_t *memory);
 void draw_button(cw_graph_t *cw_graph, sfVector2f pos, sfColor color,
@@ -198,6 +199,7 @@ void draw_text(cw_graph_t *cw_graph, char *name, int size, sfVector2f pos);
 bool is_in_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size);
 int count_process(proc_t **procs, int i);
 char *int_to_str(int nb);
+void free_end(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 
 // champions
 bool load_all_champions(char *path, champion_t ***champions);
