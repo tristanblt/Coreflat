@@ -46,13 +46,13 @@ All code is made with <3")
 FIRST :\n       \
 Press the fancy play button\n\n\
 SECOND :\n       \
-Choose the number of warrior/champion you \
+Choose the number of warriors/champions you \
 will need for the battle\n\n\
 THEN :\n       \
 You can either create your own champion or\n       \
-choose one of our best contestant \
+choose one of our best contestants \
 (I suggest you choose one of ours)\n\n\n\
-Last but not the least :\n       \
+Last but not least :\n       \
 Have fun, this game was made for this after all !!! <3"
 #define COREWAR_TEXT "Corewar"
 #define BEGIN_TEXT "Begin the war"

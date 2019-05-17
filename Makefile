@@ -86,7 +86,7 @@ SRC_COREFLAT =	bonus/src/main.c										\
 OBJ	=	$(SRC_COREFLAT:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-			-Icorewar/include -Iinclude		\
+			-Iinclude -Icorewar/include		\
 
 SFMLFLAGS = -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
 
