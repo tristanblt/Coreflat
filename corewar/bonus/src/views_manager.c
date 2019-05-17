@@ -7,7 +7,8 @@
 
 #include "coreflat.h"
 
-view_t *set_fct(int view, bool (*fct)(cw_graph_t *cw_graph, champion_t **champions, list_t *memory))
+view_t *set_fct(int view, bool (*fct)(cw_graph_t *cw_graph,
+champion_t **champions, list_t *memory))
 {
     view_t *init = malloc(sizeof(view_t));
 

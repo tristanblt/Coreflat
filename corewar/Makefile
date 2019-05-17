@@ -35,6 +35,12 @@ SRCBONUS	=	bonus/src/main.c						\
 				bonus/src/redirections.c				\
 				bonus/src/utils.c						\
 				bonus/src/load_all_champions.c			\
+				bonus/src/auto_pre_game.c				\
+				bonus/src/draw_checkbox.c				\
+				bonus/src/draw_choose_next_2.c			\
+				bonus/src/draw_choose_next.c			\
+				bonus/src/draw_selector.c				\
+				bonus/src/launch_corewar.c				\
 
 SRC	=	src/parse_instructions.c						\
 		src/parse_header.c								\

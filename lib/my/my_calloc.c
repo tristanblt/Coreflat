@@ -11,14 +11,14 @@ void *my_memset(void *alloced, char c, int count)
 {
     char *start;
 
-	if (alloced == NULL)
-		return (NULL);
-	start = alloced;
-	for (; count; count--) {
-		*start = c;
-		start++;
-	}
-	return (alloced);
+    if (alloced == NULL)
+        return (NULL);
+    start = alloced;
+    for (; count; count--) {
+        *start = c;
+        start++;
+    }
+    return (alloced);
 }
 
 void *my_calloc(int count, int size)
@@ -26,5 +26,5 @@ void *my_calloc(int count, int size)
     void *alloced = malloc(count * size);
 
     my_memset(alloced, 0, count);
-    return(alloced);
+    return (alloced);
 }

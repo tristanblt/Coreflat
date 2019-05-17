@@ -12,9 +12,10 @@ int main(void)
     champion_t **champions = malloc(sizeof(champion_t *));
     list_t *memory = create_list();
 
-    champions[0] = NULL;
     if (memory == NULL || !champions)
         return (EXIT_FAIL);
+    srand((long) champions);
+    champions[0] = NULL;
     if (!load_all_champions("bonus/champions/", &champions))
         return (EXIT_FAIL);
     if (!start_graphical_corewar(champions, memory))

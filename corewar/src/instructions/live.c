@@ -33,3 +33,18 @@ bool live(proc_t ***procs, int i)
     }
     return (true);
 }
+
+bool live_flat(proc_t ***procs, int i)
+{
+    int nb = procs[0][i]->instruction->args[0];
+    char *name = get_champ_name(*procs, nb);
+
+    if (!name)
+        return (true);
+    nbr_lives++;
+    if (nbr_lives > NBR_LIVE) {
+        cycle_to_die -= CYCLE_DELTA;
+        nbr_lives = 0;
+    }
+    return (true);
+}

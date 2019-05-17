@@ -24,22 +24,22 @@
 #define FRAMERATE_LIMIT 120
 #define WINDOW_NAME "CoreFlat"
 
-#define BACKGROUND_COLOR (sfColor) {20, 20, 20, 255}
-#define SUBWINDOW_COLOR (sfColor) {30, 30, 30, 255}
-#define SELECTOR_COLOR (sfColor) {70, 70, 70, 255}
-#define SELECTOR_COLOR_HOVER (sfColor) {50, 50, 50, 255}
-#define SELECTOR_COLOR_CLICKED (sfColor) {40, 40, 40, 255}
-#define SELECTOR_MIDDLE_COLOR (sfColor) {60, 60, 60, 255}
+#define BACKGROUND_COLOR ((sfColor){20, 20, 20, 255})
+#define SUBWINDOW_COLOR ((sfColor){30, 30, 30, 255})
+#define SELECTOR_COLOR ((sfColor){70, 70, 70, 255})
+#define SELECTOR_COLOR_HOVE ((sfColor){50, 50, 50, 255})
+#define SELECTOR_COLOR_CLICKED ((sfColor){40, 40, 40, 255})
+#define SELECTOR_MIDDLE_COLOR ((sfColor){60, 60, 60, 255})
 
 #define DRAW_CREDITS_TEXT ("\
 Development:\n    \
 -  Paul BUGEON\n    \
--  Yoann LE espace PECH\n    \
+-  Yoann LE PECH\n    \
 -  Jamil ETTEL\n    \
 -  Tristan BOUILLOT\n\
 \n\
-Music:\n\
-    - Benjamin DESIGAUX (BROME)\n\n\
+Music:\n    \
+- Benjamin DESIGAUX (BROME)\n\n\
 All code is made with <3")
 #define DRAW_HELP_TEXT "To play THE Corewar :\n\n\n\
 FIRST :\n       \
@@ -59,11 +59,16 @@ Have fun, this game was made for this after all !!! <3"
 #define CREDITS_TEXT "Credits"
 #define EXIT_TEXT "Exit"
 #define MAIN_MENU_TEXT "Main menu"
+#define MAIN_MENU_RES_TEXT "Main Menu"
 #define NEXT_TEXT "Next"
 #define NEXT_CHAMP_TEXT "Next champion"
+#define PAUSE_TEXT "Pause"
+#define PLAY_TEXT "Play"
 
-#define NBR_ICONS 3
+#define NBR_ICONS 4
 #define NBR_VIEWS 6
+
+#define GAME_SPEED 5
 
 /*
 ** TYPEDEFS
@@ -102,7 +107,8 @@ struct icon
 struct view
 {
     int view;
-    bool (*fct)(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+    bool (*fct)(cw_graph_t *cw_graph, champion_t **champions,
+    list_t *memory);
 };
 
 struct game_settings
@@ -112,7 +118,9 @@ struct game_settings
     int corewar_launched;
     int nb_champions;
     int cycles_per_second;
+    int acceleration;
     int pass_step;
+    int champ_added;
     bool automatic_cps;
     sfColor color;
     champion_t **champions;
@@ -144,19 +152,36 @@ view_t **views_fcts(void);
 bool start_graphical_corewar(champion_t **champions, list_t *memory);
 bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 
+// instruction quiet
+bool live_flat(proc_t ***procs, int i);
+bool aff_flat(proc_t ***procs, int i);
+
+
 // drawing
 void draw_interface(cw_graph_t *cw_graph, champion_t **champions);
 void evolve_gradient(sfColor *gradient);
-void draw_button(cw_graph_t *cw_graph, sfVector2f pos, sfColor color, char *text);
+void draw_button(cw_graph_t *cw_graph, sfVector2f pos, sfColor color,
+char *text);
 void draw_icons(cw_graph_t *cw_graph, champion_t **champions);
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 void draw_pause(cw_graph_t *cw_graph);
 bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
-bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions,
+list_t *memory);
 bool draw_help(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 void draw_background(cw_graph_t *cw_graph);
+void draw_selector(cw_graph_t *cw_graph, sfVector2i limiter, sfVector2f pos, int
+*value);
+void draw_step_dots(cw_graph_t *cw_graph);
+void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value);
+void draw_ready_to_start(cw_graph_t *cw_graph);
+void draw_choose_cyc_auto(cw_graph_t *cw_graph);
+void draw_choose_cyc_per_sec(cw_graph_t *cw_graph);
+void draw_choose_champion(cw_graph_t *cw_graph);
+bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions,
+int *n);
 
 //events
 void manage_events(cw_graph_t *cw_graph);
@@ -166,10 +191,14 @@ void redirection(cw_graph_t *cw_graph, char *to);
 //utils
 char *int_to_str(int nb);
 bool is_in_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size);
+int count_process(proc_t **procs, int i);
+void draw_text(cw_graph_t *cw_graph, char *name, int size, sfVector2f pos);
 
 // champions
 bool load_all_champions(char *path, champion_t ***champions);
 champion_t *champion_dup(champion_t *dup);
+void set_proc_owner(proc_t **procs);
+bool auto_pre_game(cw_graph_t *cw_graph, list_t *memory);
 
 
 

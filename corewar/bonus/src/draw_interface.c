@@ -53,9 +53,9 @@ void draw_subwindows(cw_graph_t *cw_graph)
 
 void draw_buttons(cw_graph_t *cw_graph)
 {
-    //char *text = !cw_graph->current_view ? CREDITS_TEXT : COREWAR_TEXT;
+    char *text = cw_graph->g_setts.corewar_launched ? PAUSE_TEXT : PLAY_TEXT;
 
-    //draw_button(cw_graph, (sfVector2f){1400, 15}, BACKGROUND_COLOR, text);
+    draw_button(cw_graph, (sfVector2f){1400, 15}, BACKGROUND_COLOR, text);
 }
 
 void draw_interface(cw_graph_t *cw_graph, champion_t **champions)

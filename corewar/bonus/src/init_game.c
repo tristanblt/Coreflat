@@ -45,11 +45,27 @@ icon_t **init_icons(void)
     icons[0] = init_icon("bonus/assets/icons/trophy.png");
     icons[1] = init_icon("bonus/assets/icons/cemetery.png");
     icons[2] = init_icon("bonus/assets/icons/round-right-arrow.png");
+    icons[3] = init_icon("bonus/assets/icons/settings.png");
     icons[NBR_ICONS] = NULL;
     for (int i = 0; icons[i]; i++)
         if (icons[i] == NULL)
             return (NULL);
     return (icons);
+}
+
+bool init_g_setts(cw_graph_t *cw_graph)
+{
+    cw_graph->current_view = 0;
+    cw_graph->g_setts = (game_settings_t) {0};
+    cw_graph->g_setts.nb_champions = 2;
+    cw_graph->g_setts.pass_step = 1;
+    cw_graph->g_setts.cycles_per_second = 1;
+    cw_graph->g_setts.acceleration = 1;
+    cw_graph->g_setts.champions = malloc(sizeof(champion_t *));
+    if (cw_graph->g_setts.champions == NULL)
+        return (false);
+    cw_graph->g_setts.champions[0] = NULL;
+    return (false);
 }
 
 cw_graph_t *init_cw_graph(void)
@@ -73,13 +89,6 @@ cw_graph_t *init_cw_graph(void)
     sfText_setFont(cw_graph->text.text, cw_graph->text.font);
     if ((cw_graph->icons = init_icons()) == NULL)
         return (NULL);
-    cw_graph->current_view = 0;
-    cw_graph->g_setts = (game_settings_t) {0};
-    cw_graph->g_setts.nb_champions = 2;
-    cw_graph->g_setts.pass_step = 1;
-    cw_graph->g_setts.champions = malloc(sizeof(champion_t *));
-    if (cw_graph->g_setts.champions == NULL)
-        return (NULL);
-    cw_graph->g_setts.champions[0] = NULL;
+    init_g_setts(cw_graph);
     return (cw_graph);
 }

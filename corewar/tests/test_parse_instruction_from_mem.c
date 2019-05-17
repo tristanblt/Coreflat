@@ -83,7 +83,7 @@ Test(argument_handling, basic_test)
     int dump = -1;
     int ac = 3;
     char *av[] = {"./corewar", "tests/files/test.cor",
-"tests/files/test.cor", NULL};
+        "tests/files/test.cor", NULL};
 
     champs[0] = 0;
     cr_assert(argument_handling(ac, av, &champs, &dump));
@@ -95,7 +95,7 @@ Test(argument_handling, more_arguments)
     int dump = -1;
     int ac = 13;
     char *av[] = {"./corewar", "-n", "10", "-a", "101", "tests/files/test.cor",
-"-a", "6000", "-n", "1000", "tests/files/test.cor", "-dump", "12", NULL};
+        "-a", "6000", "-n", "100", "tests/files/test.cor", "-dump", "12", NULL};
 
     champs[0] = 0;
     cr_assert(argument_handling(ac, av, &champs, &dump));

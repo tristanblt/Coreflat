@@ -90,10 +90,10 @@ enum INSTRUCTION_CODES {
 // STRUCTS
 
 struct color {
-    char r;
-    char g;
-    char b;
-    char a;
+    int r;
+    int g;
+    int b;
+    int a;
 };
 
 struct fct {

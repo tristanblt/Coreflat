@@ -7,7 +7,8 @@
 
 #include "coreflat.h"
 
-bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
+bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions,
+list_t *memory)
 {
     champions = (void *)champions;
     memory = (void *)memory;

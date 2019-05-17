@@ -7,6 +7,7 @@
 
 #include "corewar.h"
 #include "my.h"
+#include "time.h"
 
 int nbr_cycles = 0;
 
@@ -85,7 +86,6 @@ bool start_corewar(champion_t **champions, list_t *memory, int dump)
             break;
         }
         cycles++;
-        nbr_cycles++;
     }
     display_winner(champions);
     destroy_processes(procs);

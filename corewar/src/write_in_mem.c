@@ -36,6 +36,11 @@ bool load_champion_instructions_in_mem(champion_t **champ, list_t *mem)
     int champ_count = 0;
     int offset = 0;
 
+    for (int i = 0; i < MEM_SIZE; i++) {
+        mem->owner = 0;
+        mem->val = 0;
+        mem = mem->next;
+    }
     for (; champ[champ_count]; champ_count++);
     offset = MEM_SIZE / champ_count;
     for (int i = 0; champ[i]; i++)

@@ -19,6 +19,7 @@ bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfRenderWindow_drawText(cw_graph->window->window,
     cw_graph->text.text, NULL);
-    draw_button(cw_graph, (sfVector2f) {250, 600}, cw_graph->interface_gradient, MAIN_MENU_TEXT);
+    draw_button(cw_graph, (sfVector2f) {250, 600}, cw_graph->interface_gradient,
+    MAIN_MENU_TEXT);
     return (true);
 }
