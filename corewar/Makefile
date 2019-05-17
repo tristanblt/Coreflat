@@ -45,6 +45,12 @@ SRCBONUS	=	bonus/src/main.c						\
 				bonus/src/free_utils.c					\
 				bonus/src/editor/draw_editor.c			\
 				bonus/src/editor/draw_configuration.c	\
+				bonus/src/editor/draw_interface.c		\
+				bonus/src/editor/draw_input_number.c	\
+				bonus/src/editor/instruction_manager.c	\
+				bonus/src/editor/label_manager.c		\
+				bonus/src/editor/register_manager.c		\
+				bonus/src/editor/save_to_file.c			\
 
 SRC	=	src/parse_instructions.c						\
 		src/parse_header.c								\
