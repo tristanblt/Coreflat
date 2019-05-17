@@ -66,7 +66,7 @@ void fill_label_args(instruction_t **insts)
     for (int i = 0; insts[i]; i++)
         for (int j = 0; insts[i]->description[j]; j++) {
             insts[i]->description[j] != 1 ?
-                insts[i]->label_arg[j] = get_label(insts[i]->args[j],
-insts[i]->cumulative_size, insts) : 0;
+            insts[i]->label_arg[j] = get_label(insts[i]->args[j],
+        insts[i]->cumulative_size, insts) : 0;
         }
 }

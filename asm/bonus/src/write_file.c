@@ -17,10 +17,10 @@ void write_instruction_args(instruction_t *inst, int fd)
             my_putchar(fd, '%');
         if (inst->label_arg[i])
             my_dprintf(fd, ":%s%c", inst->label_arg[i],
-inst->description[i + 1] ? ' ' : '\n');
+            inst->description[i + 1] ? ' ' : '\n');
         else
             my_dprintf(fd, "%d%c", inst->args[i],
-inst->description[i + 1] ? ' ' : '\n');
+            inst->description[i + 1] ? ' ' : '\n');
     }
 }
 

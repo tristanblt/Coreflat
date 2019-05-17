@@ -15,9 +15,9 @@ void compute_instructions_sizes(instruction_t **insts)
             insts[i]->size = 1;
         for (int j = 0; insts[i]->description[j]; j++)
             insts[i]->size += get_arg_size(insts[i]->description[j],
-insts[i]->code);
+            insts[i]->code);
         if (i)
             insts[i]->cumulative_size=insts[i-1]->cumulative_size
-                +insts[i-1]->size;
+            +insts[i-1]->size;
     }
 }

@@ -36,7 +36,7 @@ instruction_t ***insts, char *filepath)
         return (NULL);
     for (int i = 0; i < (*header)->prog_size;) {
         if (!(to_add = parse_instruction_from_file(file_content, &i,
-(*header)->prog_size)))
+            (*header)->prog_size)))
             return (NULL);
         if (!(*insts = push_instruction(*insts, to_add)))
             return (NULL);
