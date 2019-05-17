@@ -67,6 +67,8 @@ Have fun, this game was made for this after all !!! <3"
 #define PLAY_TEXT "Play"
 #define SETTINGS_TEXT "Settings"
 #define EDITOR_TEXT "Editor"
+#define CHANGE_TYPE_TEXT "Change type"
+#define EDIT_CHAMP_TEXT "Edit Champion"
 
 #define NBR_ICONS 4
 #define NBR_VIEWS 8
@@ -135,6 +137,7 @@ struct game_settings
 struct editor
 {
     int step;
+    bool indirect_type;
 };
 
 struct coreflat
@@ -198,6 +201,9 @@ bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions,
 int *n);
 bool draw_editor(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 void draw_editor_interface(cw_graph_t *cw_graph);
+void draw_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size, sfColor color);
+void draw_registers(cw_graph_t *cw_graph);
+void draw_all_instructions(cw_graph_t *cw_graph);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
