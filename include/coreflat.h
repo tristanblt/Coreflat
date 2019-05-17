@@ -176,12 +176,14 @@ bool aff_flat(proc_t ***procs, int i);
 // drawing
 bool draw_corewar(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_credits(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str, int size);
 bool draw_winner(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_choose(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 bool draw_help(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 void draw_checkbox(cw_graph_t *cw_graph, sfVector2f pos, bool *value);
 void draw_interface(cw_graph_t *cw_graph, champion_t **champions);
 void draw_icons(cw_graph_t *cw_graph, champion_t **champions);
+void update_input(cw_graph_t *cw_graph, char *str, int size);
 void draw_choose_cyc_per_sec(cw_graph_t *cw_graph);
 void draw_choose_cyc_auto(cw_graph_t *cw_graph);
 void draw_choose_champion(cw_graph_t *cw_graph);

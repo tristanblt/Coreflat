@@ -7,19 +7,29 @@
 
 #include "coreflat.h"
 
-champion_t *create_empty_champion(void)
+bool fill_editor_with_empty_champion(editor_t *editor)
 {
+    editor->header = malloc(sizeof(header_t));
+    editor->instructions = malloc(sizeof(instruction_t *));
+    if (!editor->header || !editor->instructions)
+        return (false);
+    *editor->header = (header_t){0};
+    *editor->instructions = NULL;
+    return (true);
 }
 
 bool draw_create_champion(cw_graph_t *cw_graph)
 {
-    header_t *header = malloc(sizeof(header_t));
-    instruction_t **insts = malloc(sizeof(instruction_t *));
+    sfColor color = cw_graph->interface_gradient;
 
-    if (!header || !insts)
-        return (false);
-    *header = (header_t){0};
-    insts[0] = NULL;
+    if (!cw_graph->edit.header)
+        if (!fill_editor_with_empty_champion(&cw_graph->edit))
+            return (false);
+    draw_background(cw_graph);
+    draw_input_bar(cw_graph, (sfVector2f){500, 400},
+    cw_graph->edit.header->prog_name, 20);
+    if (cw_graph->edit.header->prog_name[0])
+        draw_button(cw_graph, (sfVector2f){700, 500}, color, "Edit Champion");
     return (true);
 }
 
