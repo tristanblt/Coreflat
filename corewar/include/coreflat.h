@@ -197,6 +197,7 @@ void draw_selector(cw_graph_t *cw_graph, sfVector2i limiter, sfVector2f pos, int
 bool draw_champions_settings(cw_graph_t *cw_graph, champion_t **champions,
 int *n);
 bool draw_editor(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
+void draw_editor_interface(cw_graph_t *cw_graph);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
