@@ -8,7 +8,8 @@
 #include "my.h"
 #include "corewar.h"
 
-instruction_t **push_instruction_corewar(instruction_t **arr, instruction_t *add)
+instruction_t **push_instruction_corewar(instruction_t **arr,
+instruction_t *add)
 {
     instruction_t **new_arr = NULL;
     int nb_elem_arr;
