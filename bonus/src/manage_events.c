@@ -30,6 +30,8 @@ void manage_events(cw_graph_t *cw_graph)
         if (cw_graph->current_view == 7 && cw_graph->edit.step == 2 &&
             cw_graph->window->event.type == sfEvtKeyPressed)
             update_input(cw_graph, cw_graph->edit.header->prog_name, 28);
+        if (cw_graph->window->event.type == sfEvtMouseWheelScrolled)
+            cw_graph->edit.cursor += 13 * cw_graph->window->event.mouseWheelScroll.delta;
     }
     sfMusic_setVolume(cw_graph->music, cw_graph->g_setts.volume * 10);
     is_released(cw_graph);

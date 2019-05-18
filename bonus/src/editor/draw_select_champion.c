@@ -25,6 +25,8 @@ bool disasm_champion(cw_graph_t *cw_graph, champion_t **champions)
         if (!(cw_graph->edit.instructions = push_instruction(cw_graph->edit.instructions, to_add)))
             return (false);
     }
+    compute_instructions_sizes(cw_graph->edit.instructions);
+    fill_label_args(cw_graph->edit.instructions);
     cw_graph->edit.step = 3;
     return (true);
 }

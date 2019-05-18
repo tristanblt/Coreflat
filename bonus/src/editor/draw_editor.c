@@ -17,10 +17,14 @@ void draw_input_dir_ind(cw_graph_t *cw_graph)
 
 void draw_edition(cw_graph_t *cw_graph)
 {
+    draw_background(cw_graph);
+    draw_rect(cw_graph, (sfVector2f) {30, 160}, (sfVector2f) {500, 710},
+    SUBWINDOW_COLOR);
+    draw_champ_instructions(cw_graph);
     draw_editor_interface(cw_graph);
     draw_all_instructions(cw_graph);
-    draw_champ_instructions(cw_graph);
     draw_registers(cw_graph);
+    draw_labels(cw_graph);
     draw_input_dir_ind(cw_graph);
 }
 

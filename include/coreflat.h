@@ -144,6 +144,7 @@ struct editor
     int selected;
     instruction_t **instructions;
     header_t *header;
+    int cursor;
 };
 
 struct coreflat

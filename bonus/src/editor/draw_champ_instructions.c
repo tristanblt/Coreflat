@@ -7,64 +7,57 @@
 
 #include "coreflat.h"
 
-void display_hover_instruction(cw_graph_t *cw_graph, int i)
+void draw_args_instr(cw_graph_t *cw_graph, int i,
+instruction_t *instruction)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *)cw_graph->window->window);
     int dec = 0;
 
-    draw_rect(cw_graph, (sfVector2f) {(int)mouse.x, (int)mouse.y},
-    (sfVector2f) {150, 180}, SELECTOR_COLOR);
-    draw_text(cw_graph, op_tab[i].mnemonique, 40,
-    (sfVector2f) {(int)mouse.x + 20, (int)mouse.y + 10});
     for (int j = 0; j < op_tab[i].nbr_args; j++) {
-        if (op_tab[i].type[j] & T_REG) {
+        if (op_tab[instruction->code - 1].type[j] & T_REG) {
             draw_text(cw_graph, "Reg", 16,
-            (sfVector2f) {(int)mouse.x + 20 + dec * 40, (int)mouse.y + 70 + j * 30});
+            (sfVector2f) {180 + dec * 40 + j * 100, 170 + i * 39.3 + cw_graph->edit.cursor});
             dec++;
         }
-        if (op_tab[i].type[j] & T_DIR) {
+        if (op_tab[instruction->code - 1].type[j] & T_DIR) {
             draw_text(cw_graph, "Dir", 16,
-            (sfVector2f) {(int)mouse.x + 20 + dec * 40, (int)mouse.y + 70 + j * 30});
+            (sfVector2f) {180 + dec * 40 + j * 100, 170 + i * 39.3 + cw_graph->edit.cursor});
             dec++;
         }
-        if (op_tab[i].type[j] & T_IND) {
+        if (op_tab[instruction->code - 1].type[j] & T_IND) {
             draw_text(cw_graph, "Ind", 16,
-            (sfVector2f) {(int)mouse.x + 20 + dec * 35, (int)mouse.y + 70 + j * 30});
+            (sfVector2f) {180 + dec * 35 + j * 100, 170 + i * 39.3 + cw_graph->edit.cursor});
             dec++;
         }
         dec = 0;
     }
 }
 
-void draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)
+void draw_one_instruction_champ(cw_graph_t *cw_graph, int i,
+instruction_t *instruction)
 {
     sfColor color = SUBWINDOW_COLOR;
 
-    if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
+    /*if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
     (sfVector2f) {430, 39.3}) && cw_graph->is_released)
-        printf("ADDING INSTRUCTION \"%s\"\n", op_tab[i].mnemonique);
+        printf("TOUCH INSTRUCTION \"%s\"\n", op_tab[i].mnemonique);*/
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
-    (sfVector2f){1140, 30 + i * 39.3}, (sfVector2f) {430, 39.3}))
+    (sfVector2f){30, 160 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f) {500, 39.3}))
         color = SELECTOR_COLOR_CLICKED;
-    else if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
-    (sfVector2f) {430, 39.3})) {
+    else if (is_in_rect(cw_graph, (sfVector2f){30, 160 + i * 39.3 + cw_graph->edit.cursor},
+    (sfVector2f) {500, 39.3})) {
         color = SELECTOR_COLOR_HOVE;
-        *hover = i;
     }
     else
         color = SUBWINDOW_COLOR;
-    draw_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
-    (sfVector2f) {430, 39.3}, color);
-    draw_text(cw_graph, op_tab[i].mnemonique, 20,
-    (sfVector2f){1200, 37 + i * 39.3});
+    draw_rect(cw_graph, (sfVector2f){30, 160 + i * 39.3 + cw_graph->edit.cursor},
+    (sfVector2f) {500, 39.3}, color);
+    draw_text(cw_graph, op_tab[instruction->code - 1].mnemonique, 20,
+    (sfVector2f){60, 165 + i * 39.3 + cw_graph->edit.cursor});
+    draw_args_instr(cw_graph, i, instruction);
 }
 
 void draw_champ_instructions(cw_graph_t *cw_graph)
 {
-    int hover = -1;
-
-    for (int i = 0; op_tab[i].code; i++)
-        draw_one_instruction(cw_graph, i, &hover);
-    if (hover != -1)
-        display_hover_instruction(cw_graph, hover);
+    for (int i = 0; cw_graph->edit.instructions[i]; i++)
+        draw_one_instruction_champ(cw_graph, i, cw_graph->edit.instructions[i]);
 }

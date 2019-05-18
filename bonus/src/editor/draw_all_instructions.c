@@ -8,7 +8,7 @@
 #include "coreflat.h"
 #include "my.h"
 
-void display_hover_instruction_champ(cw_graph_t *cw_graph, int i)
+void display_hover_instruction(cw_graph_t *cw_graph, int i)
 {
     sfVector2i mouse = sfMouse_getPosition((sfWindow *)cw_graph->window->window);
     int dec = 0;
@@ -37,7 +37,7 @@ void display_hover_instruction_champ(cw_graph_t *cw_graph, int i)
     }
 }
 
-void draw_one_instruction_champ(cw_graph_t *cw_graph, int i, int *hover)
+void draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)
 {
     sfColor color = SUBWINDOW_COLOR;
 

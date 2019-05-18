@@ -20,8 +20,6 @@ void draw_editor_subwindows(cw_graph_t *cw_graph)
 {
     draw_rect(cw_graph, (sfVector2f) {30, 30}, (sfVector2f) {500, 100},
     SUBWINDOW_COLOR);
-    draw_rect(cw_graph, (sfVector2f) {30, 160}, (sfVector2f) {500, 710},
-    SUBWINDOW_COLOR);
     draw_rect(cw_graph, (sfVector2f) {560, 30}, (sfVector2f) {550, 300},
     SUBWINDOW_COLOR);
     draw_rect(cw_graph, (sfVector2f) {560, 360}, (sfVector2f) {550, 300},
@@ -36,7 +34,12 @@ void draw_editor_subwindows(cw_graph_t *cw_graph)
 
 void draw_editor_interface(cw_graph_t *cw_graph)
 {
-    draw_background(cw_graph);
+    draw_rect(cw_graph, (sfVector2f) {0, 0}, (sfVector2f) {1600, 160},
+    BACKGROUND_COLOR);
+    draw_rect(cw_graph, (sfVector2f) {530, 0}, (sfVector2f) {1070, 900},
+    BACKGROUND_COLOR);
+    draw_rect(cw_graph, (sfVector2f) {0, 870}, (sfVector2f) {1600, 30},
+    BACKGROUND_COLOR);
     draw_editor_subwindows(cw_graph);
     draw_text(cw_graph, cw_graph->edit.header->prog_name, 35, (sfVector2f){60, 55});
 }
