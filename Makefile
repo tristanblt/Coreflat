@@ -41,6 +41,7 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				bonus/src/editor/draw_input_number.c					\
 				bonus/src/editor/instruction_manager.c					\
 				bonus/src/editor/draw_all_instructions.c				\
+				bonus/src/editor/draw_champ_instructions.c				\
 				bonus/src/editor/draw_register.c						\
 				bonus/src/editor/draw_select_champion.c					\
 				bonus/src/editor/label_manager.c						\
