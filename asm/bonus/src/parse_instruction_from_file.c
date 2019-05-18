@@ -56,8 +56,10 @@ int get_argument_from_file(char *file, int *i, int fsize, int size)
         if ((*i) > fsize)
             return (0);
         argument <<= 8;
-        argument |= file[*i];
+        argument |= (file[*i]) & 0xff;
     }
+    if (size == 2)
+        argument = (short)argument;
     return (argument);
 }
 

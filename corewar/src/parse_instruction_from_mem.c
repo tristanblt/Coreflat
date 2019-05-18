@@ -14,7 +14,7 @@ int get_argument_from_mem(proc_t *proc, int size)
 
     for (int i = 0; i < size; i++) {
         argument <<= 8;
-        argument |= proc->pc->val;
+        argument |= (proc->pc->val);
         proc->pc = proc->pc->next;
     }
     proc->instruction->size += size;
@@ -30,8 +30,6 @@ bool get_description_from_mem(proc_t *proc)
             return (false);
         proc->instruction->description[1] = 0;
         proc->instruction->description[0] = 2;
-        if (uses_indexes(proc->instruction->code))
-            proc->instruction->description[0] = 3;
         return (true);
     }
     if (proc->instruction->description)

@@ -22,8 +22,13 @@ bool instruction_is_valid(instruction_t *instruction)
     for (; expected < 4 && op.type[expected]; expected++);
     if (args != expected)
         return (false);
-    for (int i = 0; i < args; i++)
-        if (!(op.type[i] | instruction->description[i]))
+    for (int j = 0; j < args; j++) {
+        if (instruction->description[j] == 1 && !(op.type[j] & T_REG))
             return (false);
+        if (instruction->description[j] == 2 && !(op.type[j] & T_DIR))
+            return (false);
+        if (instruction->description[j] == 3 && !(op.type[j] & T_IND))
+            return (false);
+    }
     return (true);
 }
