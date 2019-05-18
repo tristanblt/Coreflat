@@ -50,7 +50,7 @@ char *get_instruction_label(char *instruction)
     return (label);
 }
 
-char *get_label(char *arg)
+char *get_label_asm(char *arg)
 {
     if (arg[0] == DIRECT_CHAR)
         arg++;
@@ -79,7 +79,7 @@ nb, labels[label])%1);
     if (!arguments_are_valid(op_tab[i].type, line + 1 + label, nb))
         return (-1);
     for (int j = label + 1, arg = 0; line[j]; j++, arg++)
-        if (argument_is_label(line[j], 0)&&!(labels[arg]=get_label(line[j])))
+        if (argument_is_label(line[j], 0)&&!(labels[arg]=get_label_asm(line[j])))
             return (-1);
     return (op_tab[i].code);
 }

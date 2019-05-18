@@ -42,7 +42,7 @@ bool add_champ_from_argument(char *path, int *n, int *a, champion_t ***champs)
 {
     champion_t *to_add = NULL;
 
-    if (!end_of_file(path, ".cor"))
+    if (!end_of_file_corewar(path, ".cor"))
         return (true);
     if (!(to_add = create_champion(path, *n, *a)))
         return (false);

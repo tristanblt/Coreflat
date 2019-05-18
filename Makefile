@@ -42,6 +42,7 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				bonus/src/editor/instruction_manager.c					\
 				bonus/src/editor/draw_all_instructions.c				\
 				bonus/src/editor/draw_register.c						\
+				bonus/src/editor/draw_select_champion.c					\
 				bonus/src/editor/label_manager.c						\
 				bonus/src/editor/register_manager.c						\
 				bonus/src/editor/save_to_file.c							\
@@ -84,11 +85,37 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				corewar/src/start_corewar.c								\
 				corewar/src/free_utils.c								\
 				corewar/src/end_of_file.c								\
+				asm/src/encode_instructions_to_file.c					\
+				asm/src/arguments_handling.c							\
+				asm/src/error_handling_and_parsing.c					\
+				asm/src/get_file.c										\
+				asm/src/multiple_split.c								\
+				asm/src/my_strncpy.c									\
+				asm/src/free_utils.c									\
+				asm/src/instruction_get_code.c							\
+				asm/src/argument_type.c									\
+				asm/src/parse_instruction.c								\
+				asm/src/writing_in_file.c								\
+				asm/src/utils.c											\
+				asm/src/get_header.c									\
+				asm/src/get_instruction_size.c							\
+				asm/src/labels.c										\
+				asm/src/check_multiple_label_definitions.c				\
+				asm/src/compute_instruction_size.c						\
+				asm/src/char_is_in_string.c								\
+				asm/bonus/src/parse_header.c							\
+				asm/bonus/src/parse_instruction_from_file.c				\
+				asm/bonus/src/parse_instruction_and_header.c			\
+				asm/bonus/src/compute_instructions_sizes.c				\
+				asm/bonus/src/destroy_instructions.c					\
+				asm/bonus/src/label.c									\
+				asm/bonus/src/utils.c									\
+				asm/bonus/src/write_file.c								\
 
 OBJ	=	$(SRC_COREFLAT:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-			-Iinclude -Icorewar/include		\
+			-Iinclude -Icorewar/include -Iasm/include/		\
 
 SFMLFLAGS = -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
 

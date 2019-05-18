@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-bool instruction_is_valid(instruction_t *instruction)
+bool instruction_is_valid_corewar(instruction_t *instruction)
 {
     op_t op = {0};
     int expected = 0;

@@ -38,4 +38,5 @@ void draw_editor_interface(cw_graph_t *cw_graph)
 {
     draw_background(cw_graph);
     draw_editor_subwindows(cw_graph);
+    draw_text(cw_graph, cw_graph->edit.header->prog_name, 35, (sfVector2f){60, 55});
 }

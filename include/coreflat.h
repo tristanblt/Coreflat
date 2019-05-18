@@ -71,6 +71,7 @@ Have fun, this game was made for this after all !!! <3"
 #define EDIT_CHAMP_TEXT "Edit Champion"
 #define LOAD_TEXT "Load Champion"
 #define CREATE_CHAMPION "Create Champion"
+#define VALIDATE_CHAMPION "Validate choice"
 
 #define NBR_ICONS 4
 #define NBR_VIEWS 8
@@ -140,6 +141,7 @@ struct editor
 {
     int step;
     bool indirect_type;
+    int selected;
     instruction_t **instructions;
     header_t *header;
 };
@@ -212,11 +214,16 @@ void draw_registers(cw_graph_t *cw_graph);
 void draw_all_instructions(cw_graph_t *cw_graph);
 void draw_configuration(cw_graph_t *cw_graph);
 bool draw_create_champion(cw_graph_t *cw_graph);
+bool draw_select_champion(cw_graph_t *cw_graph, champion_t **champions);
+void draw_champion_select(cw_graph_t *cw_graph, char *name, int i,
+bool is_select);
+void draw_champ_instructions(cw_graph_t *cw_graph);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
 void manage_events(cw_graph_t *cw_graph);
 void is_released(cw_graph_t *cw_graph);
+instruction_t **push_instruction(instruction_t **arr, instruction_t *add);
 
 //utils
 void draw_text(cw_graph_t *cw_graph, char *name, int size, sfVector2f pos);
@@ -230,6 +237,7 @@ bool load_all_champions(char *path, champion_t ***champions);
 bool auto_pre_game(cw_graph_t *cw_graph, list_t *memory);
 champion_t *champion_dup(champion_t *dup);
 void set_proc_owner(proc_t **procs);
+instruction_t *parse_instruction_from_file(char *file, int *i, int size);
 
 
 

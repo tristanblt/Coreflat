@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-bool end_of_file(char *path, char *end)
+bool end_of_file_corewar(char *path, char *end)
 {
     int n = my_strlen(path) - 1;
     int i = 0;

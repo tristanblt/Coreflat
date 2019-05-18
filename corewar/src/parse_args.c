@@ -15,11 +15,11 @@ int *fill_arg(char **file, int *size, char *description, int *args)
             *file += 1;
             *size -= 1;
             break;
-        case 2: args[i] = reverse_bytes(*(int *)(*file));
+        case 2: args[i] = reverse_bytes_corewar(*(int *)(*file));
             *file += 4;
             *size -= 4;
             break;
-        case 3: args[i] = reverse_bytes_two(*(short *)(*file));
+        case 3: args[i] = reverse_bytes_two_corewar(*(short *)(*file));
             *file += 2;
             *size -= 2;
             break;
@@ -37,7 +37,7 @@ int *parse_args(char **file, int *size, char *description)
     for (int i = 0; i < 4; i++)
         args[i] = 0;
     if (description == NULL) {
-        args[0] = reverse_bytes(*(int *)(*file));
+        args[0] = reverse_bytes_corewar(*(int *)(*file));
         *file += 4;
         *size -= 4;
         return (args);

@@ -48,20 +48,20 @@ struct instruction
 
 #endif
 
-int reverse_bytes(unsigned int x);
-int reverse_bytes_two(unsigned int x);
-header_t *parse_header(char *file_path, char **file_content);
+int reverse_bytes_disasm(unsigned int x);
+int reverse_bytes_two_disasm(unsigned int x);
+header_t *parse_header_disasm(char *file_path, char **file_content);
 instruction_t *parse_instruction_from_file(char *file, int *i, int size);
-bool has_one_argument(int code);
-bool uses_indexes(int code);
+bool has_one_argument_disasm(int code);
+bool uses_indexes_disasm(int code);
 void destroy_instructions(instruction_t **insts);
 void fill_label_args(instruction_t **insts);
 void write_header(header_t *header, int fd);
 void write_instructions(instruction_t **instructions, int fd);
 char *get_inst_name(int code);
-int get_arg_size(char arg, int code);
+int get_arg_size_disasm(char arg, int code);
 bool parse_header_and_instruction(header_t **, instruction_t ***, char *);
 void compute_instructions_sizes(instruction_t **insts);
-bool is_instruction_code_valid(char code);
+bool is_instruction_code_valid_disasm(char code);
 
 #endif

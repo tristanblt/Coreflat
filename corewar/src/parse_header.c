@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-int reverse_bytes(unsigned int x)
+int reverse_bytes_corewar(unsigned int x)
 {
     unsigned int out = 0;
     unsigned int byte;
@@ -20,7 +20,7 @@ int reverse_bytes(unsigned int x)
     return (out);
 }
 
-int reverse_bytes_two(unsigned int x)
+int reverse_bytes_two_corewar(unsigned int x)
 {
     unsigned int out = 0;
     unsigned int byte;
@@ -44,11 +44,11 @@ char *copy_str(char *str, int size)
     return (ret);
 }
 
-header_t *parse_header(char **file, int *size)
+header_t *parse_header_corewar(char **file, int *size)
 {
     header_t *header = NULL;
 
-    if (COREWAR_EXEC_MAGIC != reverse_bytes(*(int *)(*file)))
+    if (COREWAR_EXEC_MAGIC != reverse_bytes_corewar(*(int *)(*file)))
         return (NULL);
     *file += 4;
     *size -= 4;

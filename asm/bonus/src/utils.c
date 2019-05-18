@@ -8,11 +8,11 @@
 #include "disasm.h"
 #include <stddef.h>
 
-int get_arg_size(char arg, int code)
+int get_arg_size_disasm(char arg, int code)
 {
     if (arg == 1)
         return (1);
-    else if (arg == 2 && !uses_indexes(code))
+    else if (arg == 2 && !uses_indexes_disasm(code))
         return (DIR_SIZE);
     return (IND_SIZE);
 }
@@ -25,7 +25,7 @@ char *get_inst_name(int code)
     return (NULL);
 }
 
-bool uses_indexes(int code)
+bool uses_indexes_disasm(int code)
 {
     if (code == IC_ldi || code == IC_lldi || code == IC_fork ||
         code == IC_lfork || code == IC_zjmp || code == IC_sti)
@@ -33,7 +33,7 @@ bool uses_indexes(int code)
     return (false);
 }
 
-bool is_instruction_code_valid(char code)
+bool is_instruction_code_valid_disasm(char code)
 {
     for (int i = 0; op_tab[i].code; i++)
         if (op_tab[i].code == code)
@@ -41,7 +41,7 @@ bool is_instruction_code_valid(char code)
     return (false);
 }
 
-bool has_one_argument(int code)
+bool has_one_argument_disasm(int code)
 {
     if (code == IC_live || code == IC_zjmp || code == IC_fork ||
         code == IC_lfork)

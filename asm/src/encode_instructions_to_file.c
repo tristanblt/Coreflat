@@ -29,7 +29,7 @@ int create_file(char *file_name)
     return (open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0664));
 }
 
-bool has_one_argument(int code)
+bool has_one_argument_asm(int code)
 {
     if (code == IC_live || code == IC_zjmp || code == IC_fork ||
         code == IC_lfork)
@@ -45,7 +45,7 @@ bool encode_and_write_instructions(int fd, instruction_t **instructions)
         if (!instructions[i]->code)
             continue;
         write(fd, &instructions[i]->code, 1);
-        if (!has_one_argument(instructions[i]->code))
+        if (!has_one_argument_asm(instructions[i]->code))
             write_description(instructions[i]->description, fd);
         args = get_arg_number(instructions[i]->code);
         for (int j = 0; j < args; j++) {
@@ -69,7 +69,7 @@ header_t *header)
         return (false);
     }
     free(file_name);
-    write_header(header, fd);
+    write_header_asm(header, fd);
     if (encode_and_write_instructions(fd, instructions) == false) {
         close(fd);
         return (false);

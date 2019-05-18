@@ -44,7 +44,7 @@ int main(int ac, char **av)
     }
     compute_instructions_sizes(insts);
     fill_label_args(insts);
-    write_header(header, fd);
+    write_header_disasm(header, fd);
     write_instructions(insts, fd);
     destroy_instructions(insts);
     free(header);
