@@ -75,6 +75,22 @@ void update_input(cw_graph_t *cw_graph, char *str, int size)
         str[len] = '_';
 }
 
+void update_input_nb(cw_graph_t *cw_graph, char *str, int size)
+{
+    int len = my_strlen(str);
+    sfKeyCode code = cw_graph->window->event.key.code;
+
+    (code == sfKeyBack && len) ? str[len - 1] = 0 : 0;
+    if (len > size)
+        return;
+    printf("oui:%i\n", len);
+    if (code >= sfKeyNum0 && code <= sfKeyNum9) {
+        str[len] = 22 + code;
+        str[len + 1] = 0;
+    }
+    printf("non\n");
+}
+
 void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str)
 {
     draw_bar_gradient(cw_graph, pos);
@@ -85,6 +101,23 @@ void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str)
     sfText_setColor(cw_graph->text.text, SUBWINDOW_COLOR);
     if (!str[0]) {
         str = "Enter your champion's name";
+        sfText_setColor(cw_graph->text.text, (sfColor){150, 150, 150, 255});
+    }
+    sfText_setString(cw_graph->text.text, str);
+    sfRenderWindow_drawText(cw_graph->window->window,
+                            cw_graph->text.text, NULL);
+}
+
+void draw_input_bar_nb(cw_graph_t *cw_graph, sfVector2f pos, char *str)
+{
+    draw_bar_gradient(cw_graph, pos);
+    draw_bar_white(cw_graph, pos);
+    pos.x += 20;
+    pos.y += 17;
+    sfText_setPosition(cw_graph->text.text, pos);
+    sfText_setColor(cw_graph->text.text, SUBWINDOW_COLOR);
+    if (!cw_graph->edit.buffer) {
+        str = "Enter a number";
         sfText_setColor(cw_graph->text.text, (sfColor){150, 150, 150, 255});
     }
     sfText_setString(cw_graph->text.text, str);

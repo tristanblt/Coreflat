@@ -145,6 +145,9 @@ struct editor
     instruction_t **instructions;
     header_t *header;
     int cursor;
+    int register_selected;
+    bool number_selected;
+    char *buffer;
 };
 
 struct coreflat
@@ -219,6 +222,8 @@ bool draw_select_champion(cw_graph_t *cw_graph, champion_t **champions);
 void draw_champion_select(cw_graph_t *cw_graph, char *name, int i,
 bool is_select);
 void draw_champ_instructions(cw_graph_t *cw_graph);
+void draw_labels(cw_graph_t *cw_graph);
+void draw_input_bar_nb(cw_graph_t *cw_graph, sfVector2f pos, char *str);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);

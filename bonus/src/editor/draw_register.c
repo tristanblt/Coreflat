@@ -10,26 +10,32 @@
 void draw_register(cw_graph_t *cw_graph, int line, int col, int i)
 {
     sfColor color = SELECTOR_COLOR;
+    sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
+    sfVector2f pos;
 
-    if (is_in_rect(cw_graph, (sfVector2f) {615 + col * 130, 390 + line * 64},
-    (sfVector2f) {50, 50}) && cw_graph->is_released)
-        printf("SELECT REGISTER r%i\n", i + 1);
+    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse)
+        cw_graph->edit.register_selected = 0;
+    if (cw_graph->edit.register_selected != i + 1)
+        pos = (sfVector2f) {615 + col * 130, 390 + line * 64};
+    else
+        pos = (sfVector2f) {(int)mouse.x - 20, (int)mouse.y - 20};
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
-    (sfVector2f) {615 + col * 130, 390 + line * 64}, (sfVector2f) {50, 50}))
+    pos, (sfVector2f) {50, 50}) && cw_graph->edit.register_selected == 0 &&
+    cw_graph->edit.number_selected == false) {
         color = SELECTOR_COLOR_CLICKED;
-    else if (is_in_rect(cw_graph, (sfVector2f) {615 + col * 130, 390 + line * 64},
-    (sfVector2f) {50, 50}))
+        cw_graph->edit.register_selected = i + 1;
+    }
+    else if (is_in_rect(cw_graph, pos, (sfVector2f) {50, 50}))
         color = SELECTOR_COLOR_HOVE;
     else
         color = SELECTOR_COLOR;
-    sfCircleShape_setPosition(cw_graph->buttons,
-    (sfVector2f) {615 + col * 130, 390 + line * 64});
+    sfCircleShape_setPosition(cw_graph->buttons, pos);
     sfCircleShape_setRadius(cw_graph->buttons, 25);
     sfCircleShape_setFillColor(cw_graph->buttons, color);
     sfRenderWindow_drawCircleShape(cw_graph->window->window,
     cw_graph->buttons, NULL);
     draw_text(cw_graph, int_to_str(i + 1), 25,
-    (sfVector2f) {633 + col * 130 - (i > 8 ? 5 : 0), 399 + line * 64});
+    (sfVector2f) {18 + pos.x - (i > 8 ? 5 : 0), 9 + pos.y});
 }
 
 void draw_registers(cw_graph_t *cw_graph)

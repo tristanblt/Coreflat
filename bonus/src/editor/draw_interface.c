@@ -24,11 +24,11 @@ void draw_editor_subwindows(cw_graph_t *cw_graph)
     SUBWINDOW_COLOR);
     draw_rect(cw_graph, (sfVector2f) {560, 360}, (sfVector2f) {550, 300},
     SUBWINDOW_COLOR);
-    draw_rect(cw_graph, (sfVector2f) {560, 690}, (sfVector2f) {550, 180},
+    draw_rect(cw_graph, (sfVector2f) {560, 690}, (sfVector2f) {600, 180},
     SUBWINDOW_COLOR);
     draw_rect(cw_graph, (sfVector2f) {1140, 30}, (sfVector2f) {430, 630},
     SUBWINDOW_COLOR);
-    draw_rect(cw_graph, (sfVector2f) {1140, 690}, (sfVector2f) {430, 180},
+    draw_rect(cw_graph, (sfVector2f) {1190, 690}, (sfVector2f) {380, 180},
     SUBWINDOW_COLOR);
 }
 
