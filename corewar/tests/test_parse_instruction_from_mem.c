@@ -101,3 +101,80 @@ Test(argument_handling, more_arguments)
     cr_assert(argument_handling(ac, av, &champs, &dump));
     cr_assert(dump == 12);
 }
+
+Test(champion_parse, champion)
+{
+    champion_t **champions = malloc(sizeof(champion_t *));
+    list_t *memory = create_list();
+    int dump = -1;
+    int ac = 3;
+    char *av[] = {"./corewar", "tests/files/test.cor",
+        "tests/files/test.cor", NULL};
+
+    champions[0] = NULL;
+    argument_handling(ac, av, &champions, &dump);
+    cr_assert(load_champion_instructions_in_mem(champions, memory));
+}
+
+Test(champion_parse, champion_error)
+{
+    champion_t **champions = malloc(sizeof(champion_t *));
+    list_t *memory = create_list();
+    int dump = -1;
+    int ac = 13;
+    char *av[] = {"./corewar", "-n", "10", "-a", "101", "tests/files/test.cor",
+        "-a", "6000", "-n", "100", "tests/files/test.cor", "-dump", "12", NULL};
+
+    champions[0] = NULL;
+    argument_handling(ac, av, &champions, &dump);
+    cr_assert(!load_champion_instructions_in_mem(champions, memory));
+}
+
+Test(corewar, simple_test)
+{
+    champion_t **champions = malloc(sizeof(champion_t *));
+    list_t *memory = create_list();
+    int dump = -1;
+    int ac = 3;
+    char *av[] = {"./corewar", "tests/files/test.cor",
+        "tests/files/test.cor", NULL};
+
+    champions[0] = NULL;
+    argument_handling(ac, av, &champions, &dump);
+    load_champion_instructions_in_mem(champions, memory);
+    cr_assert(start_corewar(champions, memory, dump));
+}
+
+Test(corewar, test_with_error)
+{
+    champion_t **champions = malloc(sizeof(champion_t *));
+    list_t *memory = create_list();
+    int dump = -1;
+    int ac = 13;
+    char *av[] = {"./corewar", "-n", "10", "-a", "101", "tests/files/test.cor",
+        "-a", "6000", "-n", "100", "tests/files/test.cor", "-dump", "12", NULL};
+
+    champions[0] = NULL;
+    argument_handling(ac, av, &champions, &dump);
+    load_champion_instructions_in_mem(champions, memory);
+    cr_assert(start_corewar(champions, memory, dump));
+}
+
+Test(check_lives, simple_test)
+{
+    champion_t **champions = malloc(sizeof(champion_t *));
+    list_t *memory = create_list();
+    proc_t **procs = NULL;
+    int dump = -1;
+    int ac = 3;
+    char *av[] = {"./corewar", "tests/files/test.cor",
+        "tests/files/test.cor", NULL};
+
+    champions[0] = NULL;
+    argument_handling(ac, av, &champions, &dump);
+    load_champion_instructions_in_mem(champions, memory);
+    procs = init_processes(champions, memory);
+    for (int i = 0; champions[i]; i++)
+        champions[i]->dead = true;
+    cr_assert(!check_lives(champions, procs));
+}
