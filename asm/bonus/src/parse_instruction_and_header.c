@@ -8,7 +8,7 @@
 #include "disasm.h"
 #include <stdlib.h>
 
-instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
+instruction_t **push_instruction_asm(instruction_t **arr, instruction_t *add)
 {
     instruction_t **new_arr = NULL;
     int nb_elem_arr;
@@ -32,13 +32,13 @@ instruction_t ***insts, char *filepath)
     instruction_t *to_add = NULL;
     char *file_content = NULL;
 
-    if (!(*header = parse_header(filepath, &file_content)))
+    if (!(*header = parse_header_disasm(filepath, &file_content)))
         return (NULL);
     for (int i = 0; i < (*header)->prog_size;) {
         if (!(to_add = parse_instruction_from_file(file_content, &i,
             (*header)->prog_size)))
             return (NULL);
-        if (!(*insts = push_instruction(*insts, to_add)))
+        if (!(*insts = push_instruction_asm(*insts, to_add)))
             return (NULL);
     }
     free(file_content);

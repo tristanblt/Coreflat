@@ -32,7 +32,7 @@ bool add_champion_all(char *name, champion_t ***champions, char *f_path)
     champion_t *to_add = NULL;
     char *path = NULL;
 
-    if (!end_of_file(name, ".cor"))
+    if (!end_of_file_corewar(name, ".cor"))
         return (true);
     path = my_strcat(f_path, name);
     if (!path)

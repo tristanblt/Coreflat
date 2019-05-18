@@ -8,7 +8,7 @@
 #include "my.h"
 #include "corewar.h"
 
-instruction_t **push_instruction(instruction_t **arr, instruction_t *add)
+instruction_t **push_instruction_corewar(instruction_t **arr, instruction_t *add)
 {
     instruction_t **new_arr = NULL;
     int nb_elem_arr;
@@ -40,7 +40,7 @@ char *parse_description(char c)
     return (description);
 }
 
-bool has_one_argument(int code)
+bool has_one_argument_corewar(int code)
 {
     if (code == IC_live || code == IC_zjmp || code == IC_fork ||
         code == IC_lfork)
@@ -57,7 +57,7 @@ bool parse_instruction(char **file, int *size)
     instruction->code = file[0][0];
     *file += 1;
     *size -= 1;
-    if (!has_one_argument(instruction->code)) {
+    if (!has_one_argument_corewar(instruction->code)) {
         instruction->description = parse_description(file[0][0]);
         if (instruction->description == NULL)
             return (false);

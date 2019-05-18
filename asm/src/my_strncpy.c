@@ -8,7 +8,7 @@
 #include "my.h"
 #include "asm.h"
 
-char *my_strcpy(char *dest, char const *src)
+char *my_strcpy_asm(char *dest, char const *src)
 {
     int i = 0;
 

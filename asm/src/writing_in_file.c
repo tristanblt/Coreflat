@@ -17,7 +17,7 @@ void write_n_zeros(int n, int fd)
     }
 }
 
-void write_header(header_t *header, int fd)
+void write_header_asm(header_t *header, int fd)
 {
     write(fd, header, sizeof(header_t));
 }
@@ -60,7 +60,7 @@ void write_with_good_size(char c, int arg, int fd, int code)
     if (c == T_REG)
         write_reverse_bytes(arg, 1, fd);
     if (c == T_DIR) {
-        if (uses_indexes(code))
+        if (uses_indexes_asm(code))
             write_reverse_bytes(arg, IND_SIZE, fd);
         else
             write_reverse_bytes(arg, DIR_SIZE, fd);

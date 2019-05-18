@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-bool uses_indexes(int code)
+bool uses_indexes_corewar(int code)
 {
     if (code == IC_ldi || code == IC_lldi || code == IC_fork ||
         code == IC_lfork || code == IC_zjmp || code == IC_sti)
@@ -15,7 +15,7 @@ bool uses_indexes(int code)
     return (false);
 }
 
-bool is_instruction_code_valid(char code)
+bool is_instruction_code_valid_corewar(char code)
 {
     for (int i = 0; op_tab[i].code; i++)
         if (op_tab[i].code == code)

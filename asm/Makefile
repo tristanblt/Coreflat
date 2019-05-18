@@ -42,8 +42,8 @@ SRC	=	../src/op.c										\
 		$(SRCPATH)/get_instruction_size.c				\
 		$(SRCPATH)/labels.c								\
 		$(SRCPATH)/check_multiple_label_definitions.c	\
-		$(SRCPATH)/compute_instruction_size.c		\
-		$(SRCPATH)/char_is_in_string.c			\
+		$(SRCPATH)/compute_instruction_size.c			\
+		$(SRCPATH)/char_is_in_string.c					\
 
 
 OBJ	=	$(SRC:%.c=%.o)

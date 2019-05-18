@@ -23,7 +23,7 @@ int get_argument_from_mem(proc_t *proc, int size)
 
 bool get_description_from_mem(proc_t *proc)
 {
-    if (has_one_argument(proc->instruction->code)) {
+    if (has_one_argument_corewar(proc->instruction->code)) {
         if (!proc->instruction->description)
             proc->instruction->description = malloc(sizeof(char) * 2);
         if (!proc->instruction->description)
@@ -48,7 +48,7 @@ void parse_arguments_from_mem(proc_t *proc)
     for (int i = 0; proc->instruction->description[i]; i++) {
         if (proc->instruction->description[i] == 3 ||
             (proc->instruction->description[i] == 2 &&
-            uses_indexes(proc->instruction->code)))
+            uses_indexes_corewar(proc->instruction->code)))
             size = IND_SIZE;
         else if (proc->instruction->description[i] == 2)
             size = DIR_SIZE;
@@ -63,13 +63,13 @@ bool parse_instruction_from_mem(proc_t *proc)
     proc->instruction->size = 2;
     proc->instruction->code = proc->pc->val;
     proc->pc = proc->pc->next;
-    if (!is_instruction_code_valid(proc->instruction->code)) {
+    if (!is_instruction_code_valid_corewar(proc->instruction->code)) {
         proc->instruction->code = 0;
         return (true);
     }
     if (!get_description_from_mem(proc))
         return (false);
-    if (!instruction_is_valid(proc->instruction)) {
+    if (!instruction_is_valid_corewar(proc->instruction)) {
         proc->pc = proc->pc->prev;
         proc->instruction->code = 0;
         return (true);

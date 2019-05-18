@@ -43,6 +43,10 @@ void redirection_next(cw_graph_t *cw_graph, char *to)
         cw_graph->edit.step = 1;
     if (my_strcmp(to, CREATE_CHAMPION))
         cw_graph->edit.step = 2;
+    if (my_strcmp(to, EDIT_CHAMP_TEXT))
+        cw_graph->edit.step = 3;
+    if (my_strcmp(to, VALIDATE_CHAMPION) && cw_graph->edit.selected != -1)
+        cw_graph->edit.step = 4;
 }
 
 void redirection(cw_graph_t *cw_graph, char *to)

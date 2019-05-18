@@ -41,7 +41,7 @@ void write_instructions(instruction_t **instructions, int fd)
     }
 }
 
-void write_header(header_t *header, int fd)
+void write_header_disasm(header_t *header, int fd)
 {
     my_dprintf(fd, "%s \"%s\"\n", NAME_CMD_STRING, header->prog_name);
     my_dprintf(fd, "%s \"%s\"\n\n", COMMENT_CMD_STRING, header->comment);

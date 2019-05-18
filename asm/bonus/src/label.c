@@ -42,7 +42,7 @@ void copy_label_name(int code, char *label)
         last_live++;
 }
 
-char *get_label(int nb, int cumul_size, instruction_t **insts)
+char *get_label_disasm(int nb, int cumul_size, instruction_t **insts)
 {
     int size = nb + cumul_size;
     int i = 0;
@@ -66,7 +66,7 @@ void fill_label_args(instruction_t **insts)
     for (int i = 0; insts[i]; i++)
         for (int j = 0; insts[i]->description[j]; j++) {
             insts[i]->description[j] != 1 ?
-            insts[i]->label_args[j] = get_label(insts[i]->args[j],
+            insts[i]->label_args[j] = get_label_disasm(insts[i]->args[j],
         insts[i]->cumulative_size, insts) : 0;
         }
 }

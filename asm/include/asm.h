@@ -89,7 +89,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 char **multiple_split(char *str, char *split);
 int my_arrlen(char **arr);
 int my_argslen(char **arr);
-bool has_one_argument(int code);
+bool has_one_argument_asm(int code);
 
 void free_double_arr(char **arr);
 void free_instructions(instruction_t **arr);
@@ -114,7 +114,7 @@ int get_instruction_size(instruction_t *instruction);
 
 // writing
 void write_n_zeros(int n, int fd);
-void write_header(header_t *header, int fd);
+void write_header_asm(header_t *header, int fd);
 void write_description(char *description, int fd);
 void write_reverse_bytes(int arg, char size, int fd);
 void write_with_good_size(char c, int arg, int fd, int code);
@@ -123,7 +123,7 @@ void write_with_good_size(char c, int arg, int fd, int code);
 bool line_is_empty(char *line);
 bool is_a_label(char *str);
 int get_arg_number(int code);
-bool uses_indexes(int code);
+bool uses_indexes_asm(int code);
 
 // labels
 int compute_instruction_size(instruction_t **instructions);

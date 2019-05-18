@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-bool instruction_is_valid(instruction_t *instruction)
+bool instruction_is_valid_disasm(instruction_t *instruction)
 {
     op_t op = {0};
     int expected = 0;
@@ -35,7 +35,7 @@ char *parse_description_from_file(char c, char code)
 
     if (description == NULL)
         return (NULL);
-    if (has_one_argument(code)) {
+    if (has_one_argument_disasm(code)) {
         description[0] = 2;
         description[1] = 0;
         return (description);
@@ -73,7 +73,7 @@ bool parse_arguments(char *file, int *i, instruction_t *instruction, int fsize)
     for (int j = 0; instruction->description[j]; j++) {
         if (instruction->description[j] == 3 ||
             (instruction->description[j] == 2 &&
-            uses_indexes(instruction->code)))
+            uses_indexes_disasm(instruction->code)))
             size = IND_SIZE;
         else if (instruction->description[j] == 2)
             size = DIR_SIZE;
@@ -100,12 +100,12 @@ instruction_t *parse_instruction_from_file(char *file, int *i, int size)
     inst->code = file[*i];
     if (++(*i) > size)
         return (NULL);
-    if (!is_instruction_code_valid(inst->code)) {
+    if (!is_instruction_code_valid_disasm(inst->code)) {
         free(inst);
         return (NULL);
     }
     inst->description = parse_description_from_file(file[(*i)], inst->code);
-    if ((!has_one_argument(inst->code) && ++(*i) > size) ||
+    if ((!has_one_argument_disasm(inst->code) && ++(*i) > size) ||
         !parse_arguments(file, i, inst, size))
         return (NULL);
     return (inst);

@@ -25,7 +25,7 @@ int get_arg_number(int code)
     return (0);
 }
 
-bool uses_indexes(int code)
+bool uses_indexes_asm(int code)
 {
     if (code == IC_ldi || code == IC_lldi || code == IC_fork ||
         code == IC_lfork || code == IC_zjmp || code == IC_sti)
