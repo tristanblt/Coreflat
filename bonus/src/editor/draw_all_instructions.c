@@ -37,13 +37,39 @@ void display_hover_instruction(cw_graph_t *cw_graph, int i)
     }
 }
 
-void draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)
+bool add_instruction_to_editor(cw_graph_t *cw_graph, int i)
+{
+    instruction_t *to_add = malloc(sizeof(instruction_t));
+
+    if (!to_add)
+        return (false);
+    *to_add = (instruction_t){0};
+    to_add->args = malloc(sizeof(int) * 4);
+    to_add->description = malloc(sizeof(char) * 5);
+    to_add->label_args = malloc(sizeof(char *) * 4);
+    if (!to_add->args || !to_add->description || !to_add->label_args)
+        return (false);
+    for (int j = 0; j < 4; j++) {
+        to_add->args[j] = 0;
+        to_add->label_args[j] = NULL;
+    }
+    for (int j = 0; j < 5; j++)
+        to_add->description[j] = 0;
+    to_add->code = i;
+    cw_graph->edit.instructions = push_instruction(cw_graph->edit.instructions, to_add);
+    if (!cw_graph->edit.instructions)
+        return (false);
+    return (true);
+}
+
+bool draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)
 {
     sfColor color = SUBWINDOW_COLOR;
 
     if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
     (sfVector2f) {430, 39.3}) && cw_graph->is_released)
-        printf("ADDING INSTRUCTION \"%s\"\n", op_tab[i].mnemonique);
+        if (!add_instruction_to_editor(cw_graph, i))
+            return (false);
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
     (sfVector2f){1140, 30 + i * 39.3}, (sfVector2f) {430, 39.3}))
         color = SELECTOR_COLOR_CLICKED;
@@ -58,14 +84,17 @@ void draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)
     (sfVector2f) {430, 39.3}, color);
     draw_text(cw_graph, op_tab[i].mnemonique, 20,
     (sfVector2f){1200, 37 + i * 39.3});
+    return (true);
 }
 
-void draw_all_instructions(cw_graph_t *cw_graph)
+bool draw_all_instructions(cw_graph_t *cw_graph)
 {
     int hover = -1;
 
     for (int i = 0; op_tab[i].code; i++)
-        draw_one_instruction(cw_graph, i, &hover);
+        if (!draw_one_instruction(cw_graph, i, &hover))
+            return (false);
     if (hover != -1)
         display_hover_instruction(cw_graph, hover);
+    return (true);
 }

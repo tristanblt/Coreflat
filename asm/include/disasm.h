@@ -56,7 +56,7 @@ bool has_one_argument_disasm(int code);
 bool uses_indexes_disasm(int code);
 void destroy_instructions(instruction_t **insts);
 void fill_label_args(instruction_t **insts);
-void write_header(header_t *header, int fd);
+void write_header_disasm(header_t *header, int fd);
 void write_instructions(instruction_t **instructions, int fd);
 char *get_inst_name(int code);
 int get_arg_size_disasm(char arg, int code);

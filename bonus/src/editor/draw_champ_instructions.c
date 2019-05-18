@@ -6,6 +6,7 @@
 */
 
 #include "coreflat.h"
+#include "my.h"
 
 void draw_args_instr(cw_graph_t *cw_graph, int i,
 instruction_t *instruction)
@@ -32,14 +33,11 @@ instruction_t *instruction)
     }
 }
 
-void draw_one_instruction_champ(cw_graph_t *cw_graph, int i,
+bool draw_one_instruction_champ(cw_graph_t *cw_graph, int i,
 instruction_t *instruction)
 {
     sfColor color = SUBWINDOW_COLOR;
 
-    /*if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
-    (sfVector2f) {430, 39.3}) && cw_graph->is_released)
-        printf("TOUCH INSTRUCTION \"%s\"\n", op_tab[i].mnemonique);*/
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
     (sfVector2f){30, 160 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f) {500, 39.3}))
         color = SELECTOR_COLOR_CLICKED;
@@ -54,10 +52,46 @@ instruction_t *instruction)
     draw_text(cw_graph, op_tab[instruction->code - 1].mnemonique, 20,
     (sfVector2f){60, 165 + i * 39.3 + cw_graph->edit.cursor});
     draw_args_instr(cw_graph, i, instruction);
+    sfCircleShape_setFillColor(cw_graph->buttons, (sfColor){200, 50, 50, 255});
+    sfCircleShape_setPosition(cw_graph->buttons, (sfVector2f){490, 165 + i * 39.3 + cw_graph->edit.cursor});
+    sfCircleShape_setRadius(cw_graph->buttons, 13);
+    sfText_setPosition(cw_graph->text.text, (sfVector2f){498, 166 + i * 39.3 + cw_graph->edit.cursor});
+    sfText_setString(cw_graph->text.text, "x");
+    sfText_setFillColor(cw_graph->text.text, SUBWINDOW_COLOR);
+    sfRenderWindow_drawCircleShape(cw_graph->window->window, cw_graph->buttons, NULL);
+    sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text, NULL);
+    if (is_in_rect(cw_graph, (sfVector2f){495, 166 + i * 39.3 +
+cw_graph->edit.cursor}, (sfVector2f){26, 26}) && cw_graph->is_released)
+        return (false);
+    sfText_setColor(cw_graph->text.text, sfWhite);
+    sfText_setString(cw_graph->text.text, "V");
+    sfText_setPosition(cw_graph->text.text, (sfVector2f){481, 177 + i * 39.3 + cw_graph->edit.cursor});
+    sfText_setRotation(cw_graph->text.text, 180);
+    sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text, NULL);
+    sfText_setRotation(cw_graph->text.text, 0);
+    sfText_setPosition(cw_graph->text.text, (sfVector2f){470, 177 + i * 39.3 + cw_graph->edit.cursor});
+    sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text, NULL);
+    if (is_in_rect(cw_graph, (sfVector2f){470, 160 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f){10, 10}) && cw_graph->is_released)
+        return (my_printf("UP\n")%1 + 1);
+    if (is_in_rect(cw_graph, (sfVector2f){470, 170 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f){10, 109}) && cw_graph->is_released)
+        return (my_printf("DOWN\n")%1 + 1);
+    return (true);
 }
 
 void draw_champ_instructions(cw_graph_t *cw_graph)
 {
-    for (int i = 0; cw_graph->edit.instructions[i]; i++)
-        draw_one_instruction_champ(cw_graph, i, cw_graph->edit.instructions[i]);
+    bool removed = false;
+
+    for (int i = 0; cw_graph->edit.instructions[i]; i++) {
+        if (!draw_one_instruction_champ(cw_graph, i, cw_graph->edit.instructions[i]) && !removed) {
+            free(cw_graph->edit.instructions[i]->description);
+            free(cw_graph->edit.instructions[i]->args);
+            free(cw_graph->edit.instructions[i]->label_args);
+            free(cw_graph->edit.instructions[i]);
+            for (int j = i; cw_graph->edit.instructions[j]; j++)
+                cw_graph->edit.instructions[j] = cw_graph->edit.instructions[j + 1];
+            i--;
+            removed = true;
+        }
+    }
 }

@@ -15,17 +15,19 @@ void draw_input_dir_ind(cw_graph_t *cw_graph)
     draw_button(cw_graph, (sfVector2f) {910, 800}, cw_graph->interface_gradient, CHANGE_TYPE_TEXT);
 }
 
-void draw_edition(cw_graph_t *cw_graph)
+bool draw_edition(cw_graph_t *cw_graph)
 {
     draw_background(cw_graph);
     draw_rect(cw_graph, (sfVector2f) {30, 160}, (sfVector2f) {500, 710},
     SUBWINDOW_COLOR);
     draw_champ_instructions(cw_graph);
     draw_editor_interface(cw_graph);
-    draw_all_instructions(cw_graph);
+    if (!draw_all_instructions(cw_graph))
+        return (false);
     draw_registers(cw_graph);
     draw_labels(cw_graph);
     draw_input_dir_ind(cw_graph);
+    return (true);
 }
 
 bool draw_editor(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
@@ -39,6 +41,7 @@ bool draw_editor(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
     if (cw_graph->edit.step == 2)
         draw_create_champion(cw_graph);
     if (cw_graph->edit.step == 3)
-        draw_edition(cw_graph);
+        if (!draw_edition(cw_graph))
+            return (false);
     return (true);
 }

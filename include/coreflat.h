@@ -212,7 +212,7 @@ bool draw_editor(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);
 void draw_editor_interface(cw_graph_t *cw_graph);
 void draw_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size, sfColor color);
 void draw_registers(cw_graph_t *cw_graph);
-void draw_all_instructions(cw_graph_t *cw_graph);
+bool draw_all_instructions(cw_graph_t *cw_graph);
 void draw_configuration(cw_graph_t *cw_graph);
 bool draw_create_champion(cw_graph_t *cw_graph);
 bool draw_select_champion(cw_graph_t *cw_graph, champion_t **champions);
