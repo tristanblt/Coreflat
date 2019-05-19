@@ -10,7 +10,8 @@
 
 void display_hover_instruction(cw_graph_t *cw_graph, int i)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *)cw_graph->window->window);
+    sfVector2i mouse =
+    sfMouse_getPositionRenderWindow(cw_graph->window->window);
     int dec = 0;
 
     draw_rect(cw_graph, (sfVector2f) {(int)mouse.x, (int)mouse.y},
@@ -20,17 +21,17 @@ void display_hover_instruction(cw_graph_t *cw_graph, int i)
     for (int j = 0; j < op_tab[i].nbr_args; j++) {
         if (op_tab[i].type[j] & T_REG) {
             draw_text(cw_graph, "Reg", 16,
-            (sfVector2f) {(int)mouse.x + 20 + dec * 40, (int)mouse.y + 70 + j * 30});
+            (sfVector2f) {(int)mouse.x+20+dec*40, (int)mouse.y+70+j*30});
             dec++;
         }
         if (op_tab[i].type[j] & T_DIR) {
             draw_text(cw_graph, "Dir", 16,
-            (sfVector2f) {(int)mouse.x + 20 + dec * 40, (int)mouse.y + 70 + j * 30});
+            (sfVector2f) {(int)mouse.x+20+dec*40, (int)mouse.y+70+j*30});
             dec++;
         }
         if (op_tab[i].type[j] & T_IND) {
             draw_text(cw_graph, "Ind", 16,
-            (sfVector2f) {(int)mouse.x + 20 + dec * 35, (int)mouse.y + 70 + j * 30});
+            (sfVector2f) {(int)mouse.x+20+dec*35, (int)mouse.y+70+j*30});
             dec++;
         }
         dec = 0;
@@ -56,7 +57,8 @@ bool add_instruction_to_editor(cw_graph_t *cw_graph, int i)
     for (int j = 0; j < 5; j++)
         to_add->description[j] = 0;
     to_add->code = i + 1;
-    cw_graph->edit.instructions = push_instruction(cw_graph->edit.instructions, to_add);
+    cw_graph->edit.instructions = push_instruction(cw_graph->edit.instructions,
+    to_add);
     if (!cw_graph->edit.instructions)
         return (false);
     return (true);
@@ -67,11 +69,11 @@ bool draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)
     sfColor color = SUBWINDOW_COLOR;
 
     if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
-    (sfVector2f) {430, 39.3}) && cw_graph->is_released)
+        (sfVector2f) {430, 39.3}) && cw_graph->is_released)
         if (!add_instruction_to_editor(cw_graph, i))
             return (false);
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
-    (sfVector2f){1140, 30 + i * 39.3}, (sfVector2f) {430, 39.3}))
+        (sfVector2f){1140, 30 + i * 39.3}, (sfVector2f) {430, 39.3}))
         color = SELECTOR_COLOR_CLICKED;
     else if (is_in_rect(cw_graph, (sfVector2f){1140, 30 + i * 39.3},
     (sfVector2f) {430, 39.3})) {

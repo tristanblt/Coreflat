@@ -7,7 +7,8 @@
 
 #include "coreflat.h"
 
-void draw_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size, sfColor color)
+void draw_rect(cw_graph_t *cw_graph, sfVector2f pos, sfVector2f size,
+sfColor color)
 {
     sfRectangleShape_setPosition(cw_graph->interface, pos);
     sfRectangleShape_setSize(cw_graph->interface, size);
@@ -41,5 +42,6 @@ void draw_editor_interface(cw_graph_t *cw_graph)
     draw_rect(cw_graph, (sfVector2f) {0, 870}, (sfVector2f) {1600, 30},
     BACKGROUND_COLOR);
     draw_editor_subwindows(cw_graph);
-    draw_text(cw_graph, cw_graph->edit.header->prog_name, 35, (sfVector2f){60, 55});
+    draw_text(cw_graph, cw_graph->edit.header->prog_name, 35,
+    (sfVector2f){60, 55});
 }

@@ -28,8 +28,10 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				bonus/src/utils.c										\
 				bonus/src/load_all_champions.c							\
 				bonus/src/auto_pre_game.c								\
+				bonus/src/update_input.c								\
 				bonus/src/draw_checkbox.c								\
 				bonus/src/draw_choose_next_2.c							\
+				bonus/src/draw_text.c							\
 				bonus/src/draw_choose_next.c							\
 				bonus/src/draw_selector.c								\
 				bonus/src/draw_settings.c								\

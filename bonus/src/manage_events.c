@@ -24,7 +24,7 @@ void is_released(cw_graph_t *cw_graph)
 void manage_events(cw_graph_t *cw_graph)
 {
     while (sfRenderWindow_pollEvent(cw_graph->window->window,
-        &cw_graph->window->event)) {
+    &cw_graph->window->event)) {
         if (cw_graph->window->event.type == sfEvtClosed)
             sfRenderWindow_close(cw_graph->window->window);
         if (cw_graph->current_view == 7 && cw_graph->edit.step == 2 &&

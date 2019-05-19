@@ -7,18 +7,8 @@
 
 #include "coreflat.h"
 
-bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions,
-list_t *memory)
+void draw_button_main_menu(cw_graph_t *cw_graph)
 {
-    champions = (void *)champions;
-    memory = (void *)memory;
-    draw_background(cw_graph);
-    sfText_setString(cw_graph->text.text, WINDOW_NAME);
-    sfText_setPosition(cw_graph->text.text, (sfVector2f) {225, 200});
-    sfText_setCharacterSize(cw_graph->text.text, 70);
-    sfText_setColor(cw_graph->text.text, sfWhite);
-    sfRenderWindow_drawText(cw_graph->window->window,
-    cw_graph->text.text, NULL);
     draw_button(cw_graph, (sfVector2f) {250, 320}, cw_graph->interface_gradient,
     BEGIN_TEXT);
     draw_button(cw_graph, (sfVector2f) {250, 390}, cw_graph->interface_gradient,
@@ -33,5 +23,20 @@ list_t *memory)
     CREDITS_TEXT);
     draw_button(cw_graph, (sfVector2f) {250, 740}, cw_graph->interface_gradient,
     EXIT_TEXT);
+}
+
+bool draw_main_menu(cw_graph_t *cw_graph, champion_t **champions,
+list_t *memory)
+{
+    champions = (void *)champions;
+    memory = (void *)memory;
+    draw_background(cw_graph);
+    sfText_setString(cw_graph->text.text, WINDOW_NAME);
+    sfText_setPosition(cw_graph->text.text, (sfVector2f) {225, 200});
+    sfText_setCharacterSize(cw_graph->text.text, 70);
+    sfText_setColor(cw_graph->text.text, sfWhite);
+    sfRenderWindow_drawText(cw_graph->window->window,
+    cw_graph->text.text, NULL);
+    draw_button_main_menu(cw_graph);
     return (true);
 }

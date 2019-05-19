@@ -13,7 +13,8 @@ void draw_register(cw_graph_t *cw_graph, int line, int col, int i)
     sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
     sfVector2f pos;
 
-    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse && cw_graph->is_released)
+    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse &&
+        cw_graph->is_released)
         cw_graph->edit.register_selected = 0;
     if (cw_graph->edit.register_selected != i + 1)
         pos = (sfVector2f) {615 + col * 130, 390 + line * 64};

@@ -50,45 +50,6 @@ void draw_bar_gradient(cw_graph_t *cw_graph, sfVector2f pos)
     cw_graph->interface, NULL);
 }
 
-void update_input(cw_graph_t *cw_graph, char *str, int size)
-{
-    int len = my_strlen(str);
-    sfKeyCode code = cw_graph->window->event.key.code;
-    char alpha_offset = 'a';
-
-    (code == sfKeyBack && len) ? str[len - 1] = 0 : 0;
-    if (sfKeyboard_isKeyPressed(sfKeyLShift))
-        alpha_offset = 'A';
-    if (len > size)
-        return;
-    if ((code >= sfKeyA && code <= sfKeyZ) ||
-        (code >= sfKeyNum0 && code <= sfKeyNum9) ||
-        code == sfKeySpace || code == 56)
-        str[len + 1] = 0;
-    if (code >= sfKeyA && code <= sfKeyZ)
-        str[len] = alpha_offset + code;
-    if (code >= sfKeyNum0 && code <= sfKeyNum9)
-        str[len] = 22 + code;
-    if (code == sfKeySpace)
-        str[len] = ' ';
-    if (code == 56)
-        str[len] = '_';
-}
-
-void update_input_nb(cw_graph_t *cw_graph, char *str, int size)
-{
-    int len = my_strlen(str);
-    sfKeyCode code = cw_graph->window->event.key.code;
-
-    (code == sfKeyBack && len) ? str[len - 1] = 0 : 0;
-    if (len > size)
-        return;
-    if (code >= sfKeyNum0 && code <= sfKeyNum9) {
-        str[len] = 22 + code;
-        str[len + 1] = 0;
-    }
-}
-
 void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str)
 {
     draw_bar_gradient(cw_graph, pos);
@@ -103,7 +64,7 @@ void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str)
     }
     sfText_setString(cw_graph->text.text, str);
     sfRenderWindow_drawText(cw_graph->window->window,
-                            cw_graph->text.text, NULL);
+    cw_graph->text.text, NULL);
 }
 
 void draw_input_bar_nb(cw_graph_t *cw_graph, sfVector2f pos, char *str)
@@ -120,5 +81,5 @@ void draw_input_bar_nb(cw_graph_t *cw_graph, sfVector2f pos, char *str)
     }
     sfText_setString(cw_graph->text.text, str);
     sfRenderWindow_drawText(cw_graph->window->window,
-                            cw_graph->text.text, NULL);
+    cw_graph->text.text, NULL);
 }

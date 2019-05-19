@@ -13,7 +13,8 @@ void draw_input_dir_ind(cw_graph_t *cw_graph)
     sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
     sfVector2f pos;
 
-    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse && cw_graph->is_released)
+    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse &&
+        cw_graph->is_released)
         cw_graph->edit.number_selected = 0;
     if (cw_graph->edit.number_selected == 0)
         pos = (sfVector2f) {580, 800};
@@ -40,6 +41,8 @@ void draw_input_dir_ind(cw_graph_t *cw_graph)
     draw_text(cw_graph, "n", 25,
     (sfVector2f) {18 + pos.x, 9 + pos.y});
     draw_text(cw_graph, "Type:", 20, (sfVector2f) {700, 815});
-    draw_text(cw_graph, (cw_graph->edit.indirect_type ? "Indirect" : "Direct"), 20, (sfVector2f) {780, 815});
-    draw_button(cw_graph, (sfVector2f) {950, 800}, cw_graph->interface_gradient, CHANGE_TYPE_TEXT);
+    draw_text(cw_graph, (cw_graph->edit.indirect_type ? "Indirect" :
+    "Direct"), 20, (sfVector2f) {780, 815});
+    draw_button(cw_graph, (sfVector2f) {950, 800},
+    cw_graph->interface_gradient, CHANGE_TYPE_TEXT);
 }

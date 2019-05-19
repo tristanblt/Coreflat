@@ -12,12 +12,12 @@ void draw_label(cw_graph_t *cw_graph, int line, int col, int i)
     sfColor color = SUBWINDOW_COLOR;
 
     if (cw_graph->is_released && is_in_rect(cw_graph,
-    (sfVector2f) {560 + col * 110, 30 + line * 45}, (sfVector2f) {110, 45}))
+        (sfVector2f) {560 + col * 110, 30+line*45}, (sfVector2f) {110, 45}))
         strcpy(cw_graph->edit.buffer, cw_graph->edit.instructions[i]->label);
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
-    (sfVector2f) {560 + col * 110, 30 + line * 45}, (sfVector2f) {110, 45}))
+        (sfVector2f) {560+col*110, 30 + line * 45}, (sfVector2f) {110, 45}))
         color = SELECTOR_COLOR_CLICKED;
-    else if (is_in_rect(cw_graph, (sfVector2f) {560 + col * 110, 30 + line * 45},
+    else if (is_in_rect(cw_graph, (sfVector2f) {560 + col * 110, 30 + line*45},
     (sfVector2f) {110, 45})) {
         color = SELECTOR_COLOR_HOVE;
     }

@@ -22,8 +22,10 @@ bool draw_edition(cw_graph_t *cw_graph)
     draw_labels(cw_graph);
     draw_input_dir_ind(cw_graph);
     draw_input_bar_nb(cw_graph, (sfVector2f) {580, 710}, cw_graph->edit.buffer);
-    draw_button(cw_graph, (sfVector2f) {1310, 720}, cw_graph->interface_gradient, SAVE_TEXT);
-    draw_button(cw_graph, (sfVector2f) {1310, 790}, cw_graph->interface_gradient, MAIN_MENU_TEXT);
+    draw_button(cw_graph, (sfVector2f) {1310, 720},
+    cw_graph->interface_gradient, SAVE_TEXT);
+    draw_button(cw_graph, (sfVector2f) {1310, 790},
+    cw_graph->interface_gradient, MAIN_MENU_TEXT);
     return (true);
 }
 

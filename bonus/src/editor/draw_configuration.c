@@ -37,9 +37,9 @@ void draw_configuration(cw_graph_t *cw_graph)
 {
     draw_background(cw_graph);
     draw_button(cw_graph, (sfVector2f){500, 400},
-                cw_graph->interface_gradient, LOAD_TEXT);
+    cw_graph->interface_gradient, LOAD_TEXT);
     draw_button(cw_graph, (sfVector2f){900, 400},
-                cw_graph->interface_gradient, CREATE_CHAMPION);
+    cw_graph->interface_gradient, CREATE_CHAMPION);
     draw_button(cw_graph, (sfVector2f){700, 600},
-                cw_graph->interface_gradient, MAIN_MENU_TEXT);
+    cw_graph->interface_gradient, MAIN_MENU_TEXT);
 }
