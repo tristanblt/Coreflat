@@ -8,8 +8,6 @@
 #include "coreflat.h"
 #include "my.h"
 
-void draw_arg_instr(cw_graph_t *cw_graph, int i, instruction_t *instruction, int j);
-
 void draw_args_instr(cw_graph_t *cw_graph, int i,
 instruction_t *instruction)
 {
@@ -26,35 +24,39 @@ void swap_instructions(instruction_t **inst_1, instruction_t **inst_2)
     *inst_2 = tmp;
 }
 
+void draw_no_instr_label(cw_graph_t *cw_graph, int i,
+instruction_t *instruction, int *index)
+{
+    sfCircleShape_setFillColor(cw_graph->buttons,
+    (sfColor){200, 150, 50, 255});
+    sfCircleShape_setPosition(cw_graph->buttons,
+    (sfVector2f){40, 165 + i * 39.3 + cw_graph->edit.cursor});
+    sfCircleShape_setRadius(cw_graph->buttons, 13);
+    sfRenderWindow_drawCircleShape(cw_graph->window->window,
+    cw_graph->buttons, NULL);
+    sfText_setColor(cw_graph->text.text, sfWhite);
+    sfText_setString(cw_graph->text.text, "+");
+    sfText_setPosition(cw_graph->text.text,
+    (sfVector2f){48, 165 + i * 39.3 + cw_graph->edit.cursor});
+    sfRenderWindow_drawText(cw_graph->window->window,
+    cw_graph->text.text, NULL);
+    if (is_in_rect(cw_graph, (sfVector2f){40, 165 + i * 39.3 +
+        cw_graph->edit.cursor}, (sfVector2f){26, 26}) &&
+    cw_graph->is_released){
+        instruction->label = strcat(my_strdup("flat_"), int_to_str(index));
+        (*index)++;
+    }
+}
+
 void draw_label_instr(cw_graph_t *cw_graph, int i, instruction_t *instruction)
 {
     static int index = 0;
 
-    if (!instruction->label) {
-        sfCircleShape_setFillColor(cw_graph->buttons,
-        (sfColor){200, 150, 50, 255});
-        sfCircleShape_setPosition(cw_graph->buttons,
-        (sfVector2f){40, 165 + i * 39.3 + cw_graph->edit.cursor});
-        sfCircleShape_setRadius(cw_graph->buttons, 13);
-        sfRenderWindow_drawCircleShape(cw_graph->window->window,
-        cw_graph->buttons, NULL);
-        sfText_setColor(cw_graph->text.text, sfWhite);
-        sfText_setString(cw_graph->text.text, "+");
-        sfText_setPosition(cw_graph->text.text,
-        (sfVector2f){48, 165 + i * 39.3 + cw_graph->edit.cursor});
-        sfRenderWindow_drawText(cw_graph->window->window,
-        cw_graph->text.text, NULL);
-        if (is_in_rect(cw_graph, (sfVector2f){40, 165 + i * 39.3 +
-            cw_graph->edit.cursor}, (sfVector2f){26, 26}) &&
-        cw_graph->is_released){
-            instruction->label = strcat(my_strdup("flat_"), int_to_str(index));
-            index++;
-        }
-    }
-    else {
+    if (!instruction->label)
+        draw_no_instr_label(cw_graph, i, instruction, &index);
+    else
         draw_text(cw_graph, instruction->label, 15, (sfVector2f)
         {44, 170 + i * 39.3 + cw_graph->edit.cursor});
-    }
 }
 
 int draw_one_instruction_champ(cw_graph_t *cw_graph, int i,

@@ -50,25 +50,24 @@ instruction_t *instruction, sfVector2i new)
 void draw_arg_instr_2(cw_graph_t *cw_graph,
 instruction_t *instruction, sfIntRect n, sfColor color)
 {
-    if (is_in_rect(cw_graph, (sfVector2f){220+n.width*20+n.top*80,170+n.left*
+    if (is_in_rect(cw_graph, (sfVector2f){220+n.width*20+n.top*80, 170+n.left*
             39.3 + cw_graph->edit.cursor}, (sfVector2f) {70, 20}) &&
         !can_drop(cw_graph, n.left, instruction, n.top))
         color = (sfColor) {200, 20, 10, 255};
     else if (is_in_rect(cw_graph, (sfVector2f){220+n.width*20+n.top*80,
-170+n.left*39.3 + cw_graph->edit.cursor}, (sfVector2f) {70, 20}) &&
+            170+n.left*39.3 + cw_graph->edit.cursor}, (sfVector2f) {70, 20}) &&
         can_drop(cw_graph, n.left, instruction, n.top))
         color = (sfColor) {20, 200, 10, 255};
-    draw_rect(cw_graph, (sfVector2f){220+n.width*20+n.top*80,170+n.left*39.3+
+    draw_rect(cw_graph, (sfVector2f){220+n.width*20+n.top*80, 170+n.left*39.3+
         cw_graph->edit.cursor}, (sfVector2f) {70, 20}, color);
     sfText_setColor(cw_graph->text.text, color);
     if (instruction->label_args[n.top]) {
         if (instruction->description[n.top] == T_DIR)
-            draw_text(cw_graph, "%", 13,
-            (sfVector2f) {220+n.width*20+n.top*80,
-            170+n.left*39.3+cw_graph->edit.cursor});
+            draw_text(cw_graph, "%", 13, (sfVector2f)
+            {220+n.width*20+n.top*80, 170+n.left*39.3+cw_graph->edit.cursor});
         draw_text(cw_graph, instruction->label_args[n.top], 13,
-(sfVector2f) {(instruction->description[n.top] == T_DIR ? 235 : 220) +
-n.width * 20 + n.top * 80, 170 + n.left * 39.3 + cw_graph->edit.cursor});
+        (sfVector2f) {(instruction->description[n.top] == T_DIR ? 235 : 220) +
+            n.width * 20 + n.top * 80, 170+n.left*39.3+cw_graph->edit.cursor});
         return;
     }
 }
@@ -98,9 +97,9 @@ instruction_t *instruction, int j)
         instruction->description[j]=cw_graph->edit.indirect_type?T_IND:T_DIR;
     }
     else if (is_in_rect(cw_graph, (sfVector2f) {220 + dec * 20 + j * 80, 170+i*
-39.3 + cw_graph->edit.cursor}, (sfVector2f) {70, 20}) &&
-can_drop(cw_graph, i, instruction, j) && cw_graph->is_released &&
-cw_graph->edit.register_selected) {
+        39.3 + cw_graph->edit.cursor}, (sfVector2f) {70, 20}) &&
+    can_drop(cw_graph, i, instruction, j) && cw_graph->is_released &&
+    cw_graph->edit.register_selected) {
         instruction->args[j] = cw_graph->edit.register_selected;
         instruction->description[j] = T_REG;
     } draw_arg_instr_1(cw_graph, instruction, (sfIntRect){i, j, dec, 0}, color);
