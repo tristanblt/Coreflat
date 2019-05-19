@@ -149,4 +149,7 @@ $(COREFLAT): $(OBJ)
 		make lib -C corewar
 		$(CC) -o $(COREFLAT) $(OBJ) $(CFLAGS) $(LDFLAGS)
 
-.PHONY	:	clean fclean re
+tests_run	:
+			make tests_run -C corewar
+
+.PHONY	:	clean fclean re tests_run
