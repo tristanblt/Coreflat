@@ -54,7 +54,6 @@ void draw_subwindows(cw_graph_t *cw_graph)
 void draw_buttons(cw_graph_t *cw_graph)
 {
     char *text = cw_graph->g_setts.corewar_launched ? PAUSE_TEXT : PLAY_TEXT;
-
     draw_button(cw_graph, (sfVector2f){1400, 15}, BACKGROUND_COLOR, text);
 }
 

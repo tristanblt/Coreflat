@@ -48,6 +48,7 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				bonus/src/editor/label_manager.c						\
 				bonus/src/editor/register_manager.c						\
 				bonus/src/editor/save_to_file.c							\
+				bonus/src/visualiser/draw_visualiser.c						\
 				corewar/src/parse_instructions.c						\
 				corewar/src/parse_header.c								\
 				corewar/src/cycle_manager.c								\

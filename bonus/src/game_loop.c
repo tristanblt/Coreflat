@@ -66,6 +66,7 @@ bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory)
 
     fcts[0] = (fct_t) {live_flat, IC_live};
     fcts[15] = (fct_t) {aff_flat, IC_aff};
+    cw_graph->visualiser.fct = fcts;
     while (sfRenderWindow_isOpen(cw_graph->window->window)) {
         manage_events(cw_graph);
         evolve_gradient(&cw_graph->interface_gradient);

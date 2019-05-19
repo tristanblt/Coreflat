@@ -72,9 +72,11 @@ Have fun, this game was made for this after all !!! <3"
 #define LOAD_TEXT "Load Champion"
 #define CREATE_CHAMPION "Create Champion"
 #define VALIDATE_CHAMPION "Validate choice"
+#define VISUALISER_TEXT "Visualiser"
+#define VISUALISE_TEXT "Visualise"
 
 #define NBR_ICONS 4
-#define NBR_VIEWS 8
+#define NBR_VIEWS 9
 
 #define GAME_SPEED 5
 
@@ -89,6 +91,7 @@ typedef struct icon icon_t;
 typedef struct view view_t;
 typedef struct game_settings game_settings_t;
 typedef struct editor editor_t;
+typedef struct visualiser visualiser_t;
 
 /*
 ** STRUCTS
@@ -150,6 +153,13 @@ struct editor
     char *buffer;
 };
 
+struct visualiser
+{
+    int selected;
+    int step;
+    fct_t *fct;
+};
+
 struct coreflat
 {
     bool is_released;
@@ -163,6 +173,7 @@ struct coreflat
     sfCircleShape *buttons;
     sfColor interface_gradient;
     sfMusic *music;
+    visualiser_t visualiser;
 };
 
 /*
@@ -227,6 +238,10 @@ void draw_labels(cw_graph_t *cw_graph);
 void draw_input_bar_nb(cw_graph_t *cw_graph, sfVector2f pos, char *str);
 void draw_text_no_color(cw_graph_t *cw_graph, char *name, int size,
 sfVector2f pos);
+void draw_header(cw_graph_t *cw_graph);
+void draw_subwindows(cw_graph_t *cw_graph);
+sfColor find_color(champion_t **champions, list_t *memory);
+void draw_block(cw_graph_t *cw_graph, int col, int line, sfColor color);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
@@ -248,6 +263,7 @@ champion_t *champion_dup(champion_t *dup);
 void set_proc_owner(proc_t **procs);
 instruction_t *parse_instruction_from_file(char *file, int *i, int size);
 
-
+//visualisor
+bool draw_visualiser(cw_graph_t *cw_graph, champion_t **champs, list_t *memory);
 
 #endif /* !COREFLAT_H_ */
