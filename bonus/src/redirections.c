@@ -27,6 +27,16 @@ void reset_g_setts(cw_graph_t *cw_graph)
     cw_graph->g_setts.champions[0] = NULL;
 }
 
+void redirection_next_next(cw_graph_t *cw_graph, char *to)
+{
+    if (my_strcmp(to, VALIDATE_CHAMPION) && cw_graph->edit.selected != -1)
+        cw_graph->edit.step = 4;
+    if (my_strcmp(to, VISUALISER_TEXT))
+        cw_graph->current_view = 8;
+    if (my_strcmp(to, VISUALISE_TEXT))
+        cw_graph->visualiser.step = 1;
+}
+
 void redirection_next(cw_graph_t *cw_graph, char *to)
 {
     if (my_strcmp(to, PAUSE_TEXT))
@@ -47,12 +57,7 @@ void redirection_next(cw_graph_t *cw_graph, char *to)
         cw_graph->edit.step = 3;
     if (my_strcmp(to, SAVE_TEXT))
         save_to_file(cw_graph);
-    if (my_strcmp(to, VALIDATE_CHAMPION) && cw_graph->edit.selected != -1)
-        cw_graph->edit.step = 4;
-    if (my_strcmp(to, VISUALISER_TEXT))
-        cw_graph->current_view = 8;
-    if (my_strcmp(to, VISUALISE_TEXT))
-        cw_graph->visualiser.step = 1;
+    redirection_next_next(cw_graph, to);
 }
 
 void redirection(cw_graph_t *cw_graph, char *to)

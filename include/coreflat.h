@@ -185,6 +185,7 @@ struct coreflat
 // init
 cw_graph_t *init_cw_graph(void);
 view_t **views_fcts(void);
+bool init_edition(cw_graph_t *cw_graph);
 
 // starting
 bool game_loop(cw_graph_t *cw_graph, champion_t **champions, list_t *memory);

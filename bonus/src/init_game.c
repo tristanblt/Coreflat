@@ -62,13 +62,8 @@ bool init_g_setts(cw_graph_t *cw_graph)
     sfMusic_play(cw_graph->music);
     cw_graph->current_view = 0;
     cw_graph->g_setts = (game_settings_t) {0};
-    cw_graph->edit = (editor_t) {0};
-    cw_graph->edit.buffer = malloc(sizeof(char) * 14);
-    if (cw_graph->edit.buffer == NULL)
+    if (!init_edition(cw_graph))
         return (false);
-    for (int i = 0; i < 14; i++)
-        cw_graph->edit.buffer[i] = 0;
-    cw_graph->edit.number_selected = false;
     cw_graph->g_setts.nb_champions = 2;
     cw_graph->g_setts.volume = 3;
     cw_graph->g_setts.pass_step = 1;
