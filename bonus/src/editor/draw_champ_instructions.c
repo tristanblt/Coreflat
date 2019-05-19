@@ -39,7 +39,15 @@ instruction_t *instruction)
     }
 }
 
-bool draw_one_instruction_champ(cw_graph_t *cw_graph, int i,
+void swap_instructions(instruction_t **inst_1, instruction_t **inst_2)
+{
+    instruction_t *tmp = *inst_1;
+
+    *inst_1 = *inst_2;
+    *inst_2 = tmp;
+}
+
+int draw_one_instruction_champ(cw_graph_t *cw_graph, int i,
 instruction_t *instruction)
 {
     sfColor color = SUBWINDOW_COLOR;
@@ -66,9 +74,8 @@ instruction_t *instruction)
     sfText_setFillColor(cw_graph->text.text, SUBWINDOW_COLOR);
     sfRenderWindow_drawCircleShape(cw_graph->window->window, cw_graph->buttons, NULL);
     sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text, NULL);
-    if (is_in_rect(cw_graph, (sfVector2f){495, 166 + i * 39.3 +
-cw_graph->edit.cursor}, (sfVector2f){26, 26}) && cw_graph->is_released)
-        return (false);
+    if (is_in_rect(cw_graph, (sfVector2f){495, 166 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f){26, 26}) && cw_graph->is_released)
+        return (1);
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfText_setString(cw_graph->text.text, "V");
     sfText_setPosition(cw_graph->text.text, (sfVector2f){481, 177 + i * 39.3 + cw_graph->edit.cursor});
@@ -78,26 +85,40 @@ cw_graph->edit.cursor}, (sfVector2f){26, 26}) && cw_graph->is_released)
     sfText_setPosition(cw_graph->text.text, (sfVector2f){470, 177 + i * 39.3 + cw_graph->edit.cursor});
     sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text, NULL);
     if (is_in_rect(cw_graph, (sfVector2f){470, 160 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f){10, 10}) && cw_graph->is_released)
-        return (my_printf("UP\n")%1 + 1);
-    if (is_in_rect(cw_graph, (sfVector2f){470, 170 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f){10, 109}) && cw_graph->is_released)
-        return (my_printf("DOWN\n")%1 + 1);
-    return (true);
+        return (2);
+    if (is_in_rect(cw_graph, (sfVector2f){470, 185 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f){10, 10}) && cw_graph->is_released)
+        return (3);
+    return (0);
+}
+
+void remove_instruction(cw_graph_t *cw_graph, int *i, bool *removed)
+{
+    free(cw_graph->edit.instructions[*i]->description);
+    free(cw_graph->edit.instructions[*i]->args);
+    free(cw_graph->edit.instructions[*i]->label_args);
+    free(cw_graph->edit.instructions[*i]);
+    for (int j = *i; cw_graph->edit.instructions[j]; j++)
+        cw_graph->edit.instructions[j] = cw_graph->edit.instructions[j + 1];
+    (*i)--;
+    (*removed) = true;
 }
 
 void draw_champ_instructions(cw_graph_t *cw_graph)
 {
     bool removed = false;
+    bool moved = false;
+    int ret = 0;
 
     for (int i = 0; cw_graph->edit.instructions[i]; i++) {
-        if (!draw_one_instruction_champ(cw_graph, i, cw_graph->edit.instructions[i]) && !removed) {
-            free(cw_graph->edit.instructions[i]->description);
-            free(cw_graph->edit.instructions[i]->args);
-            free(cw_graph->edit.instructions[i]->label_args);
-            free(cw_graph->edit.instructions[i]);
-            for (int j = i; cw_graph->edit.instructions[j]; j++)
-                cw_graph->edit.instructions[j] = cw_graph->edit.instructions[j + 1];
-            i--;
-            removed = true;
+        ret = draw_one_instruction_champ(cw_graph, i, cw_graph->edit.instructions[i]);
+        if (ret == 1 && !removed)
+            remove_instruction(cw_graph, &i, &removed);
+        if (ret == 2 && !moved && i) {
+            swap_instructions(&cw_graph->edit.instructions[i], &cw_graph->edit.instructions[i - 1]);
+            moved = true;
+        } else if (ret == 3 && !moved && cw_graph->edit.instructions[i + 1]) {
+            swap_instructions(&cw_graph->edit.instructions[i], &cw_graph->edit.instructions[i + 1]);
+            moved = true;
         }
     }
 }
