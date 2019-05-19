@@ -8,6 +8,26 @@
 #include "coreflat.h"
 #include "my.h"
 
+void draw_arg_hover(cw_graph_t *cw_graph, int i, int dec, sfVector2i mouse)
+{
+    if (op_tab[i].type[j] & T_REG) {
+        draw_text(cw_graph, "Reg", 16,
+        (sfVector2f) {(int)mouse.x+20+dec*40, (int)mouse.y+70+j*30});
+        dec++;
+    }
+    if (op_tab[i].type[j] & T_DIR) {
+        draw_text(cw_graph, "Dir", 16,
+        (sfVector2f) {(int)mouse.x+20+dec*40, (int)mouse.y+70+j*30});
+        dec++;
+    }
+    if (op_tab[i].type[j] & T_IND) {
+        draw_text(cw_graph, "Ind", 16,
+        (sfVector2f) {(int)mouse.x+20+dec*35, (int)mouse.y+70+j*30});
+        dec++;
+    }
+    dec = 0;
+}
+
 void display_hover_instruction(cw_graph_t *cw_graph, int i)
 {
     sfVector2i mouse =
@@ -18,24 +38,8 @@ void display_hover_instruction(cw_graph_t *cw_graph, int i)
     (sfVector2f) {150, 180}, SELECTOR_COLOR);
     draw_text(cw_graph, op_tab[i].mnemonique, 40,
     (sfVector2f) {(int)mouse.x + 20, (int)mouse.y + 10});
-    for (int j = 0; j < op_tab[i].nbr_args; j++) {
-        if (op_tab[i].type[j] & T_REG) {
-            draw_text(cw_graph, "Reg", 16,
-            (sfVector2f) {(int)mouse.x+20+dec*40, (int)mouse.y+70+j*30});
-            dec++;
-        }
-        if (op_tab[i].type[j] & T_DIR) {
-            draw_text(cw_graph, "Dir", 16,
-            (sfVector2f) {(int)mouse.x+20+dec*40, (int)mouse.y+70+j*30});
-            dec++;
-        }
-        if (op_tab[i].type[j] & T_IND) {
-            draw_text(cw_graph, "Ind", 16,
-            (sfVector2f) {(int)mouse.x+20+dec*35, (int)mouse.y+70+j*30});
-            dec++;
-        }
-        dec = 0;
-    }
+    for (int j = 0; j < op_tab[i].nbr_args; j++)
+        draw_arg_hover(cw_graph, i, dec, mouse);
 }
 
 bool add_instruction_to_editor(cw_graph_t *cw_graph, int i)
@@ -59,9 +63,7 @@ bool add_instruction_to_editor(cw_graph_t *cw_graph, int i)
     to_add->code = i + 1;
     cw_graph->edit.instructions = push_instruction(cw_graph->edit.instructions,
     to_add);
-    if (!cw_graph->edit.instructions)
-        return (false);
-    return (true);
+    return (cw_graph->edit.instructions ? true : false);
 }
 
 bool draw_one_instruction(cw_graph_t *cw_graph, int i, int *hover)

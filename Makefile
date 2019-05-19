@@ -11,6 +11,7 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				bonus/src/start_graphical_corewar.c						\
 				bonus/src/game_loop.c									\
 				bonus/src/init_game.c									\
+				bonus/src/init_game2.c									\
 				bonus/src/draw_interface.c								\
 				bonus/src/draw_icons.c									\
 				bonus/src/manage_events.c								\

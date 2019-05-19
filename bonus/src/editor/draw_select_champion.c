@@ -29,8 +29,7 @@ bool disasm_champion(cw_graph_t *cw_graph, champion_t **champions)
     }
     compute_instructions_sizes(cw_graph->edit.instructions);
     fill_label_args(cw_graph->edit.instructions);
-    cw_graph->edit.step = 3;
-    return (true);
+    return ((cw_graph->edit.step = 3) % 1 + true);
 }
 
 bool draw_select_champion(cw_graph_t *cw_graph, champion_t **champions)

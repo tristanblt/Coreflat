@@ -45,7 +45,7 @@ void save_to_file(cw_graph_t *cw_graph)
     cw_graph->edit.header->prog_size =
     compute_instruction_size(cw_graph->edit.instructions);
     if (!encode_instructions_to_file(file_name,
-    cw_graph->edit.instructions, cw_graph->edit.header))
+        cw_graph->edit.instructions, cw_graph->edit.header))
         return;
     adapt_instructions_to_coreflat(cw_graph->edit.instructions);
 }
