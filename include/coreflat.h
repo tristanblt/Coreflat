@@ -265,14 +265,10 @@ bool auto_pre_game(cw_graph_t *cw_graph, list_t *memory);
 champion_t *champion_dup(champion_t *dup);
 void set_proc_owner(proc_t **procs);
 instruction_t *parse_instruction_from_file(char *file, int *i, int size);
-<<<<<<< HEAD
 bool encode_instructions_to_file(char *file_name, instruction_t **instructions,
 header_t *header);
 
-=======
-
 //visualisor
 bool draw_visualiser(cw_graph_t *cw_graph, champion_t **champs, list_t *memory);
->>>>>>> 7c69a2843017edff21f21cc885695cb9d61a2c79
 
 #endif /* !COREFLAT_H_ */
