@@ -54,11 +54,12 @@ bool visualise_champion(cw_graph_t *cw_graph, list_t *memory)
         if (col == 96)
             (line++, col = 0);
     }
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < cw_graph->visualiser.speed * 4; i++) {
         if (!do_corewar_cycle(&cw_graph->g_setts.procs,
             cw_graph->visualiser.fct))
             return (false);
-    nbr_cycles++;
+        nbr_cycles++;
+    }
     set_proc_owner(cw_graph->g_setts.procs);
     return (true);
 }
@@ -103,6 +104,8 @@ bool draw_visualiser(cw_graph_t *cw_graph, champion_t **champs, list_t *memory)
         visualise_champion(cw_graph, memory);
         draw_button(cw_graph, (sfVector2f){1300, 800},
         cw_graph->interface_gradient, EXIT_TEXT);
+        draw_selector(cw_graph, (sfVector2i){0, 9}, (sfVector2f){1220, 650},
+        &cw_graph->visualiser.speed);
     }
     return (true);
 }

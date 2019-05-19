@@ -162,6 +162,7 @@ struct visualiser
     int selected;
     int step;
     fct_t *fct;
+    int speed;
 };
 
 struct coreflat

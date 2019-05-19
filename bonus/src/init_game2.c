@@ -10,6 +10,7 @@
 bool init_edition(cw_graph_t *cw_graph)
 {
     cw_graph->edit = (editor_t) {0};
+    cw_graph->edit.selected = -1;
     cw_graph->edit.buffer = malloc(sizeof(char) * 14);
     if (cw_graph->edit.buffer == NULL)
         return (false);

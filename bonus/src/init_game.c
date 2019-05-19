@@ -70,7 +70,7 @@ bool init_g_setts(cw_graph_t *cw_graph)
     cw_graph->g_setts.cycles_per_second = 1;
     cw_graph->g_setts.acceleration = 1;
     cw_graph->g_setts.champions = malloc(sizeof(champion_t *));
-    cw_graph->visualiser = (visualiser_t){-1, 0, 0};
+    cw_graph->visualiser = (visualiser_t){-1, 0, 0, 1};
     if (cw_graph->g_setts.champions == NULL)
         return (false);
     cw_graph->g_setts.champions[0] = NULL;
