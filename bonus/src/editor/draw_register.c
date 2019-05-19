@@ -7,19 +7,11 @@
 
 #include "coreflat.h"
 
-void draw_register(cw_graph_t *cw_graph, int line, int col, int i)
+void draw_register_circle(cw_graph_t *cw_graph, sfVector2f lc, int i,
+sfVector2f pos)
 {
     sfColor color = SELECTOR_COLOR;
-    sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
-    sfVector2f pos;
 
-    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse &&
-        cw_graph->is_released)
-        cw_graph->edit.register_selected = 0;
-    if (cw_graph->edit.register_selected != i + 1)
-        pos = (sfVector2f) {615 + col * 130, 390 + line * 64};
-    else
-        pos = (sfVector2f) {(int)mouse.x - 20, (int)mouse.y - 20};
     if (sfMouse_isButtonPressed(sfMouseLeft) && is_in_rect(cw_graph,
     pos, (sfVector2f) {50, 50}) && cw_graph->edit.register_selected == 0 &&
     cw_graph->edit.number_selected == false) {
@@ -37,6 +29,21 @@ void draw_register(cw_graph_t *cw_graph, int line, int col, int i)
     cw_graph->buttons, NULL);
     draw_text(cw_graph, int_to_str(i + 1), 25,
     (sfVector2f) {18 + pos.x - (i > 8 ? 5 : 0), 9 + pos.y});
+}
+
+void draw_register(cw_graph_t *cw_graph, int line, int col, int i)
+{
+    sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
+    sfVector2f pos;
+
+    if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse &&
+        cw_graph->is_released)
+        cw_graph->edit.register_selected = 0;
+    if (cw_graph->edit.register_selected != i + 1)
+        pos = (sfVector2f) {615 + col * 130, 390 + line * 64};
+    else
+        pos = (sfVector2f) {(int)mouse.x - 20, (int)mouse.y - 20};
+    draw_register_circle(cw_graph, (sfVector2f){line, col}, i, pos);
 }
 
 void draw_registers(cw_graph_t *cw_graph)
