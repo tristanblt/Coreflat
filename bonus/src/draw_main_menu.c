@@ -23,13 +23,15 @@ list_t *memory)
     BEGIN_TEXT);
     draw_button(cw_graph, (sfVector2f) {250, 390}, cw_graph->interface_gradient,
     EDITOR_TEXT);
-    draw_button(cw_graph, (sfVector2f) {250, 460}, cw_graph->interface_gradient,
-    SETTINGS_TEXT);
+    draw_button(cw_graph, (sfVector2f){250, 460}, cw_graph->interface_gradient,
+    VISUALISER_TEXT);
     draw_button(cw_graph, (sfVector2f) {250, 530}, cw_graph->interface_gradient,
-    HELP_TEXT);
+    SETTINGS_TEXT);
     draw_button(cw_graph, (sfVector2f) {250, 600}, cw_graph->interface_gradient,
-    CREDITS_TEXT);
+    HELP_TEXT);
     draw_button(cw_graph, (sfVector2f) {250, 670}, cw_graph->interface_gradient,
+    CREDITS_TEXT);
+    draw_button(cw_graph, (sfVector2f) {250, 740}, cw_graph->interface_gradient,
     EXIT_TEXT);
     return (true);
 }
