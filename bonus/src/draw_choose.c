@@ -26,6 +26,9 @@ void draw_step_dots(cw_graph_t *cw_graph)
     if (cw_graph->g_setts.step != 3 && cw_graph->g_setts.step != 5)
         draw_button(cw_graph, (sfVector2f) {710, 600},
         cw_graph->interface_gradient, NEXT_TEXT);
+    if (cw_graph->g_setts.step < 3)
+        draw_button(cw_graph, (sfVector2f) {710, 670},
+        cw_graph->interface_gradient, MAIN_MENU_TEXT_B);
 }
 
 bool dispacht_steps(cw_graph_t *cw_graph, champion_t **champions, int *n)

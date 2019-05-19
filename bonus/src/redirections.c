@@ -40,6 +40,14 @@ void redirection_next_next(cw_graph_t *cw_graph, char *to)
         cw_graph->current_view = 8;
     if (my_strcmp(to, VISUALISE_TEXT))
         cw_graph->visualiser.step = 1;
+    if (my_strcmp(to, MAIN_MENU_TEXT_B)) {
+        cw_graph->g_setts.step = 0;
+        cw_graph->current_view = 0;
+        cw_graph->g_setts.automatic_cps = false;
+        cw_graph->g_setts.nb_champions = 2;
+        cw_graph->g_setts.pass_step = 1;
+        cw_graph->g_setts.acceleration = 1;
+    }
 }
 
 void redirection_next(cw_graph_t *cw_graph, char *to)
