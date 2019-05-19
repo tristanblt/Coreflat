@@ -45,6 +45,8 @@ void redirection_next(cw_graph_t *cw_graph, char *to)
         cw_graph->edit.step = 2;
     if (my_strcmp(to, EDIT_CHAMP_TEXT))
         cw_graph->edit.step = 3;
+    if (my_strcmp(to, SAVE_TEXT))
+        save_to_file(cw_graph);
     if (my_strcmp(to, VALIDATE_CHAMPION) && cw_graph->edit.selected != -1)
         cw_graph->edit.step = 4;
 }

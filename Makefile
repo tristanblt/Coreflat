@@ -33,21 +33,18 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				bonus/src/draw_choose_next.c							\
 				bonus/src/draw_selector.c								\
 				bonus/src/draw_settings.c								\
-				bonus/src/launch_corewar.c								\
 				bonus/src/free_utils.c									\
 				bonus/src/editor/draw_editor.c							\
 				bonus/src/editor/draw_configuration.c					\
 				bonus/src/editor/draw_interface.c						\
 				bonus/src/editor/draw_input_number.c					\
-				bonus/src/editor/instruction_manager.c					\
 				bonus/src/editor/draw_all_instructions.c				\
 				bonus/src/editor/draw_champ_instructions.c				\
 				bonus/src/editor/draw_labels.c							\
 				bonus/src/editor/draw_register.c						\
 				bonus/src/editor/draw_select_champion.c					\
-				bonus/src/editor/label_manager.c						\
-				bonus/src/editor/register_manager.c						\
 				bonus/src/editor/save_to_file.c							\
+				bonus/src/editor/draw_input_dir_ind.c					\
 				corewar/src/parse_instructions.c						\
 				corewar/src/parse_header.c								\
 				corewar/src/cycle_manager.c								\

@@ -51,6 +51,25 @@ char *int_to_str(int nb)
     return (str);
 }
 
+char *int_to_str_reg(int nb)
+{
+    char *str = malloc(sizeof(char) * (12));
+    int k = 0;
+
+    if (str == NULL)
+        return (NULL);
+    memset(str, 0, 12);
+    if (nb == 0)
+        str[0] = '0';
+    for (int i = 0; nb > 0; i++) {
+        str[i] = nb % 10 + '0';
+        nb /= 10;
+    }
+    my_revstr(str);
+    return (str);
+}
+
+
 void draw_text(cw_graph_t *cw_graph, char *name, int size, sfVector2f pos)
 {
     sfText_setString(cw_graph->text.text, name);

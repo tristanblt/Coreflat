@@ -12,7 +12,6 @@ char *change_s_to_cor(char *file_name)
 {
     int i = 0;
     char *new_file_name = my_calloc(my_strlen(file_name) + 3, sizeof(char));
-
     if (new_file_name == NULL)
         return (NULL);
     for (; i < my_strlen(file_name) - 1; i++)

@@ -83,12 +83,10 @@ void update_input_nb(cw_graph_t *cw_graph, char *str, int size)
     (code == sfKeyBack && len) ? str[len - 1] = 0 : 0;
     if (len > size)
         return;
-    printf("oui:%i\n", len);
     if (code >= sfKeyNum0 && code <= sfKeyNum9) {
         str[len] = 22 + code;
         str[len + 1] = 0;
     }
-    printf("non\n");
 }
 
 void draw_input_bar(cw_graph_t *cw_graph, sfVector2f pos, char *str)
