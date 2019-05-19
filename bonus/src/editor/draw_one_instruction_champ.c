@@ -29,12 +29,13 @@ instruction_t *instruction, sfColor color)
     sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text,
     NULL);
 }
+
 void draw_one_instruction_champ_2(cw_graph_t *cw_graph, int i)
 {
     sfText_setColor(cw_graph->text.text, sfWhite);
     sfText_setString(cw_graph->text.text, "V");
     sfText_setPosition(cw_graph->text.text, (sfVector2f){481, 177 + i * 39.3 +
-    cw_graph->edit.cursor});
+        cw_graph->edit.cursor});
     sfText_setRotation(cw_graph->text.text, 180);
     sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text,
     NULL);
@@ -48,14 +49,17 @@ void draw_one_instruction_champ_2(cw_graph_t *cw_graph, int i)
 int draw_one_instruction_champ_3(cw_graph_t *cw_graph, int i)
 {
     if (is_in_rect(cw_graph, (sfVector2f){495, 166 + i * 39.3 +
-        cw_graph->edit.cursor}, (sfVector2f){26, 26}) && cw_graph->is_released)
+            cw_graph->edit.cursor}, (sfVector2f){26, 26}) &&
+        cw_graph->is_released)
         return (1);
     draw_one_instruction_champ_2(cw_graph, i);
     if (is_in_rect(cw_graph, (sfVector2f){470, 160 + i * 39.3 +
-        cw_graph->edit.cursor}, (sfVector2f){10, 10}) && cw_graph->is_released)
+            cw_graph->edit.cursor}, (sfVector2f){10, 10}) &&
+        cw_graph->is_released)
         return (2);
     if (is_in_rect(cw_graph, (sfVector2f){470, 185 + i * 39.3 +
-        cw_graph->edit.cursor}, (sfVector2f){10, 10}) && cw_graph->is_released)
+            cw_graph->edit.cursor}, (sfVector2f){10, 10}) &&
+        cw_graph->is_released)
         return (3);
     return (0);
 

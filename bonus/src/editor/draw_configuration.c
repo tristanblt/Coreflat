@@ -7,6 +7,14 @@
 
 #include "coreflat.h"
 
+void draw_args_instr(cw_graph_t *cw_graph, int i,
+instruction_t *instruction)
+{
+    for (int j = 0; j < op_tab[instruction->code - 1].nbr_args; j++) {
+        draw_arg_instr(cw_graph, i, instruction, j);
+    }
+}
+
 bool fill_editor_with_empty_champion(editor_t *editor)
 {
     editor->header = malloc(sizeof(header_t));

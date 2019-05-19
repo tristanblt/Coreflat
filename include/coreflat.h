@@ -255,6 +255,8 @@ void update_input_nb(cw_graph_t *cw_graph, char *str, int size);
 void save_to_file(cw_graph_t *cw_graph);
 void draw_input_dir_ind(cw_graph_t *cw_graph);
 void compute_instructions_sizes(instruction_t **insts);
+void draw_args_instr(cw_graph_t *cw_graph, int i,
+instruction_t *instruction);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
