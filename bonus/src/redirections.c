@@ -23,12 +23,17 @@ void reset_g_setts(cw_graph_t *cw_graph)
     cw_graph->g_setts.pass_step = 1;
     cw_graph->g_setts.automatic_cps = false;
     cw_graph->g_setts.color = (sfColor) {0};
+    destroy_champions(cw_graph->g_setts.champions);
     cw_graph->g_setts.champions = malloc(sizeof(champion_t *));
     cw_graph->g_setts.champions[0] = NULL;
 }
 
 void redirection_next_next(cw_graph_t *cw_graph, char *to)
 {
+    if (my_strcmp(to, SAVE_TEXT)) {
+        save_to_file(cw_graph);
+        sfRenderWindow_close(cw_graph->window->window);
+    }
     if (my_strcmp(to, VALIDATE_CHAMPION) && cw_graph->edit.selected != -1)
         cw_graph->edit.step = 4;
     if (my_strcmp(to, VISUALISER_TEXT))
@@ -55,8 +60,6 @@ void redirection_next(cw_graph_t *cw_graph, char *to)
         cw_graph->edit.step = 2;
     if (my_strcmp(to, EDIT_CHAMP_TEXT))
         cw_graph->edit.step = 3;
-    if (my_strcmp(to, SAVE_TEXT))
-        save_to_file(cw_graph);
     redirection_next_next(cw_graph, to);
 }
 

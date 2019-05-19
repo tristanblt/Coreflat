@@ -56,10 +56,13 @@ bool visualise_champion(cw_graph_t *cw_graph, list_t *memory)
             col = 0;
         }
     }
-    if (!do_corewar_cycle(&cw_graph->g_setts.procs, cw_graph->visualiser.fct))
-        return (false);
+    for (int i = 0; i < 1; i++)
+        if (!do_corewar_cycle(&cw_graph->g_setts.procs, cw_graph->visualiser.fct))
+            return (false);
     nbr_cycles++;
     set_proc_owner(cw_graph->g_setts.procs);
+    draw_button(cw_graph, (sfVector2f){1300, 800}, cw_graph->interface_gradient,
+    EXIT_TEXT);
     return (true);
 }
 
