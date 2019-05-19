@@ -41,6 +41,7 @@ void save_to_file(cw_graph_t *cw_graph)
         return;
     for (int i = 0; comment[i]; i++)
         cw_graph->edit.header->comment[i] = comment[i];
+    adapt_instructions_to_asm(cw_graph->edit.instructions);
     cw_graph->edit.header->prog_size =
     compute_instruction_size(cw_graph->edit.instructions);
     if (!encode_instructions_to_file(file_name,
