@@ -8,28 +8,34 @@
 #include "coreflat.h"
 #include "my.h"
 
+void draw_arg_instr(cw_graph_t *cw_graph, int i,
+instruction_t *instruction, int j)
+{
+    int dec = 0;
+    sfColor color = (sfColor) {255, 255, 255, 255};
+
+    if (op_tab[instruction->code - 1].type[j] & T_REG) {
+        draw_text_no_color(cw_graph, "R", 16,
+        (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor});
+        dec++;
+    }
+    if (op_tab[instruction->code - 1].type[j] & T_DIR) {
+        draw_text_no_color(cw_graph, "D", 16,
+        (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor});
+        dec++;
+    }
+    if (op_tab[instruction->code - 1].type[j] & T_IND) {
+        draw_text_no_color(cw_graph, "I", 16,
+        (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor});
+        dec++;
+    }
+}
+
 void draw_args_instr(cw_graph_t *cw_graph, int i,
 instruction_t *instruction)
 {
-    int dec = 0;
-
     for (int j = 0; j < op_tab[i].nbr_args; j++) {
-        if (op_tab[instruction->code - 1].type[j] & T_REG) {
-            draw_text(cw_graph, "Reg", 16,
-            (sfVector2f) {180 + dec * 40 + j * 100, 170 + i * 39.3 + cw_graph->edit.cursor});
-            dec++;
-        }
-        if (op_tab[instruction->code - 1].type[j] & T_DIR) {
-            draw_text(cw_graph, "Dir", 16,
-            (sfVector2f) {180 + dec * 40 + j * 100, 170 + i * 39.3 + cw_graph->edit.cursor});
-            dec++;
-        }
-        if (op_tab[instruction->code - 1].type[j] & T_IND) {
-            draw_text(cw_graph, "Ind", 16,
-            (sfVector2f) {180 + dec * 35 + j * 100, 170 + i * 39.3 + cw_graph->edit.cursor});
-            dec++;
-        }
-        dec = 0;
+        draw_arg_instr(cw_graph, i, instruction, j);
     }
 }
 
