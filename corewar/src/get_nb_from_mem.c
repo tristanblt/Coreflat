@@ -23,4 +23,3 @@ int get_nb_from_mem(list_t *mem, int size, int offset)
     }
     return (nb);
 }
-
