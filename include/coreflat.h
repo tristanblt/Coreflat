@@ -73,12 +73,9 @@ Have fun, this game was made for this after all !!! <3"
 #define LOAD_TEXT "Load Champion"
 #define CREATE_CHAMPION "Create Champion"
 #define VALIDATE_CHAMPION "Validate choice"
-<<<<<<< HEAD
 #define SAVE_TEXT "Save"
-=======
 #define VISUALISER_TEXT "Visualiser"
 #define VISUALISE_TEXT "Visualise"
->>>>>>> 7c69a2843017edff21f21cc885695cb9d61a2c79
 
 #define NBR_ICONS 4
 #define NBR_VIEWS 9
