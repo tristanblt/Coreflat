@@ -55,7 +55,7 @@ bool add_instruction_to_editor(cw_graph_t *cw_graph, int i)
     }
     for (int j = 0; j < 5; j++)
         to_add->description[j] = 0;
-    to_add->code = i;
+    to_add->code = i + 1;
     cw_graph->edit.instructions = push_instruction(cw_graph->edit.instructions, to_add);
     if (!cw_graph->edit.instructions)
         return (false);
