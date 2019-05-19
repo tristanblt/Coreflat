@@ -29,11 +29,12 @@ sfVector2f pos)
     cw_graph->buttons, NULL);
     draw_text(cw_graph, int_to_str(i + 1), 25,
     (sfVector2f) {18 + pos.x - (i > 8 ? 5 : 0), 9 + pos.y});
+    (void)lc;
 }
 
 void draw_register(cw_graph_t *cw_graph, int line, int col, int i)
 {
-    sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
+    sfVector2i mouse=sfMouse_getPositionRenderWindow(cw_graph->window->window);
     sfVector2f pos;
 
     if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse &&

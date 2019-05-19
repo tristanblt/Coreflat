@@ -11,9 +11,9 @@ TEST_NAME	=	unit_tests
 
 MAIN	=	src/main.c
 
-SRC_TEST	=	tests/test_parse_instruction_from_mem.c
-				tests/test_parse_instruction_from_mem2.c
-				tests/test_parse_instruction_from_mem3.c
+SRC_TEST	=	tests/test_parse_instruction_from_mem.c		\
+			tests/test_parse_instruction_from_mem2.c	\
+			tests/test_parse_instruction_from_mem3.c	\
 
 SRC	=	src/parse_instructions.c						\
 		src/parse_header.c								\

@@ -16,4 +16,5 @@ bool init_edition(cw_graph_t *cw_graph)
     for (int i = 0; i < 14; i++)
         cw_graph->edit.buffer[i] = 0;
     cw_graph->edit.number_selected = false;
+    return (true);
 }

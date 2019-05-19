@@ -54,7 +54,6 @@ char *int_to_str(int nb)
 char *int_to_str_reg(int nb)
 {
     char *str = malloc(sizeof(char) * (12));
-    int k = 0;
 
     if (str == NULL)
         return (NULL);

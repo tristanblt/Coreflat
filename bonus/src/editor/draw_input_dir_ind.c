@@ -6,6 +6,7 @@
 */
 
 #include "coreflat.h"
+#include "my.h"
 
 void draw_input_dir_ind_text(cw_graph_t *cw_graph, sfVector2f pos,
 sfColor color)
@@ -27,7 +28,7 @@ sfColor color)
 void draw_input_dir_ind(cw_graph_t *cw_graph)
 {
     sfColor color = SELECTOR_COLOR;
-    sfVector2i mouse = sfMouse_getPosition(cw_graph->window->window);
+    sfVector2i mouse=sfMouse_getPositionRenderWindow(cw_graph->window->window);
     sfVector2f pos;
 
     if (sfMouse_isButtonPressed(sfMouseLeft) == sfFalse &&

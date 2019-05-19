@@ -6,6 +6,7 @@
 */
 
 #include "coreflat.h"
+#include "disasm.h"
 
 bool disasm_champion(cw_graph_t *cw_graph, champion_t **champions)
 {
