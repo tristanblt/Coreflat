@@ -14,18 +14,21 @@ instruction_t *instruction, int j)
     int dec = 0;
     sfColor color = (sfColor) {255, 255, 255, 255};
 
+    //if ()
+    draw_rect(cw_graph, (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor}, (sfVector2f) {70, 20}, color);
+    sfText_setColor(cw_graph->text.text, color);
     if (op_tab[instruction->code - 1].type[j] & T_REG) {
-        draw_text_no_color(cw_graph, "R", 16,
+        draw_text(cw_graph, "R", 16,
         (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor});
         dec++;
     }
     if (op_tab[instruction->code - 1].type[j] & T_DIR) {
-        draw_text_no_color(cw_graph, "D", 16,
+        draw_text(cw_graph, "D", 16,
         (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor});
         dec++;
     }
     if (op_tab[instruction->code - 1].type[j] & T_IND) {
-        draw_text_no_color(cw_graph, "I", 16,
+        draw_text(cw_graph, "I", 16,
         (sfVector2f) {160 + dec * 20 + j * 80, 170 + i * 39.3 + cw_graph->edit.cursor});
         dec++;
     }
@@ -34,7 +37,7 @@ instruction_t *instruction, int j)
 void draw_args_instr(cw_graph_t *cw_graph, int i,
 instruction_t *instruction)
 {
-    for (int j = 0; j < op_tab[i].nbr_args; j++) {
+    for (int j = 0; j < op_tab[instruction->code - 1].nbr_args; j++) {
         draw_arg_instr(cw_graph, i, instruction, j);
     }
 }
