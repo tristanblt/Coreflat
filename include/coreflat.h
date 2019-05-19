@@ -245,6 +245,11 @@ void draw_subwindows(cw_graph_t *cw_graph);
 sfColor find_color(champion_t **champions, list_t *memory);
 void draw_block(cw_graph_t *cw_graph, int col, int line, sfColor color);
 char *my_strcat(char *first, char *second);
+void draw_arg_instr(cw_graph_t *, int, instruction_t *, int);
+void draw_label_instr(cw_graph_t *cw_graph, int i, instruction_t *instruction);
+void draw_args_instr(cw_graph_t *cw_graph, int i,
+instruction_t *instruction);
+int draw_one_instruction_champ(cw_graph_t *, int, instruction_t *);
 
 //events
 void redirection(cw_graph_t *cw_graph, char *to);
