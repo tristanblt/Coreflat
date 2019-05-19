@@ -8,14 +8,6 @@
 #include "coreflat.h"
 #include "my.h"
 
-void draw_args_instr(cw_graph_t *cw_graph, int i,
-instruction_t *instruction)
-{
-    for (int j = 0; j < op_tab[instruction->code - 1].nbr_args; j++) {
-        draw_arg_instr(cw_graph, i, instruction, j);
-    }
-}
-
 void swap_instructions(instruction_t **inst_1, instruction_t **inst_2)
 {
     instruction_t *tmp = *inst_1;
