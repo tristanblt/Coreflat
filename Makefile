@@ -115,6 +115,7 @@ SRC_COREFLAT =	bonus/src/main.c										\
 				asm/bonus/src/utils.c									\
 				asm/bonus/src/write_file.c								\
 				bonus/src/editor/draw_arg_instr.c					\
+				bonus/src/editor/draw_one_instruction_champ.c	\
 
 OBJ	=	$(SRC_COREFLAT:%.c=%.o)
 
