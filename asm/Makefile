@@ -51,7 +51,7 @@ OBJ	=	$(SRC:%.c=%.o)
 OBJ_BONUS	=	$(SRC_BONUS:%.c=%.o)
 
 CFLAGS	=	-W -Wall -Wextra -Wshadow	\
-		-Iinclude -I../include -g	\
+		-Iinclude -I../include		\
 
 LIB	=	my
 
