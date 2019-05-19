@@ -71,7 +71,7 @@ instruction_t *instruction, sfIntRect n, sfColor color)
 n.width * 20 + n.top * 80, 170 + n.left * 39.3 + cw_graph->edit.cursor});
         return;
     }
- }
+}
 
 void draw_arg_instr_1(cw_graph_t *cw_graph,
 instruction_t *instruction, sfIntRect new, sfColor color)
