@@ -23,7 +23,6 @@ void reset_g_setts(cw_graph_t *cw_graph)
     cw_graph->g_setts.pass_step = 1;
     cw_graph->g_setts.automatic_cps = false;
     cw_graph->g_setts.color = (sfColor) {0};
-    destroy_champions(cw_graph->g_setts.champions);
     cw_graph->g_setts.champions = malloc(sizeof(champion_t *));
     cw_graph->g_setts.champions[0] = NULL;
 }
