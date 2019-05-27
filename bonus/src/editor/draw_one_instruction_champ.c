@@ -23,7 +23,7 @@ instruction_t *instruction, sfColor color)
     sfText_setPosition(cw_graph->text.text, (sfVector2f){498, 166 + i * 39.3 +
         cw_graph->edit.cursor});
     sfText_setString(cw_graph->text.text, "x");
-    sfText_setFillColor(cw_graph->text.text, SUBWINDOW_COLOR);
+    sfText_setColor(cw_graph->text.text, SUBWINDOW_COLOR);
     sfRenderWindow_drawCircleShape(cw_graph->window->window, cw_graph->buttons,
     NULL);
     sfRenderWindow_drawText(cw_graph->window->window, cw_graph->text.text,
