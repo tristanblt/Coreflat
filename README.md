@@ -49,7 +49,7 @@ Remove an instruction by clicking on the red X button next to the undesired inst
 
 Once you're done, save your champion and he'll be ready to go!
 
-
+Music by BROME (https://soundcloud.com/blazornet)
 
 
 /!\ DOCUMENTATION IN PROGRESS /!\
