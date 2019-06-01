@@ -67,7 +67,7 @@ Once you're done, save your champion and it'll be ready to go!
 
 # The visualiser
 
-The visualiser lets you see what you champion does by itself in the memory. In this mode, it cannot die and will not stop until you close Coreflat.
+The visualiser lets you see what your champion does by itself in the memory. In this mode, it cannot die and it will not stop until you close Coreflat.
 
 # Music
 
