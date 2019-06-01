@@ -38,7 +38,7 @@ To play a normal game, click on Begin the war.
 
 Choose the number of champions you want to see fighting, and then you will have to choose between an automatic and manual cycles per second.
 
-If you choose automatic, the game is set to last exactly a minute (you will be able to accelerate it).
+If you choose automatic, the game is set to last exactly one minute (you will be able to accelerate it).
 
 You can now choose your champions and their color if the random color is not to your liking.
 
