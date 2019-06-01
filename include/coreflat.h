@@ -43,17 +43,17 @@ Music:\n    \
 - Benjamin DESIGAUX (BROME)\n\n\
 All code is made with <3")
 #define DRAW_HELP_TEXT "To play THE Corewar :\n\n\n\
-FIRST :\n       \
-Press the fancy play button\n\n\
-SECOND :\n       \
+FIRST:\n       \
+Press the play button\n\n\
+SECOND:\n       \
 Choose the number of warriors/champions you \
 will need for the battle\n\n\
-THEN :\n       \
-You can either create your own champion or\n       \
-choose one of our best contestants \
-(I suggest you choose one of ours)\n\n\n\
-Last but not least :\n       \
-Have fun, this game was made for this after all !!! <3"
+THEN:\n       \
+Choose between automatic and manual cycles per second\n       \
+(Automatic will give you a 1 minute fight)\n\n\
+FINALLY:\n        \
+Choose you champions and their color\n\n\n\
+And most importantly, have fun!!! <3"
 #define AUTO_COMMENT "Champion created by the CoreFlat tool."
 #define COREWAR_TEXT "Corewar"
 #define BEGIN_TEXT "Begin the war"
