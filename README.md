@@ -1,4 +1,3 @@
-# Coreflat
 The Epitech CoreWar project, with a graphical interface, a champion editor, and a visualiser.
 
 ![alt text](https://github.com/tristanblt/Coreflat/blob/master/bonus/assets/imgs/screen1.png)
@@ -31,7 +30,7 @@ make coreflat && ./coreflat
 
 # CoreFlat
 
-Once launched, you can play the corewar, create and edit champions and visualise a champion.
+Once launched, you can play the corewar, create and edit champions and visualise a champion. You can change the volume of the music in the settings.
 
 # Playing the game
 
@@ -66,10 +65,12 @@ Remove an instruction by clicking on the red X button next to the undesired inst
 
 Once you're done, save your champion and it'll be ready to go!
 
+# The visualiser
+
+The visualiser lets you see what you champion does by itself in the memory. In this mode, it cannot die and will not stop until you close Coreflat.
+
 # Music
 
 Music by BROME (https://soundcloud.com/blazornet)
-
-/!\ DOCUMENTATION IN PROGRESS /!\
 
 All code is made with <3
