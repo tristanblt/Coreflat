@@ -22,7 +22,7 @@ The disassembler:
 cd asm && make bonus && ./disasm [input file .cor] [output file (optional)]
 ```
 
-CoreFlat:
+CoreFlat (requires CSFML):
 
 ```
 make coreflat && ./coreflat
